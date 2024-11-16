@@ -1,0 +1,15 @@
+#title-slide .title {
+        font-size: 1.9em;
+        color: blue;
+        font-family: Times New Roman;
+      }
+
+h1 {
+  font-size: 2em; /* Texte de taille moyenne */
+  text-align: center; /* Centre horizontalement */
+  color: darkblue; /* Facultatif : Ajoute une couleur au texte */
+}
+
+h2{
+  color : red;
+}

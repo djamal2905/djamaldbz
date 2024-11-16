@@ -1,0 +1,32 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - images/
+    - ENGLISH/
+    - ENGLISH/images
+
+website:
+  title: "DJAMAL SITE"
+  navbar:
+    logo: images/logo.png
+    logo-href: index.qmd
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - text: ENGLISH
+        menu: 
+          - text: English Presentations with Milonnet 18 Nov
+            href: "ENGLISH/English-Presentations-with-Milonnet.qmd"
+          
+      
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
