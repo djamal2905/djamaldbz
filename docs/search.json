@@ -1605,154 +1605,154 @@
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#chargement-des-données",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#chargement-des-données",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Chargement des données",
     "text": "Chargement des données"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1-combien-dindividus-ont-survécu",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1-combien-dindividus-ont-survécu",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 1 : Combien d’individus ont survécu ?",
     "text": "Question 1 : Combien d’individus ont survécu ?\n\n\n# A tibble: 1 × 1\n  `Nombre de survivants`\n                   &lt;int&gt;\n1                    427\n\n\nIl y a 427 survivants\n\nLa moyenne arithmétique de la variable Survie (indicatrice) correspond à la probabilité d’être en vie"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1-combien-dindividus-ont-survécu-1",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1-combien-dindividus-ont-survécu-1",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 1 : Combien d’individus ont survécu ?",
     "text": "Question 1 : Combien d’individus ont survécu ?\nTableau de contingence Survie/Classe\n\n\n   \n      0   1\n  1 103 181\n  2 146 115\n  3 369 131\n\n\nNon"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1-combien-dindividus-ont-survécu-2",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1-combien-dindividus-ont-survécu-2",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 1 : Combien d’individus ont survécu ?",
     "text": "Question 1 : Combien d’individus ont survécu ?\nStatistique de Khi-2\n\n\nX-squared \n  107.059 \n\n\nElle vaut 107.06\nV de Cramer\n\n\nV de Cramer \n  0.3200762"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-2",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-2",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 2 :",
     "text": "Question 2 :\n\n\n\n\n\n\n  \n    \n    \n      \n      \n        Survie\n      \n      Total\n      p-value1\n    \n    \n      0\n      1\n    \n  \n  \n    Sexe2\n\n\n\n&lt;0.001\n        Enfant\n36.00 (41.86%)\n50.00 (58.14%)\n86.00 (100.00%)\n\n        Femme\n84.00 (23.93%)\n267.00 (76.07%)\n351.00 (100.00%)\n\n        Homme\n498.00 (81.91%)\n110.00 (18.09%)\n608.00 (100.00%)\n\n    Total\n618.00 (59.14%)\n427.00 (40.86%)\n1,045.00 (100.00%)\n\n  \n  \n  \n    \n      1 Pearson’s Chi-squared test"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-3-analysez-le-lien-entre-la-survie-et-le-prix-du-ticket.",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-3-analysez-le-lien-entre-la-survie-et-le-prix-du-ticket.",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 3 : Analysez le lien entre la survie et le prix du ticket.",
     "text": "Question 3 : Analysez le lien entre la survie et le prix du ticket.\n\n\n              Df  Sum Sq Mean Sq F value   Pr(&gt;F)    \nSurvie         1  201320  201320   69.04 2.98e-16 ***\nResiduals   1043 3041464    2916                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nIl y a un lien car le test d’anova est significatif à 5%.\n\n\n[1] 0.06208252\n\n\nMais le rapport de correlation stipule que le lien n’est pas puissant."
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question",
     "text": "Question"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 1",
     "text": "Question 1\n\n\n[1] 6947\n\n\n[1] 1\n\n\n\nIl y a 6947 observations\nIl n’y a qu’une seule variable numérique"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-2-affichez-le-nombre-de-modalités-des-variables-csfils-et-cspere",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-2-affichez-le-nombre-de-modalités-des-variables-csfils-et-cspere",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 2 : Affichez le nombre de modalités des variables CSFils et CSPere",
     "text": "Question 2 : Affichez le nombre de modalités des variables CSFils et CSPere\n\n\n[1] 6\n\n\n[1] 6\n\n\nIl y en a 6 par variable"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-3-créez-les-variables-libcsfils-et-libcspere",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-3-créez-les-variables-libcsfils-et-libcspere",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 3 : Créez les variables libCSFils et libCSPere",
     "text": "Question 3 : Créez les variables libCSFils et libCSPere"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-4-affichez-le-tableau-de-contingence-des-variables-libcsfils-en-ligne-et-libcspere-en-colonne",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-4-affichez-le-tableau-de-contingence-des-variables-libcsfils-en-ligne-et-libcspere-en-colonne",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 4 : Affichez le tableau de contingence des variables libCSFils (en ligne) et libCSPere (en colonne)",
     "text": "Question 4 : Affichez le tableau de contingence des variables libCSFils (en ligne) et libCSPere (en colonne)\n\n\n                            \n                             Agriculture Artisan Cadre et PIS\n  Agriculture                        252       6            2\n  Artisan                             72     182           37\n  Cadre et PIS                       105     189          310\n  Professions intermédiaires         190     205          152\n   Employé                            98      79           37\n  Ouvrier                            426     210           52\n                            \n                             Professions intermédiaires  Employé Ouvrier\n  Agriculture                                         2        3      20\n  Artisan                                            60       43     225\n  Cadre et PIS                                      266      144     204\n  Professions intermédiaires                        263      179     701\n   Employé                                           73      108     375\n  Ouvrier                                           135      169    1373"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-5-en-tenant-compte-de-la-pondération",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-5-en-tenant-compte-de-la-pondération",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 5 : En tenant compte de la pondération :",
     "text": "Question 5 : En tenant compte de la pondération :\n\nCalculez la statistique du Khi-Deux des variables libCSFils et libCSPere\n\n      Quand il y a les poids on fait la somme des poids plutot que de compter les effectifs\n\n\nX-squared \n  2487148"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-5-en-tenant-compte-de-la-pondération-1",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-5-en-tenant-compte-de-la-pondération-1",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 5 : En tenant compte de la pondération :",
     "text": "Question 5 : En tenant compte de la pondération :\n\nCalculez le V de cramer\n\n\n\nV de Cramer \n  0.2675883"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-6",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-6",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 6 :",
     "text": "Question 6 :\nLa pondération étant uniforme (même poids pour chaque individu), est-ce que les distributions (au sens des fréquences) de chacune des variables changent ?\n\n\n                            \n                             Agriculture Artisan Cadre et PIS\n  Agriculture                        252       6            2\n  Artisan                             72     182           37\n  Cadre et PIS                       105     189          310\n  Professions intermédiaires         190     205          152\n   Employé                            98      79           37\n  Ouvrier                            426     210           52\n                            \n                             Professions intermédiaires  Employé Ouvrier\n  Agriculture                                         2        3      20\n  Artisan                                            60       43     225\n  Cadre et PIS                                      266      144     204\n  Professions intermédiaires                        263      179     701\n   Employé                                           73      108     375\n  Ouvrier                                           135      169    1373"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-6-1",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-6-1",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 6 :",
     "text": "Question 6 :\nCalculez la statistique du Khi-Deux des variables libCSFils et libCSPere sur les 6 947 individus interrogés.\n\n\n\n    Pearson's Chi-squared test\n\ndata:  tab\nX-squared = 2487.1, df = 25, p-value &lt; 2.2e-16"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-6-2",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-6-2",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 6 :",
     "text": "Question 6 :\nQue remarquez-vous ? Quelle différence observez-vous avec la question précédente ?\nLa stat est multipliée par le poids"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-7-a",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-7-a",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 7 : a)",
     "text": "Question 7 : a)\n\n\n\n\n\n\n  \n    \n    \n      \n      \n        libCSPere\n      \n      Total\n      p-value1\n    \n    \n      Agriculture\n      Artisan\n      Cadre et PIS\n      Professions intermédiaires\n      ** Employé**\n      Ouvrier\n    \n  \n  \n    libCSFils\n\n\n\n\n\n\n\n&lt;0.001\n        Agriculture\n252.00 (88.42%)\n6.00 (2.11%)\n2.00 (0.70%)\n2.00 (0.70%)\n3.00 (1.05%)\n20.00 (7.02%)\n285.00 (100.00%)\n\n        Artisan\n72.00 (11.63%)\n182.00 (29.40%)\n37.00 (5.98%)\n60.00 (9.69%)\n43.00 (6.95%)\n225.00 (36.35%)\n619.00 (100.00%)\n\n        Cadre et PIS\n105.00 (8.62%)\n189.00 (15.52%)\n310.00 (25.45%)\n266.00 (21.84%)\n144.00 (11.82%)\n204.00 (16.75%)\n1,218.00 (100.00%)\n\n        Professions intermédiaires\n190.00 (11.24%)\n205.00 (12.13%)\n152.00 (8.99%)\n263.00 (15.56%)\n179.00 (10.59%)\n701.00 (41.48%)\n1,690.00 (100.00%)\n\n         Employé\n98.00 (12.73%)\n79.00 (10.26%)\n37.00 (4.81%)\n73.00 (9.48%)\n108.00 (14.03%)\n375.00 (48.70%)\n770.00 (100.00%)\n\n        Ouvrier\n426.00 (18.01%)\n210.00 (8.88%)\n52.00 (2.20%)\n135.00 (5.71%)\n169.00 (7.15%)\n1,373.00 (58.05%)\n2,365.00 (100.00%)\n\n    Total\n1,143.00 (16.45%)\n871.00 (12.54%)\n590.00 (8.49%)\n799.00 (11.50%)\n646.00 (9.30%)\n2,898.00 (41.72%)\n6,947.00 (100.00%)\n\n  \n  \n  \n    \n      1 Pearson’s Chi-squared test"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-7",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-7",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 7 :",
     "text": "Question 7 :\n\nComment interpréter le 88.42% à l’intersection des modalités Agriculture des deux variables ?\nDans une situation de fluidité sociale, comment serait la table des recrutements ?\nQuid dans le cas d’une absence totale de mobilité sociale ?"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1-quel-indicateur-permet-de-mesurer-le-lien-linéaire-entre-deux-variables-quantitatives",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1-quel-indicateur-permet-de-mesurer-le-lien-linéaire-entre-deux-variables-quantitatives",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 1 : Quel indicateur permet de mesurer le lien linéaire entre deux variables quantitatives ?",
     "text": "Question 1 : Quel indicateur permet de mesurer le lien linéaire entre deux variables quantitatives ?\nIl s’agit du coefficient de corrélqtion de Pearson de formule :\n\\[\n\\begin{equation}\n    \\begin{split}\n        \\rho_{XY} &= \\frac{Cov(X,Y)}{Var(X)\\cdot Var(Y)},\n    \\end{split}\n\\end{equation}\n\\]"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1-calculer-cette-statistique-entre-la-variable-pop_tot-et-nb_equip_tot.",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-1-calculer-cette-statistique-entre-la-variable-pop_tot-et-nb_equip_tot.",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 1 : Calculer cette statistique entre la variable pop_tot et nb_equip_tot.",
     "text": "Question 1 : Calculer cette statistique entre la variable pop_tot et nb_equip_tot.\n\n\n      cor \n0.8866274"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-2-modèle-de-régression-linéaire",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-2-modèle-de-régression-linéaire",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 2 : Modèle de régression linéaire",
     "text": "Question 2 : Modèle de régression linéaire\n\nConstruire le modèle\n\n\nmodel &lt;- lm(nb_equip_tot~pop_tot, data = pop_equip)\n\n\nDonnez les différents coefficients\n\n\n\n(Intercept)     pop_tot \n4.399422270 0.002609363"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-2-modèle-de-régression-linéaire-1",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-2-modèle-de-régression-linéaire-1",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 2 : Modèle de régression linéaire",
     "text": "Question 2 : Modèle de régression linéaire"
   },
@@ -1773,7 +1773,7 @@
   {
     "objectID": "STATISTIC/STAT_DESC/tp05/tp05.html#question-2-modèle-de-régression-linéaire-2",
     "href": "STATISTIC/STAT_DESC/tp05/tp05.html#question-2-modèle-de-régression-linéaire-2",
-    "title": "INTRODCTION TO R LANGUAGE TP04",
+    "title": "INTRODCTION TO R LANGUAGE TP05",
     "section": "Question 2 : Modèle de régression linéaire",
     "text": "Question 2 : Modèle de régression linéaire\n\n\n\nCall:\nlm(formula = Y ~ X, data = df_)\n\nResiduals:\n      1       2       3       4       5 \n 0.7687 -2.0125  1.3937 -0.9813  0.8313 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  89.0437     1.6283   54.68 1.35e-05 ***\nX            -3.4063     0.2071  -16.45 0.000489 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.657 on 3 degrees of freedom\nMultiple R-squared:  0.989, Adjusted R-squared:  0.9854 \nF-statistic: 270.4 on 1 and 3 DF,  p-value: 0.0004894\n\n\n\n\n\nStatistiques descriptives avec R"
   },
