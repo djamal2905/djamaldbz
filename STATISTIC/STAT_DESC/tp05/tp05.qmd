@@ -1,5 +1,5 @@
 ---
-title: "INTRODCTION TO R LANGUAGE TP04"
+title: "INTRODCTION TO R LANGUAGE TP05"
 author: "Presented by Djamal Toe"
 institute: "National School for Statistic and Data Analysis"
 format:
@@ -166,7 +166,7 @@ Mais le rapport de correlation stipule que le lien n'est pas puissant.
 
 ## Question 
 
-```{r, fig.align='center', out.width="90%", out.height="85%"}
+```{r, fig.align='center', out.width="80%", out.height="75%"}
 titanic_app$Survie <- as.character(titanic_app$Survie)
 graph <- ggplot(titanic_app) +
   geom_boxplot(aes(x = Survie, y = Prix, color = Survie)) + 
@@ -350,7 +350,7 @@ coefficients_
 ```
 ## Question 2 : Modèle de régression linéaire
 
-```{r, fig.align='center', out.width="90%", out.height="85%"}
+```{r, fig.align='center', out.width="75%", out.height="65%"}
 graph <- ggplot() +
           geom_point(data = pop_equip, aes(x = pop_tot , y =nb_equip_tot )) + 
           geom_abline(slope = coefficients_[2], 
