@@ -146,14 +146,11 @@ ggplot(data, aes(x = System, y = Performance, fill = System)) +
 ```
 
 
-
-* <https://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron>
-
 # Challenges
 
 ## Avantages 
 
-::: {.fragment .highlight-green}
+::: {.fragment .highlight-blue}
 **Solve many domains problems**
 :::
 
@@ -174,8 +171,7 @@ advantage_plot
 
 ## Challenges
 
-
-```{r fig.align='center', out.height="80%", out.width="85%"}
+```{r fig.align='center', out.height="75%", out.width="85%"}
 challenges <- data.frame(
   Category = c("Cost", "Instability", "Environment"),
   Score = c(8, 9, 7)
@@ -201,6 +197,8 @@ challenge_plot
 * Quantum computers are promising 
 
 * Challenges remain for full adoption
+
+* <https://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron>
 
 ## Questions ?
 
