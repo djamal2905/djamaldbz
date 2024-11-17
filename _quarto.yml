@@ -18,8 +18,8 @@ website:
       - about.qmd
       - text: ENGLISH
         menu: 
-          - text: English Presentations with Milonnet 18 Nov
-            href: "ENGLISH/English-Presentations-with-Milonnet.qmd"
+          - href: "ENGLISH/English-Presentations-with-Milonnet.qmd"
+            text: English Presentations with Milonnet 18 Nov
           
       
 
