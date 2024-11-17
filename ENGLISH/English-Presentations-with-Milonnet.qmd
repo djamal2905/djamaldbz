@@ -130,7 +130,7 @@ newSys
 ## Quantum computing chips ?
 
 ::: {.fragment .highlight-blue}
-* Use qbits to perform computing instead of using simply bits
+* Use qbits to perform computation instead of using bits
 :::
 
 ```{r fig.align='center', out.height="70%", out.width="80%"}
@@ -171,6 +171,10 @@ advantage_plot
 
 ## Challenges
 
+::: {.fragment .highlight-red}
+**Expensive, unstable, needs controlled environment**
+:::
+
 ```{r fig.align='center', out.height="75%", out.width="85%"}
 challenges <- data.frame(
   Category = c("Cost", "Instability", "Environment"),
@@ -186,10 +190,6 @@ challenge_plot <- ggplot(challenges, aes(x = Category, y = Score, fill = Categor
 challenge_plot
 ```
 
-::: {.fragment .highlight-red}
-**Expensive, unstable, needs controlled environment**
-:::
-
 # Conclusison
 
 ## Summary
@@ -199,6 +199,18 @@ challenge_plot
 * Challenges remain for full adoption
 
 * <https://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron>
+
+## Keywords
+
+* Artificial Intelligence 
+
+* Computational ability
+
+* Supercomputers
+
+* Silicon-based computers 
+
+* Quantum computing chip
 
 ## Questions ?
 
