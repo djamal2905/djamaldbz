@@ -255,7 +255,6 @@ id14_15_16$Prix <- as.numeric(id14_15_16$Prix)
 knitr::kable(id14_15_16,caption = "Les individus avec les id 14, 15 et 16")
 ```
 
-
 Ici ce sont les niveaux (***levels***) qui sont cponvertis en numérique et pas les charactères.
 
 ## 15- supprimer la table “id14_15_16” de l’environnement”
