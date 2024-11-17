@@ -190,7 +190,7 @@ challenge_plot <- ggplot(challenges, aes(x = Category, y = Score, fill = Categor
 challenge_plot
 ```
 
-# Conclusison
+# Conclusion
 
 ## Summary
 
