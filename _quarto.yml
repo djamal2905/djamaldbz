@@ -5,7 +5,7 @@ project:
   resources:
     - images/
     - ENGLISH/
-    - ENGLISH/images
+    - ENGLISH/images/
     - STATISTIC/
 
 website:
