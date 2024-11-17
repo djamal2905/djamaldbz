@@ -7,7 +7,7 @@ format:
   revealjs:
     transition-speed: fast
     aspect_ratio: "16:9"
-    margin: 0.05
+    margin: 0.02
     fig_caption: yes
     center: true
     logo: "images/LLOGO.png"
@@ -88,7 +88,7 @@ definition
 
 ::: {.fragment .highlight-blue}
 ::: {data-id="def" style="background: #fff; width: 100%; height: 100%; font-size: 0.9em;"}
-Programmable information processus system
+Programmable information processing system
 :::
 :::
 
@@ -133,38 +133,84 @@ newSys
 * Use qbits to perform computing instead of using simply bits
 :::
 
+```{r fig.align='center', out.height="70%", out.width="80%"}
+library(ggplot2)
+data <- data.frame(
+  System = c("Classical", "Quantum"),
+  Performance = c(10, 100)
+)
+ggplot(data, aes(x = System, y = Performance, fill = System)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Performance Comparison", y = "Performance Units") +
+  theme_minimal()
+```
+
+
+
 * <https://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron>
 
 # Challenges
 
 ## Avantages 
 
--   Solve many domains problems
--   Blabla bla
+::: {.fragment .highlight-green}
+**Solve many domains problems**
+:::
 
-## Incoveniants
+```{r, fig.align='center', out.height="80%", out.width="85%"}
+advantages <- data.frame(
+  Category = c("Speed", "Efficiency", "Problem Solving"),
+  Score = c(9, 8, 7)
+)
 
--   Instabilité et décohérance quantique : sensibles aux pertubations, variation de temperature, bruit
--   infrastructure couteuse et contraignante
+advantage_plot <- ggplot(advantages, aes(x = Category, y = Score, fill = Category)) +
+  geom_bar(stat = "identity", width = 0.7, show.legend = FALSE) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = "Advantages of Quantum Computing", y = "Score", x = "") +
+  theme_minimal(base_size = 14)
+advantage_plot
+```
 
-## Words explanation
 
-* Silicon-based computers : 
+## Challenges
 
-. . .
 
-* Quantum computing chip : a procesor which uses qbits to perform computing instead of using simply bits
+```{r fig.align='center', out.height="80%", out.width="85%"}
+challenges <- data.frame(
+  Category = c("Cost", "Instability", "Environment"),
+  Score = c(8, 9, 7)
+)
 
-. . .
+challenge_plot <- ggplot(challenges, aes(x = Category, y = Score, fill = Category)) +
+  geom_bar(stat = "identity", width = 0.7, show.legend = FALSE) +
+  scale_fill_brewer(palette = "Set3") +
+  labs(title = "Challenges of Quantum Computing", y = "Score", x = "") +
+  theme_minimal(base_size = 14)
 
-* Supercomputers : Computers with big Computational ability/ hight performance
+challenge_plot
+```
 
-## Words explanation
-
-* Artificial Intelligence : An informatic system which is able to carry out some tasks which normally need human intelligence
-
-. . .
-
-* Computational ability : Computing capacities
+::: {.fragment .highlight-red}
+**Expensive, unstable, needs controlled environment**
+:::
 
 # Conclusison
+
+## Summary
+
+* Quantum computers are promising 
+
+* Challenges remain for full adoption
+
+## Questions ?
+
+::: {data-id="thx" style="background: #fff; color: light-blue; text-align: center; font-family: times new roman ; width: 100%; height: 100%; font-size: 1.5em;"}
+!!! THANK YOU FOR YOUR ATTENTION
+:::
+
+```{r, fig.align='center', out.width='80%', out.height="60%"}
+quest.img <- paste0(fig.path,"interrogation2.png")
+questions <- ggdraw() + draw_image(image = quest.img)
+questions
+```
+
