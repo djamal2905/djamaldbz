@@ -1,0 +1,878 @@
+---
+title: "STATISTIQUES DESCRIPTIVES"
+author: "Présenté par DJAMAL TOE"
+institute: "Ecole Nationale de la Statistique et de l'Analyse de l'Information"
+date: "`r Sys.Date()`"
+format:
+  revealjs:
+    transition-speed: fast
+    aspect_ratio: "16:9"
+    margin: 0.05
+    fig_caption: yes
+    center: true
+    logo: "LLOGO.png"
+    slide-number: True
+    footer: "Travaux pratiques de Statistiques descriptives"
+    css: style.css
+fig_caption: yes
+toc: true
+toc-expand: false
+toc-depth: 1
+toc-title: "Table des matières"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Installation des packages
+
+```{r}
+packages <- c("ggplot2","readxl", "gtsummary","kableExtra")
+
+#options(kableExtra.latex.load_packages = FALSE)
+
+##-- Boucle pour installer et charger les packages
+for (pkg in packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg, dependencies = T)
+  }
+  library(pkg, character.only = TRUE)
+}
+
+##-- FOnction pour titrer les  et les tableaux avec des numeros
+
+capTabNo = 1; capFigNo = 1;
+capTab = function(x){
+ 
+    x = paste0("Tableau ",capTabNo,". ",x)
+    capTabNo <<- capTabNo + 1
+ x
+}
+
+capFig = function(x){
+ 
+    x = paste0("Figure ",capFigNo,". ",x)
+    capFigNo <<- capFigNo + 1
+    x
+}
+
+repeated_capFig = function(x){
+  x = paste0(paste0(paste0("Figure ", capFigNo-1), ". "), x)
+  x
+}
+```
+
+
+
+# Exercice 1 (Rappels des sessions précédentes : on fait du R base !)
+
+## 3- Chargement des bases de données
+$$\\$$
+Pour charger le fichier avec la fonction readxl, il faut télécharger et installer le package ***readxl*** avec la commande install.packages("readxl").
+
+
+```{r}
+df1 <- read_excel("titanic_place.xlsx")
+df.client.1 <- read.csv("titanic_client1.csv")
+df.client.2 <- read.csv("titanic_client2.csv")
+df.client.3 <- read.csv("titanic_client3.csv")
+```
+
+
+## 2-Résumé du dataframe titanic_place
+
+
+```{r}
+summary(df1)
+```
+
+
+Non car : 
+
+- Le **prix** est une chaine charactère ici, alors que normalement il devrait être de classe **numérique**
+
+. . .
+
+- La **classe du billet** est sous le format numérique alors qu'elle devrait être de classe **character**
+
+. . .
+
+- La **Survie** est sous le format numérique alors qu'elle devrait être de classe **character**
+
+## 3- Convertir la variable Classe en character. Convertir la variable Prix en numerique.
+$$\\$$
+
+```{r}
+df1$Classe <- as.character(df1$Classe)
+df1$Prix <- as.numeric(df1$Prix)
+df1$Survie <- as.numeric(df1$Survie)
+```
+
+
+## 5- Afficher la ligne du passager ayant payé son billet le plus cher. Pour cela, trier la table par ordre de prix décroissant et afficher la 1ere observation.
+
+$$\\$$
+
+```{r}
+head(df1[which(df1$Prix == max(df1$Prix)),],1)
+```
+
+
+## 6- Afficher la ligne du passager ayant payé son billet le moins cher. Pour cela, trier la table par ordre de prix décroissant et afficher la 1ere observation.
+
+$$\\$$
+
+```{r}
+head(df1[which(df1$Prix == min(df1$Prix)),],1)
+```
+
+
+## 7- Faire un résumé statistique de la variable Prix. Faire également un boxplot de cette variable
+$$\\$$
+
+```{r}
+summary(df1$Prix)
+```
+
+
+Le prix minimum est 0, la moyenne esr de 33.295 tandis que la médiane est de 14.454. Le prix maximum est de 512.329.
+
+## 7- Faire un résumé statistique de la variable Prix. Faire également un boxplot de cette variable
+
+
+```{r,echo=FALSE, out.height="85%", out.width= "90%", fig.align='center', fig.cap=capFig("BoxPlot de la variable prix")}
+graph <- ggplot(df1, aes(x=Prix))+
+  geom_boxplot() + theme_light()
+graph
+```
+
+## 8- Combien y a t’il de passagers dans chaque classe ?
+$$\\$$
+
+```{r}
+rep.pass.class <- as.data.frame(table(df1$Classe))
+colnames(rep.pass.class) <- c("Classe","Effectif")
+knitr::kable(rep.pass.class, caption = "Repartition des individu par classe (Effectif)")
+```
+
+
+## 9- Quel est le pourcentage des passagers dans chaque classe ?
+$$\\$$
+```{r}
+rep.pass.class.prop <- as.data.frame(prop.table(table(df1$Classe)))
+colnames(rep.pass.class.prop) <- c("Classe","Proportion")
+knitr::kable(rep.pass.class.prop, caption = "Repartition des individu par classe (Pourcentage)")
+```
+
+## 10- Combien il y a de survivants dans chaque classe avec *aggregate*
+
+$$\\$$
+
+```{r}
+table.nb.survivant.par.classe <- aggregate(Survie ~ Classe , data = df1, FUN= sum)
+knitr::kable(table.nb.survivant.par.classe,caption = "Nombre de survivants selon la classe")
+```
+
+
+## 10- Combien il y a de survivants dans chaque classe avec *tapply*
+
+$$\\$$
+
+```{r}
+array.nb.survivant.par.classe <- tapply(df1$Survie, df1$Classe, sum)
+array.nb.survivant.par.classe
+```
+
+
+# Exercice 2 : Travaillons sur les tables clients
+
+## 11-a Créer le projet R en faisant “File->New Project -> Existing Directory” et sélectionner votre répertoire de travail actuel (TP1). Et voilà!
+
+$$\\$$
+
+::: {.fragment .highlight-red}
+- Cliquez sur file (***fichier*** en français)
+:::
+
+. . .
+
+- Cliquez ensuite sur ***create project***
+
+- Choisissez le repertoire
+
+- Commencez à travailler
+
+## 11-b Sauvegarder votre programme et fermer R.
+
+
+## 11-c Rouvrez R.
+
+$$\\$$
+
+Normalement, R s’ouvre là où vous l’avez laissé. Votre projet est relié à un dossier. En ouvrant un projet, le dossier auquel il est relié devient le répertoire de travail par défaut. Qu’est-ce que ça implique : Si vous voulez importer des données qui sont dans votre projet/dossier, vous n’avez pas besoin de préciser le chemin. Illustration avec la question suivante !
+
+$$\\$$
+
+```{r}
+df.client.1 <- read.csv("titanic_client1.csv")
+df.client.2 <- read.csv("titanic_client2.csv")
+df.client.3 <- read.csv("titanic_client3.csv")
+```
+
+
+## 12- Concaténer ces tables pour créer la table “titanic_client”. Au préalable, assurez-vous que les variables sont de même type pour pouvoir être concaténées.
+
+$$\\$$
+
+On vérifie d'abord si on a les memes variables et que les variables ont les mêmes domaines
+
+```{r}
+#- colnames(df.client.1)
+#- colnames(df.client.2)
+#- colnames(df.client.2)
+
+#- str(df.client.1)
+#- str(df.client.2)
+#- str(df.client.2)
+```
+
+```{r}
+Titanic.Clients <- rbind(
+  df.client.1,
+  df.client.2,
+  df.client.3
+)
+```
+
+
+## 13- A partir du fichier titanic_place.xlsx, créer une table “id14_15_16” contenant les individus associés aux identifiants “id14”, id15” et “id16”
+
+$$\\$$
+
+
+```{r}
+id14_15_16 <- df1[df1$id %in% c("id14", "id15", "id16"),]
+id14_15_16$Prix <- as.factor(id14_15_16$Prix)
+knitr::kable(id14_15_16,caption = "Les individus avec les id 14, 15 et 16")
+```
+
+
+## 14- Au sein de la table “id14_15_16”, convertir la variable Prix en numérique. Quel est maintenant le prix payé par nos individus ? Pourquoi ?
+
+$$\\$$
+
+```{r}
+id14_15_16 <- df1[df1$id %in% c("id14", "id15", "id16"),]
+id14_15_16$Prix <- as.numeric(id14_15_16$Prix)
+knitr::kable(id14_15_16,caption = "Les individus avec les id 14, 15 et 16")
+```
+
+Ici ce sont les niveaux (***levels***) qui sont cponvertis en numérique et pas les charactères.
+
+## 15- supprimer la table “id14_15_16” de l’environnement”
+
+$$\\$$
+
+```{r}
+rm(id14_15_16) ##-- remove(id_14_15_16)
+```
+
+
+## 16- supprimer la table “id14_15_16” de l’environnement”
+
+$$\\$$
+
+```{r}
+id14_15_16 <- df1[df1$id %in% c("id14", "id15", "id16"),]
+id14_15_16$Prix <- as.numeric(as.character(id14_15_16$Prix))
+knitr::kable(id14_15_16,caption = "Les individus avec les id 14, 15 et 16", align = c("r","l","l","l","l"))
+```
+
+# Rajout de données : fusion puis nettoyage
+
+## 17- Reprenons la table “titanic_client”, y a-t-il des doublons ? Si oui, les enlever. Convertir également la variable Age en numérique
+
+$$\\$$
+```{r}
+Titanic.Clients <- Titanic.Clients[-which(duplicated(Titanic.Clients)), ]
+Titanic.Clients$Age <- as.numeric(Titanic.Clients$Age)
+```
+
+## 18- Fusionner les tables titanic_client et titanic_place pour créer la table “titanic_passager”
+
+$$\\$$
+
+```{r}
+data.merged <- merge(
+  Titanic.Clients,
+  df1,
+  by = "id"
+)
+
+head(data.merged, 6)
+
+```
+
+## 19- Combien y a-t-il de valeurs manquantes pour la variable Age ? 
+
+$$\\$$
+
+```{r}
+index.na.age <- which(is.na(data.merged$Age))
+length(index.na.age)
+```
+
+Il y a **263** valeurs manquantes pour la variable **Age**.
+
+## 19- Créer la table “titanic_svm” qui contiendra uniquement les observations pour lesquelles l’âge est renseigné.
+
+$$\\$$
+
+```{r}
+titanic_svm <- data.merged[-index.na.age,]
+```
+
+## 20- Créer une variable Sexe qui comportera 2 modalités “Homme” et “Femme”
+
+$$\\$$
+```{r}
+hommes <- c("ColM", "DrM", "Master", "Mr")
+titanic_svm$Sexe <- ifelse(
+  titanic_svm$Civilite %in% hommes,
+  "Homme",
+  "Femme"
+)
+```
+
+***Idée*** : Je crée d'abord le vecteurs des civilités distinctes pour les hommes ensuite on crée la variable avec la fonction ***ifelse***. On vérifie si la civilité est fait partir des civilités distinctes créées pour les hommes, si oui on **Sexe** prend la valeur **Homme** sinon **Sexe** prend la valeur femme.
+
+## 21- Calculer l’âge moyen des passagers puis l’âge moyen par sexe.
+
+$$\\$$
+```{r}
+age.moyen.par.sexe <- aggregate(
+  Age ~ Sexe,
+  data = titanic_svm,
+  FUN = mean
+)
+knitr::kable(age.moyen.par.sexe,caption = "Age moyen des individus selon la classe")
+```
+
+
+## 22- Faire un boxplot croisant la variable de prix du billet selon la Classe.
+
+```{r,echo=FALSE, out.height="85%", out.width= "90%", fig.align='center', fig.cap=capFig("Dsitribution du prix du billet selon la classe")}
+graph <- ggplot(df1, aes(x= Classe, y = Prix))+
+  geom_boxplot() + theme_light() 
+
+graph
+```
+## 23- Donnez le nombre de survivants hommes selon la classe d’embarquement.
+
+$$\\$$
+
+```{r}
+hommes.index <- which(titanic_svm$Sexe=="Homme")
+data.homme <- titanic_svm[hommes.index,]
+table.nb.survivant.par.classe <- aggregate(Survie ~  Classe, data = data.homme, FUN= sum)
+knitr::kable(table.nb.survivant.par.classe,caption = "Nombre de survivants selon la classe d'embarquement")
+```
+
+## 24- Créer une variable Sexe_modif qui équivaut à la variable Sexe, à la différence que si l’âge est inférieur ou égal à 12, sexe_modif vaudra “Enfan
+
+$$\\$$
+
+```{r}
+titanic_svm$Sexe.modif <- ifelse(
+  titanic_svm$Age <= 12,
+  "Enfant",
+  titanic_svm$Sexe
+)
+```
+
+## 25- Quelle est la proportion d’hommes, de femmes et d’enfants sur le bâteau ?
+
+$$\\$$
+
+```{r}
+prop <- round(prop.table(table(titanic_svm$Sexe.modif))*100, 1)
+prop
+```
+
+## 26- Quelle est la proportion d’hommes, de femmes et d’enfants parmi les survivants?
+
+$$\\$$
+
+::: {.column width="45%"}
+```{r}
+eff <- with(
+  titanic_svm[titanic_svm$Survie==1,],
+  aggregate(
+    Survie ~ Sexe.modif,
+    FUN = sum
+  )
+)
+
+prop <- round(eff$Survie*100/sum(eff$Survie), 2)
+prop
+```
+:::
+
+::: {.column width="45%"}
+```{r}
+with(
+  titanic_svm[titanic_svm$Survie==1,],
+  prop.table(table(Sexe.modif))
+)
+```
+:::
+
+
+## 27- Calculer le taux de survie selon la variable Sexe_modif (taux de survie chez les hommes, chez les femmes et chez les enfants). 
+
+$$\\$$
+```{r}
+taux.survie.sexe <- aggregate(
+  Survie ~ Sexe.modif,
+  data = titanic_svm,
+  FUN = mean
+)
+knitr::kable(taux.survie.sexe,caption = "Taux de survie par sexe")
+```
+
+Oui cela a été respecté.
+
+## 28- Croiser maintenant la porte d’embarquement et la classe
+
+$$\\$$
+
+```{r}
+Eff <- table(titanic_svm$Classe, titanic_svm$PortEmbarq)
+Eff
+```
+
+## 29- Combien y a t’il eu d’hommes survivants selon la classe et la porte d’embarquement ?
+
+$$\\$$
+
+```{r}
+Eff29 <- table(data.homme$Classe, data.homme$PortEmbarq)
+Eff29
+```
+
+# Packages dplyr TP2 : Exercice 1
+
+## Q2- Dans la table titanic : 
+
+- **Conserver uniquement les colonnes id**
+
+- **Civilite et Age et Afficher le passager le plus vieux**
+
+```{r}
+library(dplyr)
+
+# supprimer les na
+
+
+
+q2 <- Titanic.Clients %>% 
+  select(id, Civilite, Age) %>% 
+  filter(Age == max(Age, na.rm = T))
+
+q2 
+```
+
+## Q3- Dans la table titanic_place : 
+
+- **Convertir le type de la variable Classe en character et celui de la variable Prix en numéric**
+
+
+```{r}
+path <- "E:/ENSAI/StatDesc/TP2-20241004/titanic_place.xlsx"
+titanic_place <- read_excel(path = path)
+```
+
+
+```{r}
+q2.2 <- titanic_place %>% 
+  mutate(Classe = as.character(Classe),
+         Prix = as.numeric(Prix))
+```
+
+```{r}
+knitr::kable(head(q2.2,4), caption = "Resultat de la question 2.2" )
+```
+
+## Q3- Dans la table titanic_place : 
+
+- **Conserver uniquement les colonnes id, Classe, Prix et Survie**
+
+
+```{r}
+q2.4 <- titanic_place %>% 
+  select(id, Classe, Prix, Survie)
+```
+
+```{r}
+knitr::kable(head(q2.4,4), caption = "Resultat de la question 2.4" )
+```
+
+
+
+## Q4 --> Q5 : Fusionner les tables titanic et titanic_place. 
+
+
+```{r}
+TitanicJoin <- Titanic.Clients %>% 
+  inner_join(titanic_place, by = join_by(id))
+```
+
+
+```{r}
+which(duplicated(Titanic.Clients))
+```
+
+Elle ne contient pas de doublons
+
+. . .
+
+```{r}
+knitr::kable(head(TitanicJoin,4), caption = "Resultat de la question 5" )
+```
+
+## Q6- **Afficher le nombre de valeurs manquantes pour la variable Age**
+
+```{r}
+nb.na.val <- length(which(is.na(TitanicJoin$Age)))
+nb.na.val
+
+nb.na.val <- TitanicJoin %>% 
+  select(Age) %>% 
+  filter(is.na(Age)) %>% 
+  summarise(
+    Nombre.de.Na = n()
+  )
+
+nb.na.val
+
+nb.na.val <- TitanicJoin %>% 
+  summarise(
+    Nombre.de.Na = sum(is.na(Age))
+  )
+
+nb.na.val
+```
+Il y a ***263*** valeurs manquantes pour la variable **Age**
+
+. . .
+
+## Q6- **Afficher le nombre de valeurs manquantes pour la variable Age**
+
+```{r}
+tit_svm <- TitanicJoin %>% 
+  filter(!is.na(Age))
+```
+```{r}
+knitr::kable(head(tit_svm,2), caption = "Resultat de la question 6" )
+```
+
+## Q-7 : Créer une table titanic_appur qui contiendra uniquement les observations de la table titanicJoin dont toutes les variables sont non-manquantes.
+
+
+```{r}
+tit_appur <- TitanicJoin %>% 
+  select(where(~!anyNA(.)))
+```
+
+```{r}
+knitr::kable(head(tit_appur,4), caption = "Resultat de la question 7" )
+```
+
+
+## Q-7 : Créer une table titanic_appur qui contiendra uniquement les observations de la table titanicJoin dont toutes les variables sont non-manquantes.
+
+
+```{r}
+tit_appur2 <- TitanicJoin %>% 
+  na.omit()
+```
+
+```{r}
+knitr::kable(head(tit_appur2,4), caption = "Resultat de la question 7" )
+```
+
+
+
+## Q8- Ajouter une variable sexe à la table titanic_appur qui contiendra le sexe de chaque individu. On pourra suivre la règle suivante.
+
+Mr, ColM, Major, Rev, DrM, Master –> Il ne s’agit que d’hommes. Sinon, il s’agit de femmes
+
+```{r}
+tit_appur2 <- tit_appur2 %>% 
+  mutate(
+    Sexe = if_else(
+      Civilite %in% c("Mr", "ColM", "Major", "Rev", "DrM", "Master"),
+      "Homme",
+      "Femme"
+    )
+  )
+```
+
+```{r}
+knitr::kable(head(tit_appur2,2), caption = "Resultat de la question 7" )
+```
+
+## Q9- Afficher les statistiques suivantes à partir de la table titanic_appur :
+
+- ***Sur l’ensemble des individus***
+
+```{r}
+tit_appur2 <- tit_appur2 %>% 
+  mutate(Classe = as.numeric(Classe),
+         Prix = as.numeric(Prix))
+
+stat_ind <- tit_appur2 %>% 
+  select(Prix) %>% 
+  summary()
+
+stat_ind[2:5]
+```
+## Q9- Afficher les statistiques suivantes à partir de la table titanic_appur :
+
+- ***Sur l’ensemble des individus***
+
+```{r}
+stat_ind <- tit_appur2 %>% 
+  summarise(
+    Prix.Mean = mean(Prix),
+    Q1 = quantile(Prix,0.25),
+    Q2 = median(Prix),
+    Q3 = quantile(Prix,0.75)
+  )
+
+stat_ind
+```
+
+## Q9- Afficher les statistiques suivantes à partir de la table titanic_appur :
+
+- ***Par classe***
+
+```{r}
+stat_classe <- tit_appur2 %>% 
+  group_by(Classe) %>% 
+  summarise(
+    Prix.Min = min(Prix),
+    Prix.Max = max(Prix)
+  )
+
+stat_classe
+```
+
+## Q9- Afficher les statistiques suivantes à partir de la table titanic_appur :
+
+- **Par classe et par sexe**
+
+```{r}
+
+tit_appur2 <- tit_appur2 %>% 
+  mutate(Classe = as.character(Classe))
+
+stat.Prix.By.Classe.Sexe <- tit_appur2 %>% 
+  group_by(
+    Sexe,
+    Classe
+  ) %>% 
+  summarise(
+    Prix.Moyen = mean(Prix),
+    Nombre.De.Personnes = n(),
+    .groups = "keep"
+  ) %>% 
+  mutate(
+    Pourcentage = round(Nombre.De.Personnes*100/sum(Nombre.De.Personnes),2)
+  )
+```
+
+## Q9- Afficher les statistiques suivantes à partir de la table titanic_appur :
+
+- **Par classe et par sexe**
+
+```{r}
+knitr::kable(stat.Prix.By.Classe.Sexe, caption = "Resultat de la question 9" )
+```
+
+
+## Q10- Sauvegarder la table titanic_appur au format rds
+
+```{r}
+saveRDS(
+  tit_appur2,
+  file = paste0(getwd(),"/titanic_appur.rds")
+)
+```
+
+
+# Packages dplyr TP2 : Exercice 2
+
+## Question 1 : Charger la table titanic_appur.rds
+
+```{r}
+path <- paste0(getwd(),"/titanic_appur.rds")
+df <- readRDS(path)
+##-- View(df)  Pour visualiser la base de données
+```
+
+
+## Question 2 : 
+
+- ***Définition de la VAI*** 
+
+|   On appelle VAI d’une série statistique, la plus petite valeur de la
+série supérieure à la quantité Q1 − 1.5 (Q3 − Q1)
+
+
+-  ***Définition de la VAS*** 
+
+|   On appelle VAS d’une série statistique, la plus grande valeur de la
+série inférieure à la quantité Q3 + 1.5 (Q3 − Q1)
+
+
+## Question 2 : 
+
+- **Calculez-les pour la variable Prix**
+
+```{r}
+Q1.prix <- quantile(df$Prix, 0.25)
+Q3.Prix <- quantile(df$Prix, 0.75)
+
+Q_VAI <- Q1.prix - 1.5*(Q3.Prix-Q1.prix)
+Q_VAS = Q3.Prix + 1.5*(Q3.Prix-Q1.prix)
+
+results <- df %>% 
+  filter(Prix >  Q_VAI & Prix < Q_VAS) %>% 
+  summarise(
+    VAI = min(Prix),
+    VAS = max(Prix)
+  )
+
+
+```
+
+
+## Question 2 : 
+
+- **Afficher ensuite les valeurs extrêmes de la variable Prix**. 
+
+On considèrera qu’une valeur est jugée extrême si elle est inférieure à la VAI ou supérieure à la VAS.
+
+
+```{r}
+results <- df %>% 
+  filter(Prix >  Q_VAI | Prix < Q_VAS) 
+```
+
+```{r}
+knitr::kable(head(results,4), caption = "Resultat de la question 2")
+```
+
+
+## Question 3 : Faire un boxplot pour mettre en lumière le lien entre le prix du ticket et la classe. Quelles informations retrouve-t-on sur un boxplot ?
+
+```{r}
+graph <- ggplot(df, aes(x = Classe, y = Prix, color = Classe)) +
+    geom_boxplot() +
+    xlab("Classe") +
+    ylab("Prix") +
+    theme_light() +
+    labs(color = "Classes") + 
+    theme(axis.text.x = element_text(angle = 70, hjust = 1),
+          axis.text.y = element_text(size = 10))
+
+```
+
+## Question 3 : Boxplot => le lien entre le prix du ticket et la classe
+
+```{r, fig.align='center', out.height="85%", out.width= "90%", fig.cap="Box Plot"}
+graph 
+```
+
+## Question 4 : Quel est l’avantage du vioplot par rapport au boxplot ?
+
+Elle présente la densité de la variable.
+
+```{r, fig.align='center', out.height="70%", out.width= "80%", fig.cap="Violon plot"}
+#-- install.packages("vioplot")
+vio <- vioplot::vioplot( Prix ~ Classe,df,main = "Prix selon la classe")
+print(vio)
+```
+
+## Question 4 :  Vio avec ggplot 2 ?
+
+```{r, fig.align='center', out.height="77%", out.width= "85%", fig.cap="Violon plot"}
+vio <- ggplot(df, aes(x = Classe, y = Prix, color = Classe)) +
+    geom_violin() +
+    xlab("Classes") +
+    ylab("Prix") +
+    theme_light() +
+    labs(color = "Classes") + 
+    theme(axis.text.x = element_text(angle = 70, hjust = 1),
+          axis.text.y = element_text(size = 10))
+
+vio
+```
+
+## Q5
+
+```{r}
+rapport_cor <- df %>% 
+  mutate(
+    `Prix moyen`  = mean(Prix),
+    Effectif = n()
+  ) %>%
+  group_by(Classe) %>% 
+  mutate(
+    `Ecart moyen` = (mean(Prix) - `Prix moyen`) ^2 / Effectif
+    ) %>% 
+  ungroup() %>% 
+  summarise(
+    Rapport = sum(`Ecart moyen`) / var(Prix)
+  )
+   
+rapport_cor
+
+#- anov <- summary(aov(Prix ~ Classe, data = df))
+#- On enregistre les Sum square dataSq <- anov[[1]]
+#- rap <- dataSq$SumSq[1]/sum(dataSq$SumSq)
+```
+
+Le rapport de corrélation est de ***0,374*** donc on peut dire que le prix est **lié** à la classe.
+
+## Question 6 : La proportion d’hommes parmi les 100 individus ayant payé leur ticket le plus cher
+
+```{r}
+prop <- df %>% 
+  arrange(desc(Prix)) %>% 
+  slice(1:100) %>% 
+  filter(Sexe == "Homme") %>% 
+  summarise(
+    Effectif = n ()
+  ) %>% 
+  mutate(
+    Proportion = round(
+      Effectif*100/sum(Effectif),
+      2
+    )
+  )
+    
+```
+
+
+## Question 6 : Donnez la proportion d’hommes parmi les 100 individus ayant payé leur ticket le plus cher
+
+```{r}
+knitr::kable(prop, caption = "Resultat de la question 6")
+```
+
+
+## Question 7 : Commentez et vérifiez l’affirmation suivante: “Les femmes sont sur-représentées en première classe”.

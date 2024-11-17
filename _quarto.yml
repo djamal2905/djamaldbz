@@ -6,6 +6,7 @@ project:
     - images/
     - ENGLISH/
     - ENGLISH/images
+    - STATISTIC/
 
 website:
   title: "DJAMAL SITE"
@@ -15,11 +16,18 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
-      - text: ENGLISH
+      - text: Statistic
+        menu: 
+          - href: "STATISTIC/STAT_DESC/1TP/Exercies.qmd"
+            text: Practical work 1
+          - href: "STATISTIC/STAT_DESC/tp05/tp05.qmd"
+            text: Practical work 5
+          
+      - text: English
         menu: 
           - href: "ENGLISH/English-Presentations-with-Milonnet.qmd"
             text: English Presentations with Milonnet 18 Nov
+      - about.qmd
           
       
 
