@@ -77,7 +77,7 @@ for (pkg in packages_) {
 
 
 ::: {.column width="48%"}
-```{r, fig.align='center', fig.width=7, fig.height=5}
+```{r, fig.align='center', out.width='90%', out.height="90%"}
 fig.path <- paste0(getwd(),"/images/")
 def.img <- paste0(fig.path,"definition.jpg")
 oldSys.img <- paste0(fig.path,"old_system.jpg")
@@ -99,7 +99,7 @@ Programmable information processus system
 ::::{.rows}
 
 :::{.row heigth="40%"}
-```{r, fig.align='center', fig.width=3.8, fig.height=2.2,}
+```{r, fig.align='center', out.width='80%', out.height="60%"}
 oldSys <- ggdraw() + draw_image(image = oldSys.img)
 oldSys
 ```
@@ -114,7 +114,7 @@ Old System ===>> New System
 :::
 
 :::{.row heigth="40%"}
-```{r, fig.align='center', fig.width=3.8, fig.height=2.2}
+```{r, fig.align='center', out.width='80%', out.height="60%"}
 newSys <- ggdraw() + draw_image(image = newSys.img)
 newSys
 ```
