@@ -88,16 +88,13 @@ df.client.3 <- read.csv("titanic_client3.csv")
 summary(df1)
 ```
 
+## 2-Résumé du dataframe titanic_place
 
 Non car : 
 
 - Le **prix** est une chaine charactère ici, alors que normalement il devrait être de classe **numérique**
 
-## 2-Résumé du dataframe titanic_place
-
 - La **classe du billet** est sous le format numérique alors qu'elle devrait être de classe **character**
-
-. . .
 
 - La **Survie** est sous le format numérique alors qu'elle devrait être de classe **character**
 
@@ -149,6 +146,11 @@ graph
 ```{r}
 rep.pass.class <- as.data.frame(table(df1$Classe))
 colnames(rep.pass.class) <- c("Classe","Effectif")
+```
+
+## 8- Combien y a t’il de passagers dans chaque classe ?
+
+```{r}
 knitr::kable(rep.pass.class, caption = "Repartition des individu par classe (Effectif)")
 ```
 
@@ -158,6 +160,11 @@ knitr::kable(rep.pass.class, caption = "Repartition des individu par classe (Eff
 ```{r}
 rep.pass.class.prop <- as.data.frame(prop.table(table(df1$Classe)))
 colnames(rep.pass.class.prop) <- c("Classe","Proportion")
+```
+
+## 9- Quel est le pourcentage des passagers dans chaque classe ?
+
+```{r}
 knitr::kable(rep.pass.class.prop, caption = "Repartition des individu par classe (Pourcentage)")
 ```
 
@@ -165,12 +172,15 @@ knitr::kable(rep.pass.class.prop, caption = "Repartition des individu par classe
 
 ```{r}
 table.nb.survivant.par.classe <- aggregate(Survie ~ Classe , data = df1, FUN= sum)
+```
+
+## 10- Combien il y a de survivants dans chaque classe avec *aggregate*
+
+```{r}
 knitr::kable(table.nb.survivant.par.classe,caption = "Nombre de survivants selon la classe")
 ```
 
-
 ## 10- Combien il y a de survivants dans chaque classe avec *tapply*
-
 
 ```{r}
 array.nb.survivant.par.classe <- tapply(df1$Survie, df1$Classe, sum)
@@ -237,8 +247,14 @@ knitr::kable(id14_15_16,caption = "Les individus avec les id 14, 15 et 16")
 ```{r}
 id14_15_16 <- df1[df1$id %in% c("id14", "id15", "id16"),]
 id14_15_16$Prix <- as.numeric(id14_15_16$Prix)
+```
+
+## 14- Suite
+
+```{r}
 knitr::kable(id14_15_16,caption = "Les individus avec les id 14, 15 et 16")
 ```
+
 
 Ici ce sont les niveaux (***levels***) qui sont cponvertis en numérique et pas les charactères.
 
@@ -315,6 +331,11 @@ age.moyen.par.sexe <- aggregate(
   data = titanic_svm,
   FUN = mean
 )
+```
+
+## 21- Calculer l’âge moyen des passagers puis l’âge moyen par sexe.
+
+```{r}
 knitr::kable(age.moyen.par.sexe,caption = "Age moyen des individus selon la classe")
 ```
 
@@ -333,8 +354,15 @@ graph
 hommes.index <- which(titanic_svm$Sexe=="Homme")
 data.homme <- titanic_svm[hommes.index,]
 table.nb.survivant.par.classe <- aggregate(Survie ~  Classe, data = data.homme, FUN= sum)
+```
+
+## 23- Donnez le nombre de survivants hommes selon la classe d’embarquement.
+
+
+```{r}
 knitr::kable(table.nb.survivant.par.classe,caption = "Nb de survivants selon la classe d'ebqt")
 ```
+
 
 ## 24- Créer une variable Sexe_modif qui équivaut à la variable Sexe, à la différence que si l’âge est inférieur ou égal à 12, sexe_modif vaudra “Enfan
 
@@ -388,6 +416,12 @@ taux.survie.sexe <- aggregate(
   data = titanic_svm,
   FUN = mean
 )
+
+```
+
+## 27- Calculer le taux de survie selon la variable Sexe_modif 
+
+```{r}
 knitr::kable(taux.survie.sexe,caption = "Taux de survie par sexe")
 ```
 
@@ -456,11 +490,11 @@ q2.4 <- titanic_place %>%
   select(id, Classe, Prix, Survie)
 ```
 
+## Q3- Dans la table titanic_place : 
+
 ```{r}
 knitr::kable(head(q2.4,4), caption = "Resultat de la question 2.4" )
 ```
-
-
 
 ## Q4 --> Q5 : Fusionner les tables titanic et titanic_place. 
 
@@ -519,7 +553,7 @@ tit_appur <- TitanicJoin %>%
   select(where(~!anyNA(.)))
 ```
 
-## Q-7 : Table titanic_appur qui contiendra uniquement les observations de la table titanicJoin dont toutes les variables sont non-manquantes.
+## Q-7 : Suites
 
 
 ```{r}
@@ -535,18 +569,14 @@ tit_appur2 <- TitanicJoin %>%
   na.omit()
 ```
 
-## Q-7 : Créer une table titanic_appur qui contiendra uniquement les observations de la table titanicJoin dont toutes les variables sont non-manquantes.
-
+## Q-7 : Suites
 
 ```{r}
 knitr::kable(head(tit_appur2,4), caption = "Resultat de la question 7" )
 ```
 
 
-
-## Q8- Ajouter une variable sexe à la table titanic_appur qui contiendra le sexe de chaque individu. On pourra suivre la règle suivante.
-
-Mr, ColM, Major, Rev, DrM, Master –> Il ne s’agit que d’hommes. Sinon, il s’agit de femmes
+## Q8- Une variable sexe à la table titanic_appur qui contiendra le sexe de chaque individu
 
 ```{r}
 tit_appur2 <- tit_appur2 %>% 
@@ -616,23 +646,17 @@ stat_classe
 - **Par classe et par sexe**
 
 ```{r}
-
 tit_appur2 <- tit_appur2 %>% 
   mutate(Classe = as.character(Classe))
 
 stat.Prix.By.Classe.Sexe <- tit_appur2 %>% 
-  group_by(
-    Sexe,
-    Classe
-  ) %>% 
+  group_by(Sexe,Classe) %>% 
   summarise(
     Prix.Moyen = mean(Prix),
-    Nombre.De.Personnes = n(),
-    .groups = "keep"
-  ) %>% 
+    Nombre.De.Personnes = n(),.groups = "keep") %>% 
   mutate(
     Pourcentage = round(Nombre.De.Personnes*100/sum(Nombre.De.Personnes),2)
-  )
+    )
 ```
 
 ## Q9- Afficher les statistiques suivantes à partir de la table titanic_appur :
@@ -772,22 +796,18 @@ vio
 ```{r}
 rapport_cor <- df %>% 
   mutate(
-    `Prix moyen`  = mean(Prix),
-    Effectif = n()
-  ) %>%
+    `Prix moyen`  = mean(Prix),Effectif = n()) %>%
   group_by(Classe) %>% 
   mutate(
-    `Ecart moyen` = (mean(Prix) - `Prix moyen`) ^2 / Effectif
-    ) %>% 
+    `Ecart moyen` = (mean(Prix) - `Prix moyen`) ^2 / Effectif ) %>% 
   ungroup() %>% 
   summarise(
     Rapport = sum(`Ecart moyen`) / var(Prix)
   )
-   
 rapport_cor
 ```
 
-Le rapport de corrélation est de ***0,374*** donc on peut dire que le prix est **lié** à la classe.
+Le rapport de corrélation est de ***0,374*** donc le prix est **lié** à la classe.
 
 ## Question 6 : La proportion d’hommes parmi les 100 individus ayant payé leur ticket le plus cher
 
@@ -796,14 +816,9 @@ prop <- df %>%
   arrange(desc(Prix)) %>% 
   slice(1:100) %>% 
   filter(Sexe == "Homme") %>% 
-  summarise(
-    Effectif = n ()
-  ) %>% 
-  mutate(
-    Proportion = round(
-      Effectif*100/sum(Effectif),
-      2
-    )
+  summarise(Effectif = n ()) %>% 
+  mutate( Proportion = round(
+      Effectif*100/sum(Effectif),2)
   )
     
 ```

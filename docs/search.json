@@ -263,14 +263,14 @@
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#résumé-du-dataframe-titanic_place",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "2-Résumé du dataframe titanic_place",
-    "text": "2-Résumé du dataframe titanic_place\n\nsummary(df1)\n\n      id                Classe          Survie           Prix          \n Length:1308        Min.   :1.000   Min.   :0.0000   Length:1308       \n Class :character   1st Qu.:2.000   1st Qu.:0.0000   Class :character  \n Mode  :character   Median :3.000   Median :0.0000   Mode  :character  \n                    Mean   :2.294   Mean   :0.3823                     \n                    3rd Qu.:3.000   3rd Qu.:1.0000                     \n                    Max.   :3.000   Max.   :1.0000                     \n  PortEmbarq       \n Length:1308       \n Class :character  \n Mode  :character  \n                   \n                   \n                   \n\n\nNon car :\n\nLe prix est une chaine charactère ici, alors que normalement il devrait être de classe numérique"
+    "text": "2-Résumé du dataframe titanic_place\n\nsummary(df1)\n\n      id                Classe          Survie           Prix          \n Length:1308        Min.   :1.000   Min.   :0.0000   Length:1308       \n Class :character   1st Qu.:2.000   1st Qu.:0.0000   Class :character  \n Mode  :character   Median :3.000   Median :0.0000   Mode  :character  \n                    Mean   :2.294   Mean   :0.3823                     \n                    3rd Qu.:3.000   3rd Qu.:1.0000                     \n                    Max.   :3.000   Max.   :1.0000                     \n  PortEmbarq       \n Length:1308       \n Class :character  \n Mode  :character"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#résumé-du-dataframe-titanic_place-1",
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#résumé-du-dataframe-titanic_place-1",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "2-Résumé du dataframe titanic_place",
-    "text": "2-Résumé du dataframe titanic_place\n\nLa classe du billet est sous le format numérique alors qu’elle devrait être de classe character\n\n\n\nLa Survie est sous le format numérique alors qu’elle devrait être de classe character"
+    "text": "2-Résumé du dataframe titanic_place\nNon car :\n\nLe prix est une chaine charactère ici, alors que normalement il devrait être de classe numérique\nLa classe du billet est sous le format numérique alors qu’elle devrait être de classe character\nLa Survie est sous le format numérique alors qu’elle devrait être de classe character"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#convertir-la-classe-en-character-et-le-prix-en-numerique",
@@ -312,21 +312,42 @@
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#combien-y-a-til-de-passagers-dans-chaque-classe",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "8- Combien y a t’il de passagers dans chaque classe ?",
-    "text": "8- Combien y a t’il de passagers dans chaque classe ?\n\nrep.pass.class &lt;- as.data.frame(table(df1$Classe))\ncolnames(rep.pass.class) &lt;- c(\"Classe\",\"Effectif\")\nknitr::kable(rep.pass.class, caption = \"Repartition des individu par classe (Effectif)\")\n\n\nRepartition des individu par classe (Effectif)\n\n\nClasse\nEffectif\n\n\n\n\n1\n323\n\n\n2\n277\n\n\n3\n708"
+    "text": "8- Combien y a t’il de passagers dans chaque classe ?\n\nrep.pass.class &lt;- as.data.frame(table(df1$Classe))\ncolnames(rep.pass.class) &lt;- c(\"Classe\",\"Effectif\")"
+  },
+  {
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#combien-y-a-til-de-passagers-dans-chaque-classe-1",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#combien-y-a-til-de-passagers-dans-chaque-classe-1",
+    "title": "STATISTIQUES DESCRIPTIVES",
+    "section": "8- Combien y a t’il de passagers dans chaque classe ?",
+    "text": "8- Combien y a t’il de passagers dans chaque classe ?\n\nknitr::kable(rep.pass.class, caption = \"Repartition des individu par classe (Effectif)\")\n\n\nRepartition des individu par classe (Effectif)\n\n\nClasse\nEffectif\n\n\n\n\n1\n323\n\n\n2\n277\n\n\n3\n708"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#quel-est-le-pourcentage-des-passagers-dans-chaque-classe",
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#quel-est-le-pourcentage-des-passagers-dans-chaque-classe",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "9- Quel est le pourcentage des passagers dans chaque classe ?",
-    "text": "9- Quel est le pourcentage des passagers dans chaque classe ?\n\nrep.pass.class.prop &lt;- as.data.frame(prop.table(table(df1$Classe)))\ncolnames(rep.pass.class.prop) &lt;- c(\"Classe\",\"Proportion\")\nknitr::kable(rep.pass.class.prop, caption = \"Repartition des individu par classe (Pourcentage)\")\n\n\nRepartition des individu par classe (Pourcentage)\n\n\nClasse\nProportion\n\n\n\n\n1\n0.2469419\n\n\n2\n0.2117737\n\n\n3\n0.5412844"
+    "text": "9- Quel est le pourcentage des passagers dans chaque classe ?\n\nrep.pass.class.prop &lt;- as.data.frame(prop.table(table(df1$Classe)))\ncolnames(rep.pass.class.prop) &lt;- c(\"Classe\",\"Proportion\")"
+  },
+  {
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#quel-est-le-pourcentage-des-passagers-dans-chaque-classe-1",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#quel-est-le-pourcentage-des-passagers-dans-chaque-classe-1",
+    "title": "STATISTIQUES DESCRIPTIVES",
+    "section": "9- Quel est le pourcentage des passagers dans chaque classe ?",
+    "text": "9- Quel est le pourcentage des passagers dans chaque classe ?\n\nknitr::kable(rep.pass.class.prop, caption = \"Repartition des individu par classe (Pourcentage)\")\n\n\nRepartition des individu par classe (Pourcentage)\n\n\nClasse\nProportion\n\n\n\n\n1\n0.2469419\n\n\n2\n0.2117737\n\n\n3\n0.5412844"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#combien-il-y-a-de-survivants-dans-chaque-classe-avec-aggregate",
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#combien-il-y-a-de-survivants-dans-chaque-classe-avec-aggregate",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "10- Combien il y a de survivants dans chaque classe avec aggregate",
-    "text": "10- Combien il y a de survivants dans chaque classe avec aggregate\n\ntable.nb.survivant.par.classe &lt;- aggregate(Survie ~ Classe , data = df1, FUN= sum)\nknitr::kable(table.nb.survivant.par.classe,caption = \"Nombre de survivants selon la classe\")\n\n\nNombre de survivants selon la classe\n\n\nClasse\nSurvie\n\n\n\n\n1\n200\n\n\n2\n119\n\n\n3\n181"
+    "text": "10- Combien il y a de survivants dans chaque classe avec aggregate\n\ntable.nb.survivant.par.classe &lt;- aggregate(Survie ~ Classe , data = df1, FUN= sum)"
+  },
+  {
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#combien-il-y-a-de-survivants-dans-chaque-classe-avec-aggregate-1",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#combien-il-y-a-de-survivants-dans-chaque-classe-avec-aggregate-1",
+    "title": "STATISTIQUES DESCRIPTIVES",
+    "section": "10- Combien il y a de survivants dans chaque classe avec aggregate",
+    "text": "10- Combien il y a de survivants dans chaque classe avec aggregate\n\nknitr::kable(table.nb.survivant.par.classe,caption = \"Nombre de survivants selon la classe\")\n\n\nNombre de survivants selon la classe\n\n\nClasse\nSurvie\n\n\n\n\n1\n200\n\n\n2\n119\n\n\n3\n181"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#combien-il-y-a-de-survivants-dans-chaque-classe-avec-tapply",
@@ -375,7 +396,14 @@
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#convertir-le-prix-en-numérique.-quel-est-maintenant-le-prix-payé-par-nos-individus",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "14- Convertir le Prix en numérique. Quel est maintenant le prix payé par nos individus ?",
-    "text": "14- Convertir le Prix en numérique. Quel est maintenant le prix payé par nos individus ?\n\nid14_15_16 &lt;- df1[df1$id %in% c(\"id14\", \"id15\", \"id16\"),]\nid14_15_16$Prix &lt;- as.numeric(id14_15_16$Prix)\nknitr::kable(id14_15_16,caption = \"Les individus avec les id 14, 15 et 16\")\n\n\nLes individus avec les id 14, 15 et 16\n\n\nid\nClasse\nSurvie\nPrix\nPortEmbarq\n\n\n\n\nid14\n1\n1\n78.850\nS\n\n\nid15\n1\n1\n30.000\nS\n\n\nid16\n1\n0\n25.925\nS\n\n\n\n\n\n\n\nIci ce sont les niveaux (levels) qui sont cponvertis en numérique et pas les charactères."
+    "text": "14- Convertir le Prix en numérique. Quel est maintenant le prix payé par nos individus ?\n\nid14_15_16 &lt;- df1[df1$id %in% c(\"id14\", \"id15\", \"id16\"),]\nid14_15_16$Prix &lt;- as.numeric(id14_15_16$Prix)"
+  },
+  {
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#suite",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#suite",
+    "title": "STATISTIQUES DESCRIPTIVES",
+    "section": "14- Suite",
+    "text": "14- Suite\n\nknitr::kable(id14_15_16,caption = \"Les individus avec les id 14, 15 et 16\")\n\n\nLes individus avec les id 14, 15 et 16\n\n\nid\nClasse\nSurvie\nPrix\nPortEmbarq\n\n\n\n\nid14\n1\n1\n78.850\nS\n\n\nid15\n1\n1\n30.000\nS\n\n\nid16\n1\n0\n25.925\nS\n\n\n\n\n\n\n\nIci ce sont les niveaux (levels) qui sont cponvertis en numérique et pas les charactères."
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#supprimer-la-table-id14_15_16-de-lenvironnement",
@@ -431,7 +459,14 @@
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#calculer-lâge-moyen-des-passagers-puis-lâge-moyen-par-sexe.",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "21- Calculer l’âge moyen des passagers puis l’âge moyen par sexe.",
-    "text": "21- Calculer l’âge moyen des passagers puis l’âge moyen par sexe.\n\nage.moyen.par.sexe &lt;- aggregate(\n  Age ~ Sexe,\n  data = titanic_svm,\n  FUN = mean\n)\nknitr::kable(age.moyen.par.sexe,caption = \"Age moyen des individus selon la classe\")\n\n\nAge moyen des individus selon la classe\n\n\nSexe\nAge\n\n\n\n\nFemme\n29.24274\n\n\nHomme\n30.23263"
+    "text": "21- Calculer l’âge moyen des passagers puis l’âge moyen par sexe.\n\nage.moyen.par.sexe &lt;- aggregate(\n  Age ~ Sexe,\n  data = titanic_svm,\n  FUN = mean\n)"
+  },
+  {
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#calculer-lâge-moyen-des-passagers-puis-lâge-moyen-par-sexe.-1",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#calculer-lâge-moyen-des-passagers-puis-lâge-moyen-par-sexe.-1",
+    "title": "STATISTIQUES DESCRIPTIVES",
+    "section": "21- Calculer l’âge moyen des passagers puis l’âge moyen par sexe.",
+    "text": "21- Calculer l’âge moyen des passagers puis l’âge moyen par sexe.\n\nknitr::kable(age.moyen.par.sexe,caption = \"Age moyen des individus selon la classe\")\n\n\nAge moyen des individus selon la classe\n\n\nSexe\nAge\n\n\n\n\nFemme\n29.24274\n\n\nHomme\n30.23263"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#faire-un-boxplot-croisant-la-variable-de-prix-du-billet-selon-la-classe.",
@@ -445,7 +480,14 @@
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#donnez-le-nombre-de-survivants-hommes-selon-la-classe-dembarquement.",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "23- Donnez le nombre de survivants hommes selon la classe d’embarquement.",
-    "text": "23- Donnez le nombre de survivants hommes selon la classe d’embarquement.\n\nhommes.index &lt;- which(titanic_svm$Sexe==\"Homme\")\ndata.homme &lt;- titanic_svm[hommes.index,]\ntable.nb.survivant.par.classe &lt;- aggregate(Survie ~  Classe, data = data.homme, FUN= sum)\nknitr::kable(table.nb.survivant.par.classe,caption = \"Nb de survivants selon la classe d'ebqt\")\n\n\nNb de survivants selon la classe d'ebqt\n\n\nClasse\nSurvie\n\n\n\n\n1\n52\n\n\n2\n23\n\n\n3\n59"
+    "text": "23- Donnez le nombre de survivants hommes selon la classe d’embarquement.\n\nhommes.index &lt;- which(titanic_svm$Sexe==\"Homme\")\ndata.homme &lt;- titanic_svm[hommes.index,]\ntable.nb.survivant.par.classe &lt;- aggregate(Survie ~  Classe, data = data.homme, FUN= sum)"
+  },
+  {
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#donnez-le-nombre-de-survivants-hommes-selon-la-classe-dembarquement.-1",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#donnez-le-nombre-de-survivants-hommes-selon-la-classe-dembarquement.-1",
+    "title": "STATISTIQUES DESCRIPTIVES",
+    "section": "23- Donnez le nombre de survivants hommes selon la classe d’embarquement.",
+    "text": "23- Donnez le nombre de survivants hommes selon la classe d’embarquement.\n\nknitr::kable(table.nb.survivant.par.classe,caption = \"Nb de survivants selon la classe d'ebqt\")\n\n\nNb de survivants selon la classe d'ebqt\n\n\nClasse\nSurvie\n\n\n\n\n1\n52\n\n\n2\n23\n\n\n3\n59"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#créer-une-variable-sexe_modif-qui-équivaut-à-la-variable-sexe-à-la-différence-que-si-lâge-est-inférieur-ou-égal-à-12-sexe_modif-vaudra-enfan",
@@ -473,7 +515,14 @@
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#calculer-le-taux-de-survie-selon-la-variable-sexe_modif",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "27- Calculer le taux de survie selon la variable Sexe_modif",
-    "text": "27- Calculer le taux de survie selon la variable Sexe_modif\n\ntaux.survie.sexe &lt;- aggregate(\n  Survie ~ Sexe.modif,\n  data = titanic_svm,\n  FUN = mean\n)\nknitr::kable(taux.survie.sexe,caption = \"Taux de survie par sexe\")\n\n\nTaux de survie par sexe\n\n\nSexe.modif\nSurvie\n\n\n\n\nEnfant\n0.5744681\n\n\nFemme\n0.7430168\n\n\nHomme\n0.1804384\n\n\n\n\n\n\n\nOui cela a été respecté."
+    "text": "27- Calculer le taux de survie selon la variable Sexe_modif\n\ntaux.survie.sexe &lt;- aggregate(\n  Survie ~ Sexe.modif,\n  data = titanic_svm,\n  FUN = mean\n)"
+  },
+  {
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#calculer-le-taux-de-survie-selon-la-variable-sexe_modif-1",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#calculer-le-taux-de-survie-selon-la-variable-sexe_modif-1",
+    "title": "STATISTIQUES DESCRIPTIVES",
+    "section": "27- Calculer le taux de survie selon la variable Sexe_modif",
+    "text": "27- Calculer le taux de survie selon la variable Sexe_modif\n\nknitr::kable(taux.survie.sexe,caption = \"Taux de survie par sexe\")\n\n\nTaux de survie par sexe\n\n\nSexe.modif\nSurvie\n\n\n\n\nEnfant\n0.5744681\n\n\nFemme\n0.7430168\n\n\nHomme\n0.1804384\n\n\n\n\n\n\n\nOui cela a été respecté."
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#croiser-maintenant-la-porte-dembarquement-et-la-classe",
@@ -515,7 +564,14 @@
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q3--dans-la-table-titanic_place-2",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "Q3- Dans la table titanic_place :",
-    "text": "Q3- Dans la table titanic_place :\n\nConserver uniquement les colonnes id, Classe, Prix et Survie\n\n\nq2.4 &lt;- titanic_place %&gt;% \n  select(id, Classe, Prix, Survie)\n\n\nknitr::kable(head(q2.4,4), caption = \"Resultat de la question 2.4\" )\n\n\nResultat de la question 2.4\n\n\nid\nClasse\nPrix\nSurvie\n\n\n\n\nid1\n1\n211.3375\n1\n\n\nid2\n1\n151.55\n1\n\n\nid3\n1\n151.55\n0\n\n\nid4\n1\n151.55\n0"
+    "text": "Q3- Dans la table titanic_place :\n\nConserver uniquement les colonnes id, Classe, Prix et Survie\n\n\nq2.4 &lt;- titanic_place %&gt;% \n  select(id, Classe, Prix, Survie)"
+  },
+  {
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q3--dans-la-table-titanic_place-3",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q3--dans-la-table-titanic_place-3",
+    "title": "STATISTIQUES DESCRIPTIVES",
+    "section": "Q3- Dans la table titanic_place :",
+    "text": "Q3- Dans la table titanic_place :\n\nknitr::kable(head(q2.4,4), caption = \"Resultat de la question 2.4\" )\n\n\nResultat de la question 2.4\n\n\nid\nClasse\nPrix\nSurvie\n\n\n\n\nid1\n1\n211.3375\n1\n\n\nid2\n1\n151.55\n1\n\n\nid3\n1\n151.55\n0\n\n\nid4\n1\n151.55\n0"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q4-q5-fusionner-les-tables-titanic-et-titanic_place.",
@@ -553,11 +609,11 @@
     "text": "Q-7 : Table titanic_appur qui contiendra uniquement les observations de la table titanicJoin dont toutes les variables sont non-manquantes.\n\ntit_appur &lt;- TitanicJoin %&gt;% \n  select(where(~!anyNA(.)))"
   },
   {
-    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q-7-table-titanic_appur-qui-contiendra-uniquement-les-observations-de-la-table-titanicjoin-dont-toutes-les-variables-sont-non-manquantes.-1",
-    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q-7-table-titanic_appur-qui-contiendra-uniquement-les-observations-de-la-table-titanicjoin-dont-toutes-les-variables-sont-non-manquantes.-1",
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q-7-suites",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q-7-suites",
     "title": "STATISTIQUES DESCRIPTIVES",
-    "section": "Q-7 : Table titanic_appur qui contiendra uniquement les observations de la table titanicJoin dont toutes les variables sont non-manquantes.",
-    "text": "Q-7 : Table titanic_appur qui contiendra uniquement les observations de la table titanicJoin dont toutes les variables sont non-manquantes.\n\nknitr::kable(head(tit_appur,4), caption = \"Resultat de la question 7\" )\n\n\nResultat de la question 7\n\n\nid\nCivilite\nEpouseFrat\nParentsEnf\nClasse\nSurvie\nPrix\n\n\n\n\nid1\nMiss\n0\n0\n1\n1\n211.3375\n\n\nid2\nMaster\n1\n2\n1\n1\n151.55\n\n\nid3\nMiss\n1\n2\n1\n0\n151.55\n\n\nid4\nMr\n1\n2\n1\n0\n151.55"
+    "section": "Q-7 : Suites",
+    "text": "Q-7 : Suites\n\nknitr::kable(head(tit_appur,4), caption = \"Resultat de la question 7\" )\n\n\nResultat de la question 7\n\n\nid\nCivilite\nEpouseFrat\nParentsEnf\nClasse\nSurvie\nPrix\n\n\n\n\nid1\nMiss\n0\n0\n1\n1\n211.3375\n\n\nid2\nMaster\n1\n2\n1\n1\n151.55\n\n\nid3\nMiss\n1\n2\n1\n0\n151.55\n\n\nid4\nMr\n1\n2\n1\n0\n151.55"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q-7-créer-une-table-titanic_appur-qui-contiendra-uniquement-les-observations-de-la-table-titanicjoin-dont-toutes-les-variables-sont-non-manquantes.",
@@ -567,18 +623,18 @@
     "text": "Q-7 : Créer une table titanic_appur qui contiendra uniquement les observations de la table titanicJoin dont toutes les variables sont non-manquantes.\n\ntit_appur2 &lt;- TitanicJoin %&gt;% \n  na.omit()"
   },
   {
-    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q-7-créer-une-table-titanic_appur-qui-contiendra-uniquement-les-observations-de-la-table-titanicjoin-dont-toutes-les-variables-sont-non-manquantes.-1",
-    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q-7-créer-une-table-titanic_appur-qui-contiendra-uniquement-les-observations-de-la-table-titanicjoin-dont-toutes-les-variables-sont-non-manquantes.-1",
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q-7-suites-1",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q-7-suites-1",
     "title": "STATISTIQUES DESCRIPTIVES",
-    "section": "Q-7 : Créer une table titanic_appur qui contiendra uniquement les observations de la table titanicJoin dont toutes les variables sont non-manquantes.",
-    "text": "Q-7 : Créer une table titanic_appur qui contiendra uniquement les observations de la table titanicJoin dont toutes les variables sont non-manquantes.\n\nknitr::kable(head(tit_appur2,4), caption = \"Resultat de la question 7\" )\n\n\nResultat de la question 7\n\n\nid\nCivilite\nAge\nEpouseFrat\nParentsEnf\nClasse\nSurvie\nPrix\nPortEmbarq\n\n\n\n\nid1\nMiss\n29.0000\n0\n0\n1\n1\n211.3375\nS\n\n\nid2\nMaster\n0.9167\n1\n2\n1\n1\n151.55\nS\n\n\nid3\nMiss\n2.0000\n1\n2\n1\n0\n151.55\nS\n\n\nid4\nMr\n30.0000\n1\n2\n1\n0\n151.55\nS"
+    "section": "Q-7 : Suites",
+    "text": "Q-7 : Suites\n\nknitr::kable(head(tit_appur2,4), caption = \"Resultat de la question 7\" )\n\n\nResultat de la question 7\n\n\nid\nCivilite\nAge\nEpouseFrat\nParentsEnf\nClasse\nSurvie\nPrix\nPortEmbarq\n\n\n\n\nid1\nMiss\n29.0000\n0\n0\n1\n1\n211.3375\nS\n\n\nid2\nMaster\n0.9167\n1\n2\n1\n1\n151.55\nS\n\n\nid3\nMiss\n2.0000\n1\n2\n1\n0\n151.55\nS\n\n\nid4\nMr\n30.0000\n1\n2\n1\n0\n151.55\nS"
   },
   {
-    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q8--ajouter-une-variable-sexe-à-la-table-titanic_appur-qui-contiendra-le-sexe-de-chaque-individu.-on-pourra-suivre-la-règle-suivante.",
-    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q8--ajouter-une-variable-sexe-à-la-table-titanic_appur-qui-contiendra-le-sexe-de-chaque-individu.-on-pourra-suivre-la-règle-suivante.",
+    "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q8--une-variable-sexe-à-la-table-titanic_appur-qui-contiendra-le-sexe-de-chaque-individu",
+    "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q8--une-variable-sexe-à-la-table-titanic_appur-qui-contiendra-le-sexe-de-chaque-individu",
     "title": "STATISTIQUES DESCRIPTIVES",
-    "section": "Q8- Ajouter une variable sexe à la table titanic_appur qui contiendra le sexe de chaque individu. On pourra suivre la règle suivante.",
-    "text": "Q8- Ajouter une variable sexe à la table titanic_appur qui contiendra le sexe de chaque individu. On pourra suivre la règle suivante.\nMr, ColM, Major, Rev, DrM, Master –&gt; Il ne s’agit que d’hommes. Sinon, il s’agit de femmes\n\ntit_appur2 &lt;- tit_appur2 %&gt;% \n  mutate(\n    Sexe = if_else(\n      Civilite %in% c(\"Mr\", \"ColM\", \"Major\", \"Rev\", \"DrM\", \"Master\"),\n      \"Homme\",\n      \"Femme\"\n    )\n  )"
+    "section": "Q8- Une variable sexe à la table titanic_appur qui contiendra le sexe de chaque individu",
+    "text": "Q8- Une variable sexe à la table titanic_appur qui contiendra le sexe de chaque individu\n\ntit_appur2 &lt;- tit_appur2 %&gt;% \n  mutate(\n    Sexe = if_else(\n      Civilite %in% c(\"Mr\", \"ColM\", \"Major\", \"Rev\", \"DrM\", \"Master\"),\n      \"Homme\",\n      \"Femme\"\n    )\n  )"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q8--suite",
@@ -613,7 +669,7 @@
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q9--afficher-les-statistiques-suivantes-à-partir-de-la-table-titanic_appur-3",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "Q9- Afficher les statistiques suivantes à partir de la table titanic_appur :",
-    "text": "Q9- Afficher les statistiques suivantes à partir de la table titanic_appur :\n\nPar classe et par sexe\n\n\ntit_appur2 &lt;- tit_appur2 %&gt;% \n  mutate(Classe = as.character(Classe))\n\nstat.Prix.By.Classe.Sexe &lt;- tit_appur2 %&gt;% \n  group_by(\n    Sexe,\n    Classe\n  ) %&gt;% \n  summarise(\n    Prix.Moyen = mean(Prix),\n    Nombre.De.Personnes = n(),\n    .groups = \"keep\"\n  ) %&gt;% \n  mutate(\n    Pourcentage = round(Nombre.De.Personnes*100/sum(Nombre.De.Personnes),2)\n  )"
+    "text": "Q9- Afficher les statistiques suivantes à partir de la table titanic_appur :\n\nPar classe et par sexe\n\n\ntit_appur2 &lt;- tit_appur2 %&gt;% \n  mutate(Classe = as.character(Classe))\n\nstat.Prix.By.Classe.Sexe &lt;- tit_appur2 %&gt;% \n  group_by(Sexe,Classe) %&gt;% \n  summarise(\n    Prix.Moyen = mean(Prix),\n    Nombre.De.Personnes = n(),.groups = \"keep\") %&gt;% \n  mutate(\n    Pourcentage = round(Nombre.De.Personnes*100/sum(Nombre.De.Personnes),2)\n    )"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q9--afficher-les-statistiques-suivantes-à-partir-de-la-table-titanic_appur-4",
@@ -704,14 +760,14 @@
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q5",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "Q5",
-    "text": "Q5\n\nrapport_cor &lt;- df %&gt;% \n  mutate(\n    `Prix moyen`  = mean(Prix),\n    Effectif = n()\n  ) %&gt;%\n  group_by(Classe) %&gt;% \n  mutate(\n    `Ecart moyen` = (mean(Prix) - `Prix moyen`) ^2 / Effectif\n    ) %&gt;% \n  ungroup() %&gt;% \n  summarise(\n    Rapport = sum(`Ecart moyen`) / var(Prix)\n  )\n   \nrapport_cor\n\n# A tibble: 1 × 1\n  Rapport\n    &lt;dbl&gt;\n1   0.374\n\n\nLe rapport de corrélation est de 0,374 donc on peut dire que le prix est lié à la classe."
+    "text": "Q5\n\nrapport_cor &lt;- df %&gt;% \n  mutate(\n    `Prix moyen`  = mean(Prix),Effectif = n()) %&gt;%\n  group_by(Classe) %&gt;% \n  mutate(\n    `Ecart moyen` = (mean(Prix) - `Prix moyen`) ^2 / Effectif ) %&gt;% \n  ungroup() %&gt;% \n  summarise(\n    Rapport = sum(`Ecart moyen`) / var(Prix)\n  )\nrapport_cor\n\n# A tibble: 1 × 1\n  Rapport\n    &lt;dbl&gt;\n1   0.374\n\n\nLe rapport de corrélation est de 0,374 donc le prix est lié à la classe."
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#question-6-la-proportion-dhommes-parmi-les-100-individus-ayant-payé-leur-ticket-le-plus-cher",
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#question-6-la-proportion-dhommes-parmi-les-100-individus-ayant-payé-leur-ticket-le-plus-cher",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "Question 6 : La proportion d’hommes parmi les 100 individus ayant payé leur ticket le plus cher",
-    "text": "Question 6 : La proportion d’hommes parmi les 100 individus ayant payé leur ticket le plus cher\n\nprop &lt;- df %&gt;% \n  arrange(desc(Prix)) %&gt;% \n  slice(1:100) %&gt;% \n  filter(Sexe == \"Homme\") %&gt;% \n  summarise(\n    Effectif = n ()\n  ) %&gt;% \n  mutate(\n    Proportion = round(\n      Effectif*100/sum(Effectif),\n      2\n    )\n  )"
+    "text": "Question 6 : La proportion d’hommes parmi les 100 individus ayant payé leur ticket le plus cher\n\nprop &lt;- df %&gt;% \n  arrange(desc(Prix)) %&gt;% \n  slice(1:100) %&gt;% \n  filter(Sexe == \"Homme\") %&gt;% \n  summarise(Effectif = n ()) %&gt;% \n  mutate( Proportion = round(\n      Effectif*100/sum(Effectif),2)\n  )"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#question-6-donnez-la-proportion-dhommes-parmi-les-100-individus-ayant-payé-leur-ticket-le-plus-cher",
