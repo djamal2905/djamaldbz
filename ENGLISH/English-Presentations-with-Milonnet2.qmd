@@ -1,0 +1,227 @@
+---
+title: "COMPUTERS"
+author: "Presented by Djamal Toe and Chahid El Hammouti"
+institute: "National School for Statistic and Data Analysis"
+date: "`r Sys.Date()`"
+format:
+  revealjs:
+    transition-speed: fast
+    aspect_ratio: "16:9"
+    margin: 0.02
+    fig_caption: yes
+    center: true
+    logo: "images/LLOGO.png"
+    footer: "English classes with Milonnet"
+    css: style.css
+fig_caption: yes
+toc: true
+toc-expand: false
+toc-depth: 1
+toc-title: "Table of contents"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
+```
+
+```{r}
+capTabNo = 1; capFigNo = 1;
+capTab = function(x){
+ 
+    x = paste0("Table ",capTabNo," : ",x)
+    capTabNo <<- capTabNo + 1
+ x
+}
+
+capFig = function(x){
+ 
+    x = paste0("","","",x)
+    capFigNo <<- capFigNo + 1
+    x
+}
+
+repeated_capFig = function(x){
+  x = paste0(paste0(paste0("Figure ", capFigNo), ""), x)
+  x
+}
+```
+
+```{r}
+packages_ <- c("ggplot2", "dplyr","readxl","cowplot")
+
+for (pkg in packages_) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg, dependencies = T)
+  }
+  library(pkg, character.only = TRUE)
+}
+```
+
+# Introduction
+
+## News Stories
+
+::: {.fragment .highlight-red}
+- News paper : The Guardian
+:::
+
+::: {.fragment .highlight-blue}
+- Title : IBM unveils new quantum computing chip designs to explore news frontiers of science
+:::
+
+## Computers ?
+
+. . .
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+```{r, fig.align='center', out.width='90%', out.height="90%"}
+fig.path <- paste0(getwd(),"/images/")
+def.img <- paste0(fig.path,"definition.jpg")
+oldSys.img <- paste0(fig.path,"old_system.jpg")
+newSys.img <- paste0(fig.path,"new_system.jpg")
+definition <- ggdraw() + draw_image(image = def.img)
+definition
+```
+
+::: {.fragment .highlight-blue}
+::: {data-id="def" style="background: #fff; width: 100%; height: 100%; font-size: 0.9em;"}
+Programmable information processing system
+:::
+:::
+
+:::
+
+::: {.column width="48%"}
+
+::::{.rows}
+
+:::{.row heigth="40%"}
+```{r, fig.align='center', out.width='80%', out.height="60%"}
+oldSys <- ggdraw() + draw_image(image = oldSys.img)
+oldSys
+```
+:::
+
+:::{.row heigth="10%"}
+::: {.fragment .highlight-blue}
+::: {data-id="evolution" style="background: #fff; width: 100%; height: 100%; font-size: 0.7em;"}
+Old System ===>> New System
+:::
+:::
+:::
+
+:::{.row heigth="40%"}
+```{r, fig.align='center', out.width='80%', out.height="60%"}
+newSys <- ggdraw() + draw_image(image = newSys.img)
+newSys
+```
+:::
+
+
+
+::::
+:::
+
+::::
+
+## Quantum computing chips ?
+
+::: {.fragment .highlight-blue}
+* Use qbits to perform computation instead of using bits
+:::
+
+```{r fig.align='center', out.height="70%", out.width="80%"}
+library(ggplot2)
+data <- data.frame(
+  System = c("Classical", "Quantum"),
+  Performance = c(10, 100)
+)
+ggplot(data, aes(x = System, y = Performance, fill = System)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Performance Comparison", y = "Performance Units") +
+  theme_minimal()
+```
+
+
+## Keywords
+
+* Artificial Intelligence 
+
+* Computational ability
+
+* Supercomputers
+
+* Silicon-based computers 
+
+* Quantum computing chip
+
+
+# Challenges
+
+## Avantages 
+
+::: {.fragment .highlight-blue}
+**Solve many domains problems**
+:::
+
+```{r, fig.align='center', out.height="80%", out.width="85%"}
+advantages <- data.frame(
+  Category = c("Speed", "Efficiency", "Problem Solving"),
+  Score = c(9, 8, 7)
+)
+
+advantage_plot <- ggplot(advantages, aes(x = Category, y = Score, fill = Category)) +
+  geom_bar(stat = "identity", width = 0.7, show.legend = FALSE) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = "Advantages of Quantum Computing", y = "Score", x = "") +
+  theme_minimal(base_size = 14)
+advantage_plot
+```
+
+
+## Challenges
+
+::: {.fragment .highlight-red}
+**Expensive, unstable, needs controlled environment**
+:::
+
+```{r fig.align='center', out.height="75%", out.width="85%"}
+challenges <- data.frame(
+  Category = c("Cost", "Instability", "Environment"),
+  Score = c(8, 9, 7)
+)
+
+challenge_plot <- ggplot(challenges, aes(x = Category, y = Score, fill = Category)) +
+  geom_bar(stat = "identity", width = 0.7, show.legend = FALSE) +
+  scale_fill_brewer(palette = "Set3") +
+  labs(title = "Challenges of Quantum Computing", y = "Score", x = "") +
+  theme_minimal(base_size = 14)
+
+challenge_plot
+```
+
+# Conclusison
+
+## Summary
+
+* Quantum computers are promising 
+
+* Challenges remain for full adoption
+
+* <https://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron>
+
+## Questions ?
+
+::: {data-id="thx" style="background: #fff; color: light-blue; text-align: center; font-family: times new roman ; width: 100%; height: 100%; font-size: 1.5em;"}
+!!! THANK YOU FOR YOUR ATTENTION
+:::
+
+```{r, fig.align='center', out.width='80%', out.height="60%"}
+quest.img <- paste0(fig.path,"interrogation2.png")
+questions <- ggdraw() + draw_image(image = quest.img)
+questions
+```
+
