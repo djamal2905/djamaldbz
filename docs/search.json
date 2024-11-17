@@ -1418,7 +1418,7 @@
     "href": "STATISTIC/STAT_DESC/1TP/Exercies.html#q2--dans-la-table-titanic",
     "title": "STATISTIQUES DESCRIPTIVES",
     "section": "Q2- Dans la table titanic :",
-    "text": "Q2- Dans la table titanic :\n\nConserver uniquement les colonnes id\nCivilite et Age et Afficher le passager le plus vieux\n\n\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following object is masked from 'package:kableExtra':\n\n    group_rows\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n# supprimer les na\n\n\n\nq2 &lt;- Titanic.Clients %&gt;% \n  select(id, Civilite, Age) %&gt;% \n  filter(Age == max(Age, na.rm = T))\n\nq2 \n\n    id Civilite Age\n1 id15       Mr  80"
+    "text": "Q2- Dans la table titanic :\n\nConserver uniquement les colonnes id\nCivilite et Age et Afficher le passager le plus vieux\n\n\nlibrary(dplyr)\n\n# supprimer les na\n\n\n\nq2 &lt;- Titanic.Clients %&gt;% \n  select(id, Civilite, Age) %&gt;% \n  filter(Age == max(Age, na.rm = T))\n\nq2 \n\n    id Civilite Age\n1 id15       Mr  80"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#q3--dans-la-table-titanic_place",
