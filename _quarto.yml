@@ -29,6 +29,8 @@ website:
             text: English Presentations with Milonnet 18 Nov
           - href: "ENGLISH/English-Presentations-with-Milonnet2.qmd"
             text: English Presentations with Milonnet 18 Nov 2
+      - href: "PROBABILITES-TD3-MC.qmd"
+        text: Estimation MC TD3 exo 3
       - about.qmd
           
       
