@@ -161,81 +161,32 @@
     "text": "Question 2 : Modèle de régression linéaire\n\n\n\nCall:\nlm(formula = Y ~ X, data = df_)\n\nResiduals:\n      1       2       3       4       5 \n 0.7687 -2.0125  1.3937 -0.9813  0.8313 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  89.0437     1.6283   54.68 1.35e-05 ***\nX            -3.4063     0.2071  -16.45 0.000489 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.657 on 3 degrees of freedom\nMultiple R-squared:  0.989, Adjusted R-squared:  0.9854 \nF-statistic: 270.4 on 1 and 3 DF,  p-value: 0.0004894\n\n\n\n\n\nStatistiques descriptives avec R"
   },
   {
-    "objectID": "PROBABILITES/TD3-MC.html",
-    "href": "PROBABILITES/TD3-MC.html",
-    "title": "Djamaldbz - Probabilités générales TD3",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Djamaldbz - Expertise en Statistiques",
     "section": "",
-    "text": "ici nous avons utilisé la moyenne empirique et la variance corrigée qui sont des estimateurs sans bais de la moyenne du carectère X et de sa variance (\\(E[\\hat{\\theta}] = \\theta \\text{ et } E[{S^2}] = \\sigma^2\\)).\n\nmonte_carlo_geometrique &lt;- function(n, p) {\n  ##--  Fonction pour générer un nombre d'essais avant le succès\n  simuler_geometrique &lt;- function(p) {\n    essais &lt;- 1\n    while (runif(1) &gt; p) {  # runif(1) génère un nombre uniforme entre 0 et 1\n      essais &lt;- essais + 1\n    }\n    return(essais)\n  }\n  \n  ##-- Générer n réalisations de la loi géométrique\n  simulations &lt;- replicate(n, simuler_geometrique(p))\n  \n  ##-- Calcul de la moyenne empirique (approximation de l'espérance)\n  moyenne_empirique &lt;- mean(simulations)\n  \n  ##-- Calcul de la variance empirique (approximation de la variance / variance corrigée)\n  variance_empirique &lt;- var(simulations)\n  \n  ##-- Calcul de l'écart-type empirique\n  ecart_type_empirique &lt;- sd(simulations)\n  \n  ##-- Calcul du coefficient de variation (écart-type / moyenne)\n  coefficient_variation &lt;- ecart_type_empirique / moyenne_empirique\n  \n  ##-- Retourner les résultats sous forme de liste\n  return(list(\n    moyenne = moyenne_empirique,\n    variance = variance_empirique,\n    ecart_type = ecart_type_empirique,\n    coefficient_variation = coefficient_variation\n  ))\n}\n\n##-- Utilisation de la fonction avec n = 100000 simulations et p = 1/6\nresultats &lt;- monte_carlo_geometrique(100000, 1/6)\n\n##-- Affichage des résultats\ncat(\"Moyenne empirique (approximation de l'espérance) :\", resultats$moyenne, \"\\n\")\n\nMoyenne empirique (approximation de l'espérance) : 6.0062 \n\ncat(\"Variance empirique (approximation de la variance) :\", resultats$variance, \"\\n\")\n\nVariance empirique (approximation de la variance) : 29.94662 \n\ncat(\"Ecart-type empirique :\", resultats$ecart_type, \"\\n\")\n\nEcart-type empirique : 5.472351 \n\ncat(\"Coefficient de variation :\", resultats$coefficient_variation, \"\\n\")\n\nCoefficient de variation : 0.9111169"
+    "text": "Bienvenue sur mon site personnel.\nJe suis Djamal TOE, statisticien passionné par les analyses avancées, la visualisation de données, et la résolution de problèmes complexes à travers des approches quantitatives. Ce site présente mes projets, mes recherches, et mes contributions dans le domaine des statistiques et de la science des données."
   },
   {
-    "objectID": "PROBABILITES/TD3-MC.html#approximations-de-monte-carlo-de-lespérance-de-la-variance-et-du-coefficient-de-variation-quand-la-v.a.d-suit-une-loi-géométrique",
-    "href": "PROBABILITES/TD3-MC.html#approximations-de-monte-carlo-de-lespérance-de-la-variance-et-du-coefficient-de-variation-quand-la-v.a.d-suit-une-loi-géométrique",
-    "title": "Djamaldbz - Probabilités générales TD3",
-    "section": "",
-    "text": "ici nous avons utilisé la moyenne empirique et la variance corrigée qui sont des estimateurs sans bais de la moyenne du carectère X et de sa variance (\\(E[\\hat{\\theta}] = \\theta \\text{ et } E[{S^2}] = \\sigma^2\\)).\n\nmonte_carlo_geometrique &lt;- function(n, p) {\n  ##--  Fonction pour générer un nombre d'essais avant le succès\n  simuler_geometrique &lt;- function(p) {\n    essais &lt;- 1\n    while (runif(1) &gt; p) {  # runif(1) génère un nombre uniforme entre 0 et 1\n      essais &lt;- essais + 1\n    }\n    return(essais)\n  }\n  \n  ##-- Générer n réalisations de la loi géométrique\n  simulations &lt;- replicate(n, simuler_geometrique(p))\n  \n  ##-- Calcul de la moyenne empirique (approximation de l'espérance)\n  moyenne_empirique &lt;- mean(simulations)\n  \n  ##-- Calcul de la variance empirique (approximation de la variance / variance corrigée)\n  variance_empirique &lt;- var(simulations)\n  \n  ##-- Calcul de l'écart-type empirique\n  ecart_type_empirique &lt;- sd(simulations)\n  \n  ##-- Calcul du coefficient de variation (écart-type / moyenne)\n  coefficient_variation &lt;- ecart_type_empirique / moyenne_empirique\n  \n  ##-- Retourner les résultats sous forme de liste\n  return(list(\n    moyenne = moyenne_empirique,\n    variance = variance_empirique,\n    ecart_type = ecart_type_empirique,\n    coefficient_variation = coefficient_variation\n  ))\n}\n\n##-- Utilisation de la fonction avec n = 100000 simulations et p = 1/6\nresultats &lt;- monte_carlo_geometrique(100000, 1/6)\n\n##-- Affichage des résultats\ncat(\"Moyenne empirique (approximation de l'espérance) :\", resultats$moyenne, \"\\n\")\n\nMoyenne empirique (approximation de l'espérance) : 6.0062 \n\ncat(\"Variance empirique (approximation de la variance) :\", resultats$variance, \"\\n\")\n\nVariance empirique (approximation de la variance) : 29.94662 \n\ncat(\"Ecart-type empirique :\", resultats$ecart_type, \"\\n\")\n\nEcart-type empirique : 5.472351 \n\ncat(\"Coefficient de variation :\", resultats$coefficient_variation, \"\\n\")\n\nCoefficient de variation : 0.9111169"
+    "objectID": "index.html#à-propos-de-moi",
+    "href": "index.html#à-propos-de-moi",
+    "title": "Djamaldbz - Expertise en Statistiques",
+    "section": "À propos de moi",
+    "text": "À propos de moi\nJe combine mes compétences en statistiques, programmation et analyse de données pour transformer des ensembles de données en informations exploitables. Mon objectif est d’améliorer la prise de décision grâce à des modèles et des méthodes robustes. Ayant effectuer des stages en entreprises, j’ai appris beaucoup de choses notamment en bio-statistiques et sur les modélisations qui y sont utilisées. J’ai également des connaissance en cartographie (avec R)."
   },
   {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#news-stories",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#news-stories",
-    "title": "COMPUTERS",
-    "section": "News Stories",
-    "text": "News Stories\n\n\nNews paper : The Guardian\n\n\n\n\nTitle : IBM unveils new quantum computing chip designs to explore news frontiers of science"
+    "objectID": "index.html#projets-et-contributions",
+    "href": "index.html#projets-et-contributions",
+    "title": "Djamaldbz - Expertise en Statistiques",
+    "section": "Projets et Contributions",
+    "text": "Projets et Contributions\n\n1. Analyses Factorielles et Visualisations Avancées\n\nDéveloppement d’analyses factorielles (ACP, AFC, ACM) pour comprendre les structures complexes des données.\nVisualisation interactive des résultats pour une meilleure interprétation (Rshiny, Python Jupyter Dash).\n\n\n\n2. Modèles de Régression et Prévision\n\nRégression linéaire, logistique, et mixte.\nPrévisions à l’aide de modèles de séries temporelles.\n\n\n\n3. Applications Statistiques\n\nDéveloppement d’outils interactifs pour l’analyse de données (Shiny, Quarto).\nRapports automatisés (Rmarkdown, Bookdown).\n\n\n\n4. Applications Bureau et Web\n\nDévéloppement de logiciel bureau pour la gestion des caisses\nDévéloppement de sites web avec python&Django\n\n\n\n5. Computer vision\nDébute dans la vision par ordinateur avec :\n\nLa SVM (Support Vector Machine)\nLe KNN (K- Nearest Neighbour)\nL’ACP (L’Analyse en Composante Principale)\nLes reseaux de neurones convolutionnels (à venir)\n\n\n\n6. Langages de programmtion et outils statistiques\n\nPython, Java, C++ & C\nR, Stata, SPSS\nHtml, Css\nOffice et Suites\nSystème de Gestion de données :\n\nMySql\nOracle SQL"
   },
   {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#computers",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#computers",
-    "title": "COMPUTERS",
-    "section": "Computers ?",
-    "text": "Computers ?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgrammable information processing system\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOld System ===&gt;&gt; New System"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#quantum-computing-chips",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#quantum-computing-chips",
-    "title": "COMPUTERS",
-    "section": "Quantum computing chips ?",
-    "text": "Quantum computing chips ?\n\n\nUse qbits to perform computation instead of using bits"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#keywords",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#keywords",
-    "title": "COMPUTERS",
-    "section": "Keywords",
-    "text": "Keywords\n\nArtificial Intelligence\nComputational ability\nSupercomputers\nSilicon-based computers\nQuantum computing chip"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#avantages",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#avantages",
-    "title": "COMPUTERS",
-    "section": "Avantages",
-    "text": "Avantages\n\nSolve many domains problems"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#challenges-1",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#challenges-1",
-    "title": "COMPUTERS",
-    "section": "Challenges",
-    "text": "Challenges\n\nExpensive, unstable, needs controlled environment"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#summary",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#summary",
-    "title": "COMPUTERS",
-    "section": "Summary",
-    "text": "Summary\n\nQuantum computers are promising\nChallenges remain for full adoption\nhttps://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#questions",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#questions",
-    "title": "COMPUTERS",
-    "section": "Questions ?",
-    "text": "Questions ?\n\n!!! THANK YOU FOR YOUR ATTENTION\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnglish classes with Milonnet"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "objectID": "index.html#dernières-publications",
+    "href": "index.html#dernières-publications",
+    "title": "Djamaldbz - Expertise en Statistiques",
+    "section": "Dernières Publications",
+    "text": "Dernières Publications\n\nExploration des Techniques d’Analyse Factorielle\nGuide Pratique pour les Modèles Mixtes\nVisualisation Dynamique avec R et Quarto\nFOrmation en python"
   },
   {
     "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#news-stories",
@@ -294,32 +245,74 @@
     "text": "Questions ?\n\n!!! THANK YOU FOR YOUR ATTENTION\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnglish classes with Milonnet"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Djamaldbz - Expertise en Statistiques",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Djamaldbz - Probabilités générales TD3",
     "section": "",
-    "text": "Bienvenue sur mon site personnel.\nJe suis Djamal TOE, statisticien passionné par les analyses avancées, la visualisation de données, et la résolution de problèmes complexes à travers des approches quantitatives. Ce site présente mes projets, mes recherches, et mes contributions dans le domaine des statistiques et de la science des données."
+    "text": "ici nous avons utilisé la moyenne empirique et la variance corrigée qui sont des estimateurs sans bais de la moyenne du carectère X et de sa variance (\\(E[\\hat{\\theta}] = \\theta \\text{ et } E[{S^2}] = \\sigma^2\\)).\n\nmonte_carlo_geometrique &lt;- function(n, p) {\n  ##--  Fonction pour générer un nombre d'essais avant le succès\n  simuler_geometrique &lt;- function(p) {\n    essais &lt;- 1\n    while (runif(1) &gt; p) {  # runif(1) génère un nombre uniforme entre 0 et 1\n      essais &lt;- essais + 1\n    }\n    return(essais)\n  }\n  \n  ##-- Générer n réalisations de la loi géométrique\n  simulations &lt;- replicate(n, simuler_geometrique(p))\n  \n  ##-- Calcul de la moyenne empirique (approximation de l'espérance)\n  moyenne_empirique &lt;- mean(simulations)\n  \n  ##-- Calcul de la variance empirique (approximation de la variance / variance corrigée)\n  variance_empirique &lt;- var(simulations)\n  \n  ##-- Calcul de l'écart-type empirique\n  ecart_type_empirique &lt;- sd(simulations)\n  \n  ##-- Calcul du coefficient de variation (écart-type / moyenne)\n  coefficient_variation &lt;- ecart_type_empirique / moyenne_empirique\n  \n  ##-- Retourner les résultats sous forme de liste\n  return(list(\n    moyenne = moyenne_empirique,\n    variance = variance_empirique,\n    ecart_type = ecart_type_empirique,\n    coefficient_variation = coefficient_variation\n  ))\n}\n\n##-- Utilisation de la fonction avec n = 100000 simulations et p = 1/6\nresultats &lt;- monte_carlo_geometrique(100000, 1/6)\n\n##-- Affichage des résultats\ncat(\"Moyenne empirique (approximation de l'espérance) :\", resultats$moyenne, \"\\n\")\n\nMoyenne empirique (approximation de l'espérance) : 6.00252 \n\ncat(\"Variance empirique (approximation de la variance) :\", resultats$variance, \"\\n\")\n\nVariance empirique (approximation de la variance) : 30.27378 \n\ncat(\"Ecart-type empirique :\", resultats$ecart_type, \"\\n\")\n\nEcart-type empirique : 5.502161 \n\ncat(\"Coefficient de variation :\", resultats$coefficient_variation, \"\\n\")\n\nCoefficient de variation : 0.9166419"
   },
   {
-    "objectID": "index.html#à-propos-de-moi",
-    "href": "index.html#à-propos-de-moi",
-    "title": "Djamaldbz - Expertise en Statistiques",
-    "section": "À propos de moi",
-    "text": "À propos de moi\nJe combine mes compétences en statistiques, programmation et analyse de données pour transformer des ensembles de données en informations exploitables. Mon objectif est d’améliorer la prise de décision grâce à des modèles et des méthodes robustes. Ayant effectuer des stages en entreprises, j’ai appris beaucoup de choses notamment en bio-statistiques et sur les modélisations qui y sont utilisées. J’ai également des connaissance en cartographie (avec R)."
+    "objectID": "about.html#approximations-de-monte-carlo-de-lespérance-de-la-variance-et-du-coefficient-de-variation-quand-la-v.a.d-suit-une-loi-géométrique",
+    "href": "about.html#approximations-de-monte-carlo-de-lespérance-de-la-variance-et-du-coefficient-de-variation-quand-la-v.a.d-suit-une-loi-géométrique",
+    "title": "Djamaldbz - Probabilités générales TD3",
+    "section": "",
+    "text": "ici nous avons utilisé la moyenne empirique et la variance corrigée qui sont des estimateurs sans bais de la moyenne du carectère X et de sa variance (\\(E[\\hat{\\theta}] = \\theta \\text{ et } E[{S^2}] = \\sigma^2\\)).\n\nmonte_carlo_geometrique &lt;- function(n, p) {\n  ##--  Fonction pour générer un nombre d'essais avant le succès\n  simuler_geometrique &lt;- function(p) {\n    essais &lt;- 1\n    while (runif(1) &gt; p) {  # runif(1) génère un nombre uniforme entre 0 et 1\n      essais &lt;- essais + 1\n    }\n    return(essais)\n  }\n  \n  ##-- Générer n réalisations de la loi géométrique\n  simulations &lt;- replicate(n, simuler_geometrique(p))\n  \n  ##-- Calcul de la moyenne empirique (approximation de l'espérance)\n  moyenne_empirique &lt;- mean(simulations)\n  \n  ##-- Calcul de la variance empirique (approximation de la variance / variance corrigée)\n  variance_empirique &lt;- var(simulations)\n  \n  ##-- Calcul de l'écart-type empirique\n  ecart_type_empirique &lt;- sd(simulations)\n  \n  ##-- Calcul du coefficient de variation (écart-type / moyenne)\n  coefficient_variation &lt;- ecart_type_empirique / moyenne_empirique\n  \n  ##-- Retourner les résultats sous forme de liste\n  return(list(\n    moyenne = moyenne_empirique,\n    variance = variance_empirique,\n    ecart_type = ecart_type_empirique,\n    coefficient_variation = coefficient_variation\n  ))\n}\n\n##-- Utilisation de la fonction avec n = 100000 simulations et p = 1/6\nresultats &lt;- monte_carlo_geometrique(100000, 1/6)\n\n##-- Affichage des résultats\ncat(\"Moyenne empirique (approximation de l'espérance) :\", resultats$moyenne, \"\\n\")\n\nMoyenne empirique (approximation de l'espérance) : 6.00252 \n\ncat(\"Variance empirique (approximation de la variance) :\", resultats$variance, \"\\n\")\n\nVariance empirique (approximation de la variance) : 30.27378 \n\ncat(\"Ecart-type empirique :\", resultats$ecart_type, \"\\n\")\n\nEcart-type empirique : 5.502161 \n\ncat(\"Coefficient de variation :\", resultats$coefficient_variation, \"\\n\")\n\nCoefficient de variation : 0.9166419"
   },
   {
-    "objectID": "index.html#projets-et-contributions",
-    "href": "index.html#projets-et-contributions",
-    "title": "Djamaldbz - Expertise en Statistiques",
-    "section": "Projets et Contributions",
-    "text": "Projets et Contributions\n\n1. Analyses Factorielles et Visualisations Avancées\n\nDéveloppement d’analyses factorielles (ACP, AFC, ACM) pour comprendre les structures complexes des données.\nVisualisation interactive des résultats pour une meilleure interprétation (Rshiny, Python Jupyter Dash).\n\n\n\n2. Modèles de Régression et Prévision\n\nRégression linéaire, logistique, et mixte.\nPrévisions à l’aide de modèles de séries temporelles.\n\n\n\n3. Applications Statistiques\n\nDéveloppement d’outils interactifs pour l’analyse de données (Shiny, Quarto).\nRapports automatisés (Rmarkdown, Bookdown).\n\n\n\n4. Applications Bureau et Web\n\nDévéloppement de logiciel bureau pour la gestion des caisses\nDévéloppement de sites web avec python&Django\n\n\n\n5. Computer vision\nDébute dans la vision par ordinateur avec :\n\nLa SVM (Support Vector Machine)\nLe KNN (K- Nearest Neighbour)\nL’ACP (L’Analyse en Composante Principale)\nLes reseaux de neurones convolutionnels (à venir)\n\n\n\n6. Langages de programmtion et outils statistiques\n\nPython, Java, C++ & C\nR, Stata, SPSS\nHtml, Css\nOffice et Suites\nSystème de Gestion de données :\n\nMySql\nOracle SQL"
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#news-stories",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#news-stories",
+    "title": "COMPUTERS",
+    "section": "News Stories",
+    "text": "News Stories\n\n\nNews paper : The Guardian\n\n\n\n\nTitle : IBM unveils new quantum computing chip designs to explore news frontiers of science"
   },
   {
-    "objectID": "index.html#dernières-publications",
-    "href": "index.html#dernières-publications",
-    "title": "Djamaldbz - Expertise en Statistiques",
-    "section": "Dernières Publications",
-    "text": "Dernières Publications\n\nExploration des Techniques d’Analyse Factorielle\nGuide Pratique pour les Modèles Mixtes\nVisualisation Dynamique avec R et Quarto\nFOrmation en python"
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#computers",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#computers",
+    "title": "COMPUTERS",
+    "section": "Computers ?",
+    "text": "Computers ?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgrammable information processing system\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOld System ===&gt;&gt; New System"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#quantum-computing-chips",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#quantum-computing-chips",
+    "title": "COMPUTERS",
+    "section": "Quantum computing chips ?",
+    "text": "Quantum computing chips ?\n\n\nUse qbits to perform computation instead of using bits"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#keywords",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#keywords",
+    "title": "COMPUTERS",
+    "section": "Keywords",
+    "text": "Keywords\n\nArtificial Intelligence\nComputational ability\nSupercomputers\nSilicon-based computers\nQuantum computing chip"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#avantages",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#avantages",
+    "title": "COMPUTERS",
+    "section": "Avantages",
+    "text": "Avantages\n\nSolve many domains problems"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#challenges-1",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#challenges-1",
+    "title": "COMPUTERS",
+    "section": "Challenges",
+    "text": "Challenges\n\nExpensive, unstable, needs controlled environment"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#summary",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#summary",
+    "title": "COMPUTERS",
+    "section": "Summary",
+    "text": "Summary\n\nQuantum computers are promising\nChallenges remain for full adoption\nhttps://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#questions",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#questions",
+    "title": "COMPUTERS",
+    "section": "Questions ?",
+    "text": "Questions ?\n\n!!! THANK YOU FOR YOUR ATTENTION\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnglish classes with Milonnet"
   },
   {
     "objectID": "STATISTIC/STAT_DESC/1TP/Exercies.html#installation-des-packages",
