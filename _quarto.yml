@@ -7,6 +7,7 @@ project:
     - ENGLISH/
     - ENGLISH/images/
     - STATISTIC/
+    - ANALYSES_FACTORIELLES/
 
 website:
   title: "DJAMAL SITE"
@@ -16,19 +17,10 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - text: Statistic
+      - text: Analyses Factorielles
         menu: 
-          - href: "STATISTIC/STAT_DESC/1TP/Exercies.qmd"
-            text: Practical work 1
-          - href: "STATISTIC/STAT_DESC/tp05/tp05.qmd"
-            text: Practical work 5
-          
-      - text: English
-        menu: 
-          - href: "ENGLISH/English-Presentations-with-Milonnet.qmd"
-            text: English Presentations with Milonnet 18 Nov
-          - href: "ENGLISH/English-Presentations-with-Milonnet2.qmd"
-            text: English Presentations with Milonnet 18 Nov 2
+          - href: "ANALYSES_FACTORIELLES/TP03.qmd"
+            text: Travaux pratiques N02 sur les méthodes d'analyses factorielles
       - about.qmd
           
       

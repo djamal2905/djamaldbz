@@ -765,14 +765,6 @@ graph
 
 Elle présente la densité de la variable.
 
-```{r, fig.align='center', out.height="70%", out.width= "80%", fig.cap="Violon plot"}
-#-- install.packages("vioplot")
-vio <- vioplot::vioplot( Prix ~ Classe,df,main = "Prix selon la classe")
-print(vio)
-```
-
-## Question 4 :  Vio avec ggplot 2 ?
-
 ```{r}
 vio <- ggplot(df, aes(x = Classe, y = Prix, color = Classe)) +
     geom_violin() +

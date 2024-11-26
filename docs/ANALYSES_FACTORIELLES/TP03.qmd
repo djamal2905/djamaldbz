@@ -1,0 +1,176 @@
+---
+title: "Djamaldbz - Méthodes d'Analyse factorielle TP02"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r, echo = FALSE}
+capTabNo = 1; capFigNo = 1;
+capTab = function(x){
+ 
+    x = paste0("Table ",capTabNo," : ",x)
+    capTabNo <<- capTabNo + 1
+ x
+}
+
+capFig = function(x){
+ 
+    x = paste0("","","",x)
+    capFigNo <<- capFigNo + 1
+    x
+}
+
+repeated_capFig = function(x){
+  x = paste0(paste0(paste0("Figure ", capFigNo), ""), x)
+  x
+}
+options(OutDec= ",")
+```
+
+```{r}
+packages_ <- c("ggplot2", "dplyr","readxl","cowplot")
+
+for (pkg in packages_) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg, dependencies = T)
+  }
+  library(pkg, character.only = TRUE)
+}
+```
+
+# Description des données
+
+|       Le jeu de données utilisé dans ce premier cas pratique provient du site web de ***Global Footprint Network***. Il contient les résultats d’empreinte écologique et de biocapacité pour 184 pays.
+
+Les données sont disponibles sur <<https://marieetienne.github.io/datasets/overshootday_overview.csv>>.
+
+## Quelques définitions
+
+|       Le calcul de l’empreinte écologique et de la biocapacité nous aide à répondre à la question de recherche fondamentale : Quelle est la demande des êtres humains envers les surfaces biologiquement productives (empreinte écologique) par rapport à la quantité que la planète (ou la surface productive d’une région) peut régénérer sur ces surfaces (biocapacité) ?
+
+* **Hectare global (gha)** : C’est l’unité choisie pour exprimer toutes les quantités d’intérêt concernant la consommation/émission de carbone. Une unité de surface correspondant à la productivité moyenne d’un hectare de terres mondiales. Un hectare de terres agricoles vaudra plus d’hectares globaux qu’un hectare de désert.
+
+* **Empreinte écologique (en gha par personne)** : Le nombre de gha requis pour produire les besoins et absorber les déchets d’un pays.
+
+* **Biocapacité (en gha)** : La capacité d’un pays à produire ce dont il a besoin et à absorber ses déchets (réserve écologique).
+
+* **Jour de dépassement** : Jour de l’année où la demande d’un pays dépasse sa biocapacité annuelle.
+
+# Analyse des données
+
+## Chargement des données
+
+```{r}
+##-- Installer et Charger les packages requis
+###--- vecteurs des packages
+packages <- c("factoextra", "corrr", "FactoMineR", "dplyr","kableExtra")
+
+###--- Boucle pour installer et charger les packages
+for (pkg in packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg, dependencies = T)
+  }
+  library(pkg, character.only = TRUE)
+}
+
+##-- charger la base de données via le lien web
+link.to.data <- "https://marieetienne.github.io/datasets/overshootday_overview.csv"
+df <- read.csv(link.to.data)
+```
+
+## Analyse exploratoire des données
+
+```{r}
+nrow(df); ncol(df) ;dim(df)
+```
+Les données sont composées de **154** lignes et de ***13*** colonnes.
+
+## Résumé statitique des variables
+
+On utilise la commande ***summary(df)*** tout simplement. 
+
+```{r}
+##-- summary pour les variable numériques
+summary.df.num <- sapply(df[sapply(df, is.numeric)], function(x) {
+  c(
+    min = min(x, na.rm = TRUE),
+    Q1 = quantile(x, 0.25, na.rm = TRUE),
+    Q3 = quantile(x, 0.75, na.rm = TRUE),
+    med = quantile(x, 0.5, na.rm = TRUE),
+    mean = mean(x, na.rm = TRUE),
+    max = max(x, na.rm = TRUE),
+    count = sum(!is.na(x)),
+    sd = sd(x, na.rm = TRUE),
+    `NA's` = round(sum(is.na(x)),0)
+  )
+})
+summary.df.num <- as.data.frame(summary.df.num)
+```
+
+Ensuite nous affichons ce resumé dans un tableau : 
+
+```{r, echo=FALSE}
+kable(summary.df.num) %>% add_footnote(label = "by Djamal DBZ") 
+```
+
+Nous constatons que ceraines variables ont des données manquantes, nous pouvons décider de soit les supprimer soit les prédire avec des méthodes d'imputation en fonction de leurs importances. Mais pour le moment nous allons juste les supprimer.
+
+```{r}
+df <- na.omit(df)
+```
+
+Ainsi nous passons de 154 à 138 lignes.
+
+## Contruction de l'Analyse en composante principale
+
+* **Le poids pour les pays** : Les tailles respectives des populations de chaques pays car cela garantit que l'analyse est représentative des différences globales, en tenant compte de l'impact démographique des pays.
+
+* **Métrique** : Normalisation des données car les variables ne sont pas toutes sur la même échelle. Cela permet d'éviter que les variables avec de grosses valeurs (grandes échelles) dominent l'analyse.
+
+* **variables sup** :
+  * ***Quali sup*** : region
+  * ***Quanti sup*** : hdi, per_capita_gdp, life_expectancy, total_cons,income_group
+  
+### Réalisation de l'ACP
+
+```{r}
+data.pca <- df[,-c(1,7)] ## sélectionner toute les variables sauf la variable pays
+rownames(data.pca) <- df[,1] ## renommer les lignes avec les noms des pays (individus)
+poids <- df$pop
+pca.model <- PCA(data.pca, scale.unit = TRUE,
+                 quanti.sup = c("hdi","per_capita_gdp","life_expectancy",
+                                "total_cons"),
+                 quali.sup = c("region", "income_group"),
+                 graph = FALSE,
+                 row.w = poids)
+```
+
+* Recupération d'abord des valeurs propres et ensuite les variances
+
+```{r}
+eigen.values <- pca.model$eig
+knitr::kable(eigen.values[1:3,2:3], caption = capTab("Inertie expliqués par 3 premiers axes"))
+```
+On remarque que les axes 1,2 et 3 représentent respectivement **63,82, 29,65 et 4,09**.
+
+On pourrait aussi visualiser le graphique des valeurs propres : 
+
+```{r, fig.align='center', fig.cap=capFig("Valeurs proppres")}
+fviz_eig(pca.model)
+```
+
+* **Qualité de representation sur les plans** :
+  
+  * ***(1-2)***
+  
+```{r, fig.align='center', fig.cap=capFig("Qualités de representation des variables"), fig.width=11, fig.height=6}
+graph.cos2.var <- fviz_pca_var(pca.model,col.var="cos2", gradient.cols=c("#F1C40F","#2ECC71","#8E44AD"), repel=TRUE, ggtheme = theme_light())
+
+graph.cos2.var
+```
+
+  Concernant les variables, on constate qu'elles toutes sont bien representées avec des cosinus carrés qui ont une valeur minimale environ 0,9.
+  
