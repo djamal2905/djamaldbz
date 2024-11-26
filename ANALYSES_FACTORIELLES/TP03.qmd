@@ -66,7 +66,8 @@ Les données sont disponibles sur <<https://marieetienne.github.io/datasets/over
 ```{r}
 ##-- Installer et Charger les packages requis
 ###--- vecteurs des packages
-packages <- c("factoextra", "corrr", "FactoMineR", "dplyr","kableExtra")
+packages <- c("factoextra", "corrr", "FactoMineR", "dplyr","kableExtra","corrplot",
+              "explor")
 
 ###--- Boucle pour installer et charger les packages
 for (pkg in packages) {
@@ -86,7 +87,7 @@ df <- read.csv(link.to.data)
 ```{r}
 nrow(df); ncol(df) ;dim(df)
 ```
-Les données sont composées de **154** lignes et de ***13*** colonnes.
+Les données sont composées de **182** lignes et de ***13*** colonnes.
 
 ## Résumé statitique des variables
 
@@ -113,7 +114,7 @@ summary.df.num <- as.data.frame(summary.df.num)
 Ensuite nous affichons ce resumé dans un tableau : 
 
 ```{r, echo=FALSE}
-kable(summary.df.num) %>% add_footnote(label = "by Djamal DBZ") 
+kable(summary.df.num, caption = capTab("Résumé statistique des variables")) %>% add_footnote(label = "by Djamal DBZ") 
 ```
 
 Nous constatons que ceraines variables ont des données manquantes, nous pouvons décider de soit les supprimer soit les prédire avec des méthodes d'imputation en fonction de leurs importances. Mais pour le moment nous allons juste les supprimer.
@@ -136,25 +137,36 @@ Ainsi nous passons de 154 à 138 lignes.
   
 ### Réalisation de l'ACP
 
+- **Vérifions la corrélations entre les variables quantitatives**
+
+```{r, fig.align='center', fig.cap=capFig("Matrice de corrélations"), fig.width = 11, fig.height = 5}
+numeric.vars <- as.data.frame(df[sapply(df, is.numeric)])
+M <- round(cor(numeric.vars),2)
+graph_cor <- corrplot(M,method =  "circle",type = "upper")
+graph_cor[[1]]
+```
+
+
 ```{r}
-data.pca <- df[,-c(1,7)] ## sélectionner toute les variables sauf la variable pays
+data.pca <- df[,-1] ## sélectionner toute les variables sauf la variable pays
 rownames(data.pca) <- df[,1] ## renommer les lignes avec les noms des pays (individus)
 poids <- df$pop
 pca.model <- PCA(data.pca, scale.unit = TRUE,
-                 quanti.sup = c("hdi","per_capita_gdp","life_expectancy",
-                                "total_cons"),
                  quali.sup = c("region", "income_group"),
                  graph = FALSE,
-                 row.w = poids)
+                 row.w = data.pca$pop,
+                 quanti.sup = 6)
+
+explor(pca.model)
 ```
 
 * Recupération d'abord des valeurs propres et ensuite les variances
 
 ```{r}
 eigen.values <- pca.model$eig
-knitr::kable(eigen.values[1:3,2:3], caption = capTab("Inertie expliqués par 3 premiers axes"))
+knitr::kable(eigen.values[1:3,2:3], caption = capTab("Inerties expliquées par les 3 premiers axes"))
 ```
-On remarque que les axes 1,2 et 3 représentent respectivement **63,82, 29,65 et 4,09**.
+On remarque que les axes 1,2 et 3 représentent respectivement **69,76, 16,49 et 4,09**.
 
 On pourrait aussi visualiser le graphique des valeurs propres : 
 
@@ -166,11 +178,109 @@ fviz_eig(pca.model)
   
   * ***(1-2)***
   
+**LES VARIABLES**
+  
 ```{r, fig.align='center', fig.cap=capFig("Qualités de representation des variables"), fig.width=11, fig.height=6}
 graph.cos2.var <- fviz_pca_var(pca.model,col.var="cos2", gradient.cols=c("#F1C40F","#2ECC71","#8E44AD"), repel=TRUE, ggtheme = theme_light())
 
 graph.cos2.var
 ```
 
-  Concernant les variables, on constate qu'elles toutes sont bien representées avec des cosinus carrés qui ont une valeur minimale environ 0,9.
+  Concernant les variables, on constate qu'elles toutes sont bien representées avec des cosinus carrés qui ont une valeur minimale environ 0,8 à part les variables **biocapacity, life_expectancy, number_of_countries_required** qui ont un cosinus carrés qui vaut environ 0,7.
   
+**LES INDIVIDUS**
+
+```{r}
+threshold <- 0.85
+data.ind.cos2 <- pca.model$ind$cos2
+Dim1 <- data.ind.cos2[,"Dim.1"]
+Dim2 <- data.ind.cos2[,"Dim.2"]
+Dim1 <- Dim1[Dim1 >= threshold]
+Dim2 <- Dim2[Dim2 >= 0.6]
+Dim1
+Dim2
+```
+* **AXE 1** : On voit que les pays (individus) comme le Togo, le Yemen, les USA, le Rwanda sont tres bien representés. **RMRQ : Il y en a d'autres**
+
+* **AXE 2** : les pays les mieux représentés sur cet axe sont le Barbados, la Bolivie, le Brésil, la Namibie et le Paraguay
+  
+ * ***(1-3)***
+ 
+**LES VARIABLES**
+ 
+```{r}
+graph.cos2.var <- fviz_pca_var(pca.model,col.var="cos2",axes = c(1,3), gradient.cols=c("#F1C40F","#2ECC71","#8E44AD"), repel=TRUE, ggtheme = theme_light())
+
+graph.cos2.var
+```
+ 
+* **AXE 1** : Sur cet axe les variables ***overshoot_day***, **number_of_earths_required** (toutes les variables en violet) sont bien représentées.
+
+* **AXE 3** : La ***biocapacité*** est légèrement bien représentée avec un $cos^2 \sim 0,6$ parcontre la variable ***number_of_countries_required*** n'est pas bien représentée.
+
+**LES INDIVIDUS**
+
+```{r}
+threshold <- 0.85
+data.ind.cos2 <- pca.model$ind$cos2
+Dim1 <- data.ind.cos2[,"Dim.1"]
+Dim3 <- data.ind.cos2[,"Dim.3"]
+Dim1 <- Dim1[Dim1 >= threshold]
+Dim3 <- Dim3[Dim3 >= threshold]
+Dim1
+Dim3
+```
+
+* **AXE 3** : On voit que seul l'Albanie est bien représentée.
+
+### Comment l’ACP est-elle modifiée si on retire Singapour de l’analyse ?
+
+```{r}
+#poids <- df$pop
+#pca.model <- PCA(data.pca, scale.unit = TRUE,
+#                 quali.sup = c("region", "income_group"),
+#                 graph = FALSE,
+#                row.w = data.pca$pop,
+#                quanti.sup = 6, ind.sup = 136 )
+```
+
+
+### Deux ACP différentes
+
+```{r}
+variables.empreinte <- df[, c("total_prod", "total_cons", "biocapacity", "number_of_earths_required", "overshoot_day", "pop")]
+rownames(variables.empreinte) <- df$country
+variables.developpement <- df[, c("life_expectancy", "hdi", "per_capita_gdp","pop")]
+rownames(variables.developpement) <- df$country
+```
+
+
+#### ACP sur les variables d'empruntes écologiques
+
+```{r}
+acp_empreinte <- PCA(variables.empreinte, graph = FALSE, scale.unit = TRUE, row.w = variables.empreinte$pop)
+##-- valeurs propres
+acp_empreinte$eig[1,1]
+```
+La première valeur propre est : ***4,10***
+
+
+#### ACP sur les variables d'empruntes écologiques
+
+```{r}
+acp.developpement <- PCA(variables.developpement, graph = FALSE, scale.unit = TRUE, row.w = variables.developpement$pop)
+##-- valeurs propres
+acp.developpement$eig[1,1]
+```
+La première valeur propre est : ***2,59***
+
+### ACP avec pondérations des variables
+
+```{r}
+poids.var <- c(rep(1, length(variables.empreinte)), rep(2, length(variables.developpement)))
+
+acp.ponderee <- PCA(data.pca, col.w = poids.var, graph = FALSE, row.w = data.pca$pop, scale.unit = TRUE,quanti.sup = "pop",
+                 quali.sup = c("region", "income_group"),)
+```
+
+

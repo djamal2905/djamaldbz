@@ -93,6 +93,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -164,6 +166,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#contruction-de-lanalyse-en-composante-principale" id="toc-contruction-de-lanalyse-en-composante-principale" class="nav-link" data-scroll-target="#contruction-de-lanalyse-en-composante-principale">Contruction de l’Analyse en composante principale</a>
   <ul class="collapse">
   <li><a href="#réalisation-de-lacp" id="toc-réalisation-de-lacp" class="nav-link" data-scroll-target="#réalisation-de-lacp">Réalisation de l’ACP</a></li>
+  <li><a href="#comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse" id="toc-comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse" class="nav-link" data-scroll-target="#comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse">Comment l’ACP est-elle modifiée si on retire Singapour de l’analyse ?</a></li>
+  <li><a href="#deux-acp-différentes" id="toc-deux-acp-différentes" class="nav-link" data-scroll-target="#deux-acp-différentes">Deux ACP différentes</a></li>
+  <li><a href="#acp-avec-pondérations-des-variables" id="toc-acp-avec-pondérations-des-variables" class="nav-link" data-scroll-target="#acp-avec-pondérations-des-variables">ACP avec pondérations des variables</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -221,19 +226,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">##-- Installer et Charger les packages requis</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">###--- vecteurs des packages</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"factoextra"</span>, <span class="st">"corrr"</span>, <span class="st">"FactoMineR"</span>, <span class="st">"dplyr"</span>,<span class="st">"kableExtra"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">###--- Boucle pour installer et charger les packages</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> packages) {</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> T)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">##-- charger la base de données via le lien web</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>link.to.data <span class="ot">&lt;-</span> <span class="st">"https://marieetienne.github.io/datasets/overshootday_overview.csv"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(link.to.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"factoextra"</span>, <span class="st">"corrr"</span>, <span class="st">"FactoMineR"</span>, <span class="st">"dplyr"</span>,<span class="st">"kableExtra"</span>,<span class="st">"corrplot"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">"explor"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">###--- Boucle pour installer et charger les packages</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> packages) {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> T)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">##-- charger la base de données via le lien web</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>link.to.data <span class="ot">&lt;-</span> <span class="st">"https://marieetienne.github.io/datasets/overshootday_overview.csv"</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(link.to.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="analyse-exploratoire-des-données" class="level2">
@@ -241,16 +247,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df); <span class="fu">ncol</span>(df) ;<span class="fu">dim</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 154</code></pre>
+<pre><code>[1] 182</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 13</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 154  13</code></pre>
+<pre><code>[1] 182  13</code></pre>
 </div>
 </div>
-<p>Les données sont composées de <strong>154</strong> lignes et de <strong><em>13</em></strong> colonnes.</p>
+<p>Les données sont composées de <strong>182</strong> lignes et de <strong><em>13</em></strong> colonnes.</p>
 </section>
 <section id="résumé-statitique-des-variables" class="level2">
 <h2 class="anchored" data-anchor-id="résumé-statitique-des-variables">Résumé statitique des variables</h2>
@@ -276,13 +282,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
+<caption>Table 1 : Résumé statistique des variables</caption>
 <colgroup>
 <col style="width: 4%">
 <col style="width: 9%">
 <col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 7%">
-<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
 <col style="width: 7%">
 <col style="width: 7%">
 <col style="width: 17%">
@@ -307,120 +314,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">min</td>
-<td style="text-align: right;">53,70500</td>
-<td style="text-align: right;">0,3910000</td>
-<td style="text-align: right;">472,826</td>
-<td style="text-align: right;">0,071625</td>
-<td style="text-align: right;">0,3001031</td>
-<td style="text-align: right;">0,5085417</td>
-<td style="text-align: right;">0,0108531</td>
-<td style="text-align: right;">0,0203866</td>
-<td style="text-align: right;">0,3213282</td>
-<td style="text-align: right;">40,0000</td>
+<td style="text-align: right;">52,525000</td>
+<td style="text-align: right;">0,3850000</td>
+<td style="text-align: right;">732,836</td>
+<td style="text-align: right;">0,06200</td>
+<td style="text-align: right;">0,371747</td>
+<td style="text-align: right;">0,5540298</td>
+<td style="text-align: right;">0,1041268</td>
+<td style="text-align: right;">0,0180633</td>
+<td style="text-align: right;">0,3668548</td>
+<td style="text-align: right;">41,0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Q1.25%</td>
-<td style="text-align: right;">69,48425</td>
-<td style="text-align: right;">0,6375000</td>
-<td style="text-align: right;">2369,949</td>
-<td style="text-align: right;">2,152970</td>
-<td style="text-align: right;">1,3225996</td>
-<td style="text-align: right;">1,5441436</td>
-<td style="text-align: right;">0,3530460</td>
-<td style="text-align: right;">0,9065755</td>
-<td style="text-align: right;">0,9756859</td>
-<td style="text-align: right;">123,0000</td>
+<td style="text-align: right;">65,747000</td>
+<td style="text-align: right;">0,5945000</td>
+<td style="text-align: right;">4888,255</td>
+<td style="text-align: right;">2,64100</td>
+<td style="text-align: right;">1,156834</td>
+<td style="text-align: right;">1,2195240</td>
+<td style="text-align: right;">0,6633750</td>
+<td style="text-align: right;">0,8273357</td>
+<td style="text-align: right;">0,8075166</td>
+<td style="text-align: right;">143,0000</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Q3.75%</td>
-<td style="text-align: right;">78,20060</td>
-<td style="text-align: right;">0,8510000</td>
-<td style="text-align: right;">20684,123</td>
-<td style="text-align: right;">28,790000</td>
-<td style="text-align: right;">4,2824196</td>
-<td style="text-align: right;">4,6594186</td>
-<td style="text-align: right;">1,5180718</td>
-<td style="text-align: right;">3,1275740</td>
-<td style="text-align: right;">2,9441101</td>
+<td style="text-align: right;">76,400695</td>
+<td style="text-align: right;">0,8350000</td>
+<td style="text-align: right;">31670,000</td>
+<td style="text-align: right;">32,91550</td>
+<td style="text-align: right;">3,828778</td>
+<td style="text-align: right;">3,8418335</td>
+<td style="text-align: right;">2,6656718</td>
+<td style="text-align: right;">2,7330613</td>
+<td style="text-align: right;">2,5438978</td>
 <td style="text-align: right;">365,0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">med.50%</td>
-<td style="text-align: right;">74,95420</td>
-<td style="text-align: right;">0,7700000</td>
-<td style="text-align: right;">7468,925</td>
-<td style="text-align: right;">8,135305</td>
-<td style="text-align: right;">2,1455985</td>
-<td style="text-align: right;">3,0645671</td>
-<td style="text-align: right;">0,7664921</td>
-<td style="text-align: right;">1,9003434</td>
-<td style="text-align: right;">1,9363838</td>
-<td style="text-align: right;">188,0000</td>
+<td style="text-align: right;">71,900000</td>
+<td style="text-align: right;">0,7310000</td>
+<td style="text-align: right;">13548,200</td>
+<td style="text-align: right;">10,01950</td>
+<td style="text-align: right;">1,924223</td>
+<td style="text-align: right;">2,3197815</td>
+<td style="text-align: right;">1,3622344</td>
+<td style="text-align: right;">1,7280656</td>
+<td style="text-align: right;">1,5360601</td>
+<td style="text-align: right;">239,0000</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">mean</td>
-<td style="text-align: right;">73,38983</td>
-<td style="text-align: right;">0,7402585</td>
-<td style="text-align: right;">16125,737</td>
-<td style="text-align: right;">42,792779</td>
-<td style="text-align: right;">3,2065001</td>
-<td style="text-align: right;">3,4753334</td>
-<td style="text-align: right;">1,2243075</td>
-<td style="text-align: right;">4,0230980</td>
-<td style="text-align: right;">2,1959315</td>
-<td style="text-align: right;">216,9542</td>
+<td style="text-align: right;">71,180320</td>
+<td style="text-align: right;">0,7177193</td>
+<td style="text-align: right;">21139,464</td>
+<td style="text-align: right;">43,47636</td>
+<td style="text-align: right;">2,879469</td>
+<td style="text-align: right;">2,9624675</td>
+<td style="text-align: right;">3,5569055</td>
+<td style="text-align: right;">2,9127705</td>
+<td style="text-align: right;">1,9616192</td>
+<td style="text-align: right;">239,7802</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">max</td>
-<td style="text-align: right;">84,21100</td>
-<td style="text-align: right;">0,9560000</td>
-<td style="text-align: right;">111380,649</td>
-<td style="text-align: right;">1459,380000</td>
-<td style="text-align: right;">12,0559431</td>
-<td style="text-align: right;">14,2709536</td>
-<td style="text-align: right;">17,6374472</td>
-<td style="text-align: right;">104,6162702</td>
-<td style="text-align: right;">9,0172749</td>
+<td style="text-align: right;">84,445610</td>
+<td style="text-align: right;">0,9620000</td>
+<td style="text-align: right;">120505,000</td>
+<td style="text-align: right;">1480,63200</td>
+<td style="text-align: right;">13,394536</td>
+<td style="text-align: right;">13,1263342</td>
+<td style="text-align: right;">85,6461100</td>
+<td style="text-align: right;">55,1061868</td>
+<td style="text-align: right;">8,6916969</td>
 <td style="text-align: right;">365,0000</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">count</td>
-<td style="text-align: right;">146,00000</td>
-<td style="text-align: right;">147,0000000</td>
-<td style="text-align: right;">143,000</td>
-<td style="text-align: right;">154,000000</td>
-<td style="text-align: right;">153,0000000</td>
-<td style="text-align: right;">153,0000000</td>
-<td style="text-align: right;">153,0000000</td>
-<td style="text-align: right;">153,0000000</td>
-<td style="text-align: right;">153,0000000</td>
-<td style="text-align: right;">153,0000</td>
+<td style="text-align: right;">175,000000</td>
+<td style="text-align: right;">171,0000000</td>
+<td style="text-align: right;">163,000</td>
+<td style="text-align: right;">182,00000</td>
+<td style="text-align: right;">182,000000</td>
+<td style="text-align: right;">181,0000000</td>
+<td style="text-align: right;">181,0000000</td>
+<td style="text-align: right;">181,0000000</td>
+<td style="text-align: right;">181,0000000</td>
+<td style="text-align: right;">182,0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">sd</td>
-<td style="text-align: right;">7,11729</td>
-<td style="text-align: right;">0,1454945</td>
-<td style="text-align: right;">20696,903</td>
-<td style="text-align: right;">163,331614</td>
-<td style="text-align: right;">2,6508716</td>
-<td style="text-align: right;">2,3154085</td>
-<td style="text-align: right;">1,8643304</td>
-<td style="text-align: right;">9,3993379</td>
-<td style="text-align: right;">1,4630189</td>
-<td style="text-align: right;">107,6486</td>
+<td style="text-align: right;">7,615465</td>
+<td style="text-align: right;">0,1533110</td>
+<td style="text-align: right;">22330,819</td>
+<td style="text-align: right;">156,03751</td>
+<td style="text-align: right;">2,515235</td>
+<td style="text-align: right;">2,1957327</td>
+<td style="text-align: right;">10,0256869</td>
+<td style="text-align: right;">5,1916277</td>
+<td style="text-align: right;">1,4539202</td>
+<td style="text-align: right;">109,5507</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NA’s</td>
-<td style="text-align: right;">8,00000</td>
-<td style="text-align: right;">7,0000000</td>
-<td style="text-align: right;">11,000</td>
+<td style="text-align: right;">7,000000</td>
+<td style="text-align: right;">11,0000000</td>
+<td style="text-align: right;">19,000</td>
+<td style="text-align: right;">0,00000</td>
 <td style="text-align: right;">0,000000</td>
 <td style="text-align: right;">1,0000000</td>
 <td style="text-align: right;">1,0000000</td>
 <td style="text-align: right;">1,0000000</td>
 <td style="text-align: right;">1,0000000</td>
-<td style="text-align: right;">1,0000000</td>
-<td style="text-align: right;">1,0000</td>
+<td style="text-align: right;">0,0000</td>
 </tr>
 </tbody>
 </table>
@@ -446,26 +453,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="réalisation-de-lacp" class="level3">
 <h3 class="anchored" data-anchor-id="réalisation-de-lacp">Réalisation de l’ACP</h3>
+<ul>
+<li><strong>Vérifions la corrélations entre les variables quantitatives</strong></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>numeric.vars <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(df[<span class="fu">sapply</span>(df, is.numeric)])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">cor</span>(numeric.vars),<span class="dv">2</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>graph_cor <span class="ot">&lt;-</span> <span class="fu">corrplot</span>(M,<span class="at">method =</span>  <span class="st">"circle"</span>,<span class="at">type =</span> <span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP03_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1056"></p>
+<figcaption class="figure-caption">Matrice de corrélations</figcaption>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>graph_cor[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                             life_expectancy   hdi per_capita_gdp   pop
+life_expectancy                         1,00  0,91           0,73  0,01
+hdi                                     0,91  1,00           0,79 -0,01
+per_capita_gdp                          0,73  0,79           1,00 -0,04
+pop                                     0,01 -0,01          -0,04  1,00
+total_prod                              0,52  0,62           0,63 -0,05
+total_cons                              0,62  0,72           0,80 -0,06
+biocapacity                             0,00  0,09           0,07 -0,06
+number_of_countries_required            0,33  0,29           0,50  0,00
+number_of_earths_required               0,62  0,72           0,80 -0,06
+overshoot_day                          -0,71 -0,83          -0,76  0,05
+                             total_prod total_cons biocapacity
+life_expectancy                    0,52       0,62        0,00
+hdi                                0,62       0,72        0,09
+per_capita_gdp                     0,63       0,80        0,07
+pop                               -0,05      -0,06       -0,06
+total_prod                         1,00       0,84        0,23
+total_cons                         0,84       1,00        0,12
+biocapacity                        0,23       0,12        1,00
+number_of_countries_required       0,10       0,33       -0,15
+number_of_earths_required          0,84       1,00        0,12
+overshoot_day                     -0,77      -0,90       -0,18
+                             number_of_countries_required
+life_expectancy                                      0,33
+hdi                                                  0,29
+per_capita_gdp                                       0,50
+pop                                                  0,00
+total_prod                                           0,10
+total_cons                                           0,33
+biocapacity                                         -0,15
+number_of_countries_required                         1,00
+number_of_earths_required                            0,33
+overshoot_day                                       -0,28
+                             number_of_earths_required overshoot_day
+life_expectancy                                   0,62         -0,71
+hdi                                               0,72         -0,83
+per_capita_gdp                                    0,80         -0,76
+pop                                              -0,06          0,05
+total_prod                                        0,84         -0,77
+total_cons                                        1,00         -0,90
+biocapacity                                       0,12         -0,18
+number_of_countries_required                      0,33         -0,28
+number_of_earths_required                         1,00         -0,90
+overshoot_day                                    -0,90          1,00</code></pre>
+</div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">7</span>)] <span class="do">## sélectionner toute les variables sauf la variable pays</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data.pca) <span class="ot">&lt;-</span> df[,<span class="dv">1</span>] <span class="do">## renommer les lignes avec les noms des pays (individus)</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>poids <span class="ot">&lt;-</span> df<span class="sc">$</span>pop</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>pca.model <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="fu">c</span>(<span class="st">"hdi"</span>,<span class="st">"per_capita_gdp"</span>,<span class="st">"life_expectancy"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"total_cons"</span>),</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> poids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">1</span>] <span class="do">## sélectionner toute les variables sauf la variable pays</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data.pca) <span class="ot">&lt;-</span> df[,<span class="dv">1</span>] <span class="do">## renommer les lignes avec les noms des pays (individus)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>poids <span class="ot">&lt;-</span> df<span class="sc">$</span>pop</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>pca.model <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="dv">6</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">explor</span>(pca.model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
+</div>
 </div>
 <ul>
 <li>Recupération d’abord des valeurs propres et ensuite les variances</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>eigen.values <span class="ot">&lt;-</span> pca.model<span class="sc">$</span>eig</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(eigen.values[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">caption =</span> <span class="fu">capTab</span>(<span class="st">"Inertie expliqués par 3 premiers axes"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>eigen.values <span class="ot">&lt;-</span> pca.model<span class="sc">$</span>eig</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(eigen.values[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">caption =</span> <span class="fu">capTab</span>(<span class="st">"Inerties expliquées par les 3 premiers axes"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
-<caption>Table 1 : Inertie expliqués par 3 premiers axes</caption>
+<caption>Table 2 : Inerties expliquées par les 3 premiers axes</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -476,31 +550,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">comp 1</td>
-<td style="text-align: right;">63,824776</td>
-<td style="text-align: right;">63,82478</td>
+<td style="text-align: right;">69,758338</td>
+<td style="text-align: right;">69,75834</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">comp 2</td>
-<td style="text-align: right;">29,648994</td>
-<td style="text-align: right;">93,47377</td>
+<td style="text-align: right;">16,485374</td>
+<td style="text-align: right;">86,24371</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">comp 3</td>
-<td style="text-align: right;">4,099378</td>
-<td style="text-align: right;">97,57315</td>
+<td style="text-align: right;">4,865912</td>
+<td style="text-align: right;">91,10962</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>On remarque que les axes 1,2 et 3 représentent respectivement <strong>63,82, 29,65 et 4,09</strong>.</p>
+<p>On remarque que les axes 1,2 et 3 représentent respectivement <strong>69,76, 16,49 et 4,09</strong>.</p>
 <p>On pourrait aussi visualiser le graphique des valeurs propres :</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(pca.model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(pca.model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="TP03_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="TP03_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Valeurs proppres</figcaption>
 </figure>
 </div>
@@ -512,20 +586,197 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong><em>(1-2)</em></strong></li>
 </ul></li>
 </ul>
+<p><strong>LES VARIABLES</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>graph.cos2.var <span class="ot">&lt;-</span> <span class="fu">fviz_pca_var</span>(pca.model,<span class="at">col.var=</span><span class="st">"cos2"</span>, <span class="at">gradient.cols=</span><span class="fu">c</span>(<span class="st">"#F1C40F"</span>,<span class="st">"#2ECC71"</span>,<span class="st">"#8E44AD"</span>), <span class="at">repel=</span><span class="cn">TRUE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_light</span>())</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>graph.cos2.var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>graph.cos2.var <span class="ot">&lt;-</span> <span class="fu">fviz_pca_var</span>(pca.model,<span class="at">col.var=</span><span class="st">"cos2"</span>, <span class="at">gradient.cols=</span><span class="fu">c</span>(<span class="st">"#F1C40F"</span>,<span class="st">"#2ECC71"</span>,<span class="st">"#8E44AD"</span>), <span class="at">repel=</span><span class="cn">TRUE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_light</span>())</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>graph.cos2.var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="TP03_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="1056"></p>
+<p><img src="TP03_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="1056"></p>
 <figcaption class="figure-caption">Qualités de representation des variables</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Concernant les variables, on constate qu’elles toutes sont bien representées avec des cosinus carrés qui ont une valeur minimale environ 0,9.</p>
+<p>Concernant les variables, on constate qu’elles toutes sont bien representées avec des cosinus carrés qui ont une valeur minimale environ 0,8 à part les variables <strong>biocapacity, life_expectancy, number_of_countries_required</strong> qui ont un cosinus carrés qui vaut environ 0,7.</p>
+<p><strong>LES INDIVIDUS</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data.ind.cos2 <span class="ot">&lt;-</span> pca.model<span class="sc">$</span>ind<span class="sc">$</span>cos2</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>Dim1 <span class="ot">&lt;-</span> data.ind.cos2[,<span class="st">"Dim.1"</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>Dim2 <span class="ot">&lt;-</span> data.ind.cos2[,<span class="st">"Dim.2"</span>]</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>Dim1 <span class="ot">&lt;-</span> Dim1[Dim1 <span class="sc">&gt;=</span> threshold]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>Dim2 <span class="ot">&lt;-</span> Dim2[Dim2 <span class="sc">&gt;=</span> <span class="fl">0.6</span>]</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>Dim1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      Angola                      Austria 
+                   0,8591836                    0,9047663 
+                     Belgium                        Benin 
+                   0,8604596                    0,8831711 
+                     Burundi                     Cambodia 
+                   0,8916493                    0,8911437 
+              Czech Republic                      Denmark 
+                   0,9218239                    0,8896874 
+                    Ethiopia                       Gambia 
+                   0,9390190                    0,9377395 
+                       Ghana                    Guatemala 
+                   0,8579621                    0,9044971 
+                       Haiti                        India 
+                   0,9763067                    0,9558559 
+                       Kenya                       Malawi 
+                   0,9448689                    0,9425394 
+                    Malaysia                      Myanmar 
+                   0,8840507                    0,8964483 
+                       Nepal                     Pakistan 
+                   0,9772128                    0,9745537 
+                      Poland                       Rwanda 
+                   0,9272053                    0,9810454 
+       Sao Tome and Principe                      Senegal 
+                   0,9617076                    0,8705626 
+                Sierra Leone                     Slovakia 
+                   0,8542504                    0,8524619 
+                    Slovenia                        Sudan 
+                   0,8840522                    0,8713134 
+Tanzania, United Republic of                  Timor-Leste 
+                   0,9419010                    0,8640862 
+                        Togo     United States of America 
+                   0,9425662                    0,8875048 
+                       Yemen 
+                   0,9228666 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Dim2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Barbados   Bolivia    Brazil   Namibia  Paraguay 
+0,6458843 0,6609662 0,6672407 0,7502317 0,6807204 </code></pre>
+</div>
+</div>
+<ul>
+<li><p><strong>AXE 1</strong> : On voit que les pays (individus) comme le Togo, le Yemen, les USA, le Rwanda sont tres bien representés. <strong>RMRQ : Il y en a d’autres</strong></p></li>
+<li><p><strong>AXE 2</strong> : les pays les mieux représentés sur cet axe sont le Barbados, la Bolivie, le Brésil, la Namibie et le Paraguay</p></li>
+<li><p><strong><em>(1-3)</em></strong></p></li>
+</ul>
+<p><strong>LES VARIABLES</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>graph.cos2.var <span class="ot">&lt;-</span> <span class="fu">fviz_pca_var</span>(pca.model,<span class="at">col.var=</span><span class="st">"cos2"</span>,<span class="at">axes =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">gradient.cols=</span><span class="fu">c</span>(<span class="st">"#F1C40F"</span>,<span class="st">"#2ECC71"</span>,<span class="st">"#8E44AD"</span>), <span class="at">repel=</span><span class="cn">TRUE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_light</span>())</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>graph.cos2.var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="TP03_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><p><strong>AXE 1</strong> : Sur cet axe les variables <strong><em>overshoot_day</em></strong>, <strong>number_of_earths_required</strong> (toutes les variables en violet) sont bien représentées.</p></li>
+<li><p><strong>AXE 3</strong> : La <strong><em>biocapacité</em></strong> est légèrement bien représentée avec un <span class="math inline">\(cos^2 \sim 0,6\)</span> parcontre la variable <strong><em>number_of_countries_required</em></strong> n’est pas bien représentée.</p></li>
+</ul>
+<p><strong>LES INDIVIDUS</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>data.ind.cos2 <span class="ot">&lt;-</span> pca.model<span class="sc">$</span>ind<span class="sc">$</span>cos2</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Dim1 <span class="ot">&lt;-</span> data.ind.cos2[,<span class="st">"Dim.1"</span>]</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>Dim3 <span class="ot">&lt;-</span> data.ind.cos2[,<span class="st">"Dim.3"</span>]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>Dim1 <span class="ot">&lt;-</span> Dim1[Dim1 <span class="sc">&gt;=</span> threshold]</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>Dim3 <span class="ot">&lt;-</span> Dim3[Dim3 <span class="sc">&gt;=</span> threshold]</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>Dim1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      Angola                      Austria 
+                   0,8591836                    0,9047663 
+                     Belgium                        Benin 
+                   0,8604596                    0,8831711 
+                     Burundi                     Cambodia 
+                   0,8916493                    0,8911437 
+              Czech Republic                      Denmark 
+                   0,9218239                    0,8896874 
+                    Ethiopia                       Gambia 
+                   0,9390190                    0,9377395 
+                       Ghana                    Guatemala 
+                   0,8579621                    0,9044971 
+                       Haiti                        India 
+                   0,9763067                    0,9558559 
+                       Kenya                       Malawi 
+                   0,9448689                    0,9425394 
+                    Malaysia                      Myanmar 
+                   0,8840507                    0,8964483 
+                       Nepal                     Pakistan 
+                   0,9772128                    0,9745537 
+                      Poland                       Rwanda 
+                   0,9272053                    0,9810454 
+       Sao Tome and Principe                      Senegal 
+                   0,9617076                    0,8705626 
+                Sierra Leone                     Slovakia 
+                   0,8542504                    0,8524619 
+                    Slovenia                        Sudan 
+                   0,8840522                    0,8713134 
+Tanzania, United Republic of                  Timor-Leste 
+                   0,9419010                    0,8640862 
+                        Togo     United States of America 
+                   0,9425662                    0,8875048 
+                       Yemen 
+                   0,9228666 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Dim3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Albania 
+0,8684971 </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>AXE 3</strong> : On voit que seul l’Albanie est bien représentée.</li>
+</ul>
+</section>
+<section id="comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse" class="level3">
+<h3 class="anchored" data-anchor-id="comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse">Comment l’ACP est-elle modifiée si on retire Singapour de l’analyse ?</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#poids &lt;- df$pop</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#pca.model &lt;- PCA(data.pca, scale.unit = TRUE,</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                 quali.sup = c("region", "income_group"),</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                 graph = FALSE,</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                row.w = data.pca$pop,</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                quanti.sup = 6, ind.sup = 136 )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="deux-acp-différentes" class="level3">
+<h3 class="anchored" data-anchor-id="deux-acp-différentes">Deux ACP différentes</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>variables.empreinte <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"total_prod"</span>, <span class="st">"total_cons"</span>, <span class="st">"biocapacity"</span>, <span class="st">"number_of_earths_required"</span>, <span class="st">"overshoot_day"</span>, <span class="st">"pop"</span>)]</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.empreinte) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>variables.developpement <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"life_expectancy"</span>, <span class="st">"hdi"</span>, <span class="st">"per_capita_gdp"</span>,<span class="st">"pop"</span>)]</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.developpement) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="acp-sur-les-variables-dempruntes-écologiques" class="level4">
+<h4 class="anchored" data-anchor-id="acp-sur-les-variables-dempruntes-écologiques">ACP sur les variables d’empruntes écologiques</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>acp_empreinte <span class="ot">&lt;-</span> <span class="fu">PCA</span>(variables.empreinte, <span class="at">graph =</span> <span class="cn">FALSE</span>, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>, <span class="at">row.w =</span> variables.empreinte<span class="sc">$</span>pop)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4,100602</code></pre>
+</div>
+</div>
+<p>La première valeur propre est : <strong><em>4,10</em></strong></p>
+</section>
+<section id="acp-sur-les-variables-dempruntes-écologiques-1" class="level4">
+<h4 class="anchored" data-anchor-id="acp-sur-les-variables-dempruntes-écologiques-1">ACP sur les variables d’empruntes écologiques</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>acp.developpement <span class="ot">&lt;-</span> <span class="fu">PCA</span>(variables.developpement, <span class="at">graph =</span> <span class="cn">FALSE</span>, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>, <span class="at">row.w =</span> variables.developpement<span class="sc">$</span>pop)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2,59372</code></pre>
+</div>
+</div>
+<p>La première valeur propre est : <strong><em>2,59</em></strong></p>
+</section>
+</section>
+<section id="acp-avec-pondérations-des-variables" class="level3">
+<h3 class="anchored" data-anchor-id="acp-avec-pondérations-des-variables">ACP avec pondérations des variables</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>poids.var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(variables.empreinte)), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="fu">length</span>(variables.developpement)))</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>acp.ponderee <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">col.w =</span> poids.var, <span class="at">graph =</span> <span class="cn">FALSE</span>, <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,<span class="at">quanti.sup =</span> <span class="st">"pop"</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
