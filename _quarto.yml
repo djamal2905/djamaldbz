@@ -6,7 +6,6 @@ project:
     - images/
     - ENGLISH/
     - ENGLISH/images/
-    - STATISTIC/
     - ANALYSES_FACTORIELLES/
 
 website:

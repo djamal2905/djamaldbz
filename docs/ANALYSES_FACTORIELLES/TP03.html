@@ -93,8 +93,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -166,10 +167,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#contruction-de-lanalyse-en-composante-principale" id="toc-contruction-de-lanalyse-en-composante-principale" class="nav-link" data-scroll-target="#contruction-de-lanalyse-en-composante-principale">Contruction de l’Analyse en composante principale</a>
   <ul class="collapse">
   <li><a href="#réalisation-de-lacp" id="toc-réalisation-de-lacp" class="nav-link" data-scroll-target="#réalisation-de-lacp">Réalisation de l’ACP</a></li>
+  <li><a href="#recupération-des-valeurs-propres-et-des-variances" id="toc-recupération-des-valeurs-propres-et-des-variances" class="nav-link" data-scroll-target="#recupération-des-valeurs-propres-et-des-variances">Recupération des valeurs propres et des variances</a></li>
+  <li><a href="#qualité-de-representation-des-plans-sur-les-plans" id="toc-qualité-de-representation-des-plans-sur-les-plans" class="nav-link" data-scroll-target="#qualité-de-representation-des-plans-sur-les-plans">Qualité de representation des plans / sur les plans</a></li>
+  <li><a href="#caractérisation-des-axes" id="toc-caractérisation-des-axes" class="nav-link" data-scroll-target="#caractérisation-des-axes">Caractérisation des axes</a></li>
   <li><a href="#comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse" id="toc-comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse" class="nav-link" data-scroll-target="#comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse">Comment l’ACP est-elle modifiée si on retire Singapour de l’analyse ?</a></li>
   <li><a href="#deux-acp-différentes" id="toc-deux-acp-différentes" class="nav-link" data-scroll-target="#deux-acp-différentes">Deux ACP différentes</a></li>
   <li><a href="#acp-avec-pondérations-des-variables" id="toc-acp-avec-pondérations-des-variables" class="nav-link" data-scroll-target="#acp-avec-pondérations-des-variables">ACP avec pondérations des variables</a></li>
   </ul></li>
+  <li><a href="#realisation-de-lafm" id="toc-realisation-de-lafm" class="nav-link" data-scroll-target="#realisation-de-lafm">REALISATION DE L’AFM</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -260,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="résumé-statitique-des-variables" class="level2">
 <h2 class="anchored" data-anchor-id="résumé-statitique-des-variables">Résumé statitique des variables</h2>
-<p>On utilise la commande <strong><em>summary(df)</em></strong> tout simplement.</p>
+<p>On utilise la commande <strong><em>summary(df)</em></strong> tout simplement, mais pour une question d’exthétique on utilise ce code.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">##-- summary pour les variable numériques</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>summary.df.num <span class="ot">&lt;-</span> <span class="fu">sapply</span>(df[<span class="fu">sapply</span>(df, is.numeric)], <span class="cf">function</span>(x) {</span>
@@ -282,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
-<caption>Table 1 : Résumé statistique des variables</caption>
+<caption>Tableau1 : Résumé statistique des variables</caption>
 <colgroup>
 <col style="width: 4%">
 <col style="width: 9%">
@@ -431,14 +436,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p><strong>Note:</strong> <sup>a</sup>by Djamal DBZ</p>
+<p><strong>Note:</strong> <sup>a</sup>by Djamal Y. TOE</p>
 </div>
 </div>
-<p>Nous constatons que ceraines variables ont des données manquantes, nous pouvons décider de soit les supprimer soit les prédire avec des méthodes d’imputation en fonction de leurs importances. Mais pour le moment nous allons juste les supprimer.</p>
+<p>&nbsp;&nbsp;Nous constatons que ceraines variables ont des données manquantes, nous pouvons décider de soit les supprimer, soit les prédire avec des méthodes d’imputation en fonction de leurs importances. Mais pour le moment nous allons juste les supprimer.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(df)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 162</code></pre>
 </div>
-<p>Ainsi nous passons de 154 à 138 lignes.</p>
+</div>
+<p>Ainsi nous passons de 182 à 162 lignes.</p>
 </section>
 <section id="contruction-de-lanalyse-en-composante-principale" class="level2">
 <h2 class="anchored" data-anchor-id="contruction-de-lanalyse-en-composante-principale">Contruction de l’Analyse en composante principale</h2>
@@ -447,8 +456,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Métrique</strong> : Normalisation des données car les variables ne sont pas toutes sur la même échelle. Cela permet d’éviter que les variables avec de grosses valeurs (grandes échelles) dominent l’analyse.</p></li>
 <li><p><strong>variables sup</strong> :</p>
 <ul>
-<li><strong><em>Quali sup</em></strong> : region</li>
-<li><strong><em>Quanti sup</em></strong> : hdi, per_capita_gdp, life_expectancy, total_cons,income_group</li>
+<li><strong><em>Quali sup</em></strong> : region, income_group</li>
+<li><strong><em>Quanti sup</em></strong> : pop</li>
 </ul></li>
 </ul>
 <section id="réalisation-de-lacp" class="level3">
@@ -457,89 +466,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Vérifions la corrélations entre les variables quantitatives</strong></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>numeric.vars <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(df[<span class="fu">sapply</span>(df, is.numeric)])</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">cor</span>(numeric.vars),<span class="dv">2</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>graph_cor <span class="ot">&lt;-</span> <span class="fu">corrplot</span>(M,<span class="at">method =</span>  <span class="st">"circle"</span>,<span class="at">type =</span> <span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>numeric.vars <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(df[<span class="fu">sapply</span>(df, is.numeric)])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">cor</span>(numeric.vars),<span class="dv">2</span>) <span class="co">#- Calculer la matrice de corrélation</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">##-- créer un objet qui contient une palette de couleur pour le gradiant dans le plot</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>col <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"#BB4444"</span>, <span class="st">"#EE9988"</span>, <span class="st">"#FFFFFF"</span>, <span class="st">"#77AADD"</span>, <span class="st">"#4477AA"</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="do">##-- dessiner le graphique</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(M, <span class="at">method=</span><span class="st">"color"</span>, <span class="at">col=</span><span class="fu">col</span>(<span class="dv">200</span>),  </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">type=</span><span class="st">"upper"</span>, <span class="at">order=</span><span class="st">"hclust"</span>, </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">addCoef.col =</span> <span class="st">"black"</span>, <span class="co">#- ajout des coefficients correlation</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.col=</span><span class="st">"black"</span>, <span class="at">tl.srt=</span><span class="dv">45</span>, <span class="at">tl.cex =</span> <span class="dv">1</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>         , <span class="co">#- couleur, rotation et police de texte des libellés </span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>         <span class="do">##-- ne pas afficher les coefficients de corrélations sur la diagonale (ils valent tous 1)</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">diag=</span><span class="cn">FALSE</span> </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="TP03_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1056"></p>
+<p><img src="TP03_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1152"></p>
 <figcaption class="figure-caption">Matrice de corrélations</figcaption>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>graph_cor[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                             life_expectancy   hdi per_capita_gdp   pop
-life_expectancy                         1,00  0,91           0,73  0,01
-hdi                                     0,91  1,00           0,79 -0,01
-per_capita_gdp                          0,73  0,79           1,00 -0,04
-pop                                     0,01 -0,01          -0,04  1,00
-total_prod                              0,52  0,62           0,63 -0,05
-total_cons                              0,62  0,72           0,80 -0,06
-biocapacity                             0,00  0,09           0,07 -0,06
-number_of_countries_required            0,33  0,29           0,50  0,00
-number_of_earths_required               0,62  0,72           0,80 -0,06
-overshoot_day                          -0,71 -0,83          -0,76  0,05
-                             total_prod total_cons biocapacity
-life_expectancy                    0,52       0,62        0,00
-hdi                                0,62       0,72        0,09
-per_capita_gdp                     0,63       0,80        0,07
-pop                               -0,05      -0,06       -0,06
-total_prod                         1,00       0,84        0,23
-total_cons                         0,84       1,00        0,12
-biocapacity                        0,23       0,12        1,00
-number_of_countries_required       0,10       0,33       -0,15
-number_of_earths_required          0,84       1,00        0,12
-overshoot_day                     -0,77      -0,90       -0,18
-                             number_of_countries_required
-life_expectancy                                      0,33
-hdi                                                  0,29
-per_capita_gdp                                       0,50
-pop                                                  0,00
-total_prod                                           0,10
-total_cons                                           0,33
-biocapacity                                         -0,15
-number_of_countries_required                         1,00
-number_of_earths_required                            0,33
-overshoot_day                                       -0,28
-                             number_of_earths_required overshoot_day
-life_expectancy                                   0,62         -0,71
-hdi                                               0,72         -0,83
-per_capita_gdp                                    0,80         -0,76
-pop                                              -0,06          0,05
-total_prod                                        0,84         -0,77
-total_cons                                        1,00         -0,90
-biocapacity                                       0,12         -0,18
-number_of_countries_required                      0,33         -0,28
-number_of_earths_required                         1,00         -0,90
-overshoot_day                                    -0,90          1,00</code></pre>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">1</span>] <span class="do">## sélectionner toute les variables sauf la variable pays</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data.pca) <span class="ot">&lt;-</span> df[,<span class="dv">1</span>] <span class="do">## renommer les lignes avec les noms des pays (individus)</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>poids <span class="ot">&lt;-</span> df<span class="sc">$</span>pop</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>pca.model <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="dv">6</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">explor</span>(pca.model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
-</div>
-</div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;On voit qu’il y’ a quand même des variables qui sont &lt;<fortement corrélées="">&gt; (pour l’affirmer avec plus d’assurance il serait judicieux de faire un test billatéral de corrélation de <strong>Pearson</strong> avec la commande cor.test(method = “pearson”, alternative = “two.sided”)).</fortement></p>
 <ul>
-<li>Recupération d’abord des valeurs propres et ensuite les variances</li>
+<li><strong>Création du modèle de l’ACP</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>eigen.values <span class="ot">&lt;-</span> pca.model<span class="sc">$</span>eig</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(eigen.values[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">caption =</span> <span class="fu">capTab</span>(<span class="st">"Inerties expliquées par les 3 premiers axes"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">1</span>] <span class="co">#- sélectionner toute les variables sauf la variable pays</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data.pca) <span class="ot">&lt;-</span> df[,<span class="dv">1</span>] <span class="co">#- renommer les lignes avec les noms des pays (individus)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>poids <span class="ot">&lt;-</span> df<span class="sc">$</span>pop</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>pca.model <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="dv">6</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">##- explor(pca.model) pour une interface interactive</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="recupération-des-valeurs-propres-et-des-variances" class="level3">
+<h3 class="anchored" data-anchor-id="recupération-des-valeurs-propres-et-des-variances">Recupération des valeurs propres et des variances</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>eigen.values <span class="ot">&lt;-</span> pca.model<span class="sc">$</span>eig</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(eigen.values[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">caption =</span> <span class="fu">capTab</span>(<span class="st">"Inerties expliquées par les 3 premiers axes"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
-<caption>Table 2 : Inerties expliquées par les 3 premiers axes</caption>
+<caption>Tableau2 : Inerties expliquées par les 3 premiers axes</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -567,30 +542,29 @@ overshoot_day                                    -0,90          1,00</code></pre
 </table>
 </div>
 </div>
-<p>On remarque que les axes 1,2 et 3 représentent respectivement <strong>69,76, 16,49 et 4,09</strong>.</p>
+<p>On remarque que les axes 1,2 et 3 représentent respectivement <strong>69,76, 16,49 et 4,09</strong>, donc au total <strong>91,11</strong></p>
 <p>On pourrait aussi visualiser le graphique des valeurs propres :</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(pca.model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="TP03_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Valeurs proppres</figcaption>
-</figure>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.eig <span class="ot">&lt;-</span> <span class="fu">fviz_eig</span>(pca.model, <span class="at">title =</span> <span class="st">"Valeurs propres avec Singapore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
+</section>
+<section id="qualité-de-representation-des-plans-sur-les-plans" class="level3">
+<h3 class="anchored" data-anchor-id="qualité-de-representation-des-plans-sur-les-plans">Qualité de representation des plans / sur les plans</h3>
 <ul>
-<li><p><strong>Qualité de representation sur les plans</strong> :</p>
+<li><strong>Qualité de representation des plans</strong></li>
+</ul>
+<p>&nbsp;&nbsp;Le premier plan a un taux d’inertie supérieur à <strong>86 %</strong>, il capte une grande partie de l’information présente dans les données ce qui signifie qu’il à une bonne qualité de representation alors que le second (1-3) en capte environ <strong>74,63 %</strong> donc a une faible qualité de représenatation comparé au premier. En depit de ce fait, les deux plans ont quand même qualité de représentation si mous fions au critère du taux d’inertie.</p>
+<ul>
+<li><p><strong>Qualité de representation sur les plans</strong></p>
 <ul>
 <li><strong><em>(1-2)</em></strong></li>
 </ul></li>
 </ul>
 <p><strong>LES VARIABLES</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>graph.cos2.var <span class="ot">&lt;-</span> <span class="fu">fviz_pca_var</span>(pca.model,<span class="at">col.var=</span><span class="st">"cos2"</span>, <span class="at">gradient.cols=</span><span class="fu">c</span>(<span class="st">"#F1C40F"</span>,<span class="st">"#2ECC71"</span>,<span class="st">"#8E44AD"</span>), <span class="at">repel=</span><span class="cn">TRUE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_light</span>())</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>graph.cos2.var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>graph.cos2.var <span class="ot">&lt;-</span> <span class="fu">fviz_pca_var</span>(pca.model,<span class="at">col.var=</span><span class="st">"cos2"</span>, <span class="at">gradient.cols=</span><span class="fu">c</span>(<span class="st">"#F1C40F"</span>,<span class="st">"#2ECC71"</span>,<span class="st">"#8E44AD"</span>), <span class="at">repel=</span><span class="cn">TRUE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_light</span>())</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>graph.cos2.var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -603,155 +577,457 @@ overshoot_day                                    -0,90          1,00</code></pre
 <p>Concernant les variables, on constate qu’elles toutes sont bien representées avec des cosinus carrés qui ont une valeur minimale environ 0,8 à part les variables <strong>biocapacity, life_expectancy, number_of_countries_required</strong> qui ont un cosinus carrés qui vaut environ 0,7.</p>
 <p><strong>LES INDIVIDUS</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data.ind.cos2 <span class="ot">&lt;-</span> pca.model<span class="sc">$</span>ind<span class="sc">$</span>cos2</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>Dim1 <span class="ot">&lt;-</span> data.ind.cos2[,<span class="st">"Dim.1"</span>]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>Dim2 <span class="ot">&lt;-</span> data.ind.cos2[,<span class="st">"Dim.2"</span>]</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>Dim1 <span class="ot">&lt;-</span> Dim1[Dim1 <span class="sc">&gt;=</span> threshold]</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>Dim2 <span class="ot">&lt;-</span> Dim2[Dim2 <span class="sc">&gt;=</span> <span class="fl">0.6</span>]</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>Dim1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                      Angola                      Austria 
-                   0,8591836                    0,9047663 
-                     Belgium                        Benin 
-                   0,8604596                    0,8831711 
-                     Burundi                     Cambodia 
-                   0,8916493                    0,8911437 
-              Czech Republic                      Denmark 
-                   0,9218239                    0,8896874 
-                    Ethiopia                       Gambia 
-                   0,9390190                    0,9377395 
-                       Ghana                    Guatemala 
-                   0,8579621                    0,9044971 
-                       Haiti                        India 
-                   0,9763067                    0,9558559 
-                       Kenya                       Malawi 
-                   0,9448689                    0,9425394 
-                    Malaysia                      Myanmar 
-                   0,8840507                    0,8964483 
-                       Nepal                     Pakistan 
-                   0,9772128                    0,9745537 
-                      Poland                       Rwanda 
-                   0,9272053                    0,9810454 
-       Sao Tome and Principe                      Senegal 
-                   0,9617076                    0,8705626 
-                Sierra Leone                     Slovakia 
-                   0,8542504                    0,8524619 
-                    Slovenia                        Sudan 
-                   0,8840522                    0,8713134 
-Tanzania, United Republic of                  Timor-Leste 
-                   0,9419010                    0,8640862 
-                        Togo     United States of America 
-                   0,9425662                    0,8875048 
-                       Yemen 
-                   0,9228666 </code></pre>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data.ind.cos2 <span class="ot">&lt;-</span> pca.model<span class="sc">$</span>ind<span class="sc">$</span>cos2</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>dim1 <span class="ot">&lt;-</span> data.ind.cos2[,<span class="st">"Dim.1"</span>]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>dim1 <span class="ot">&lt;-</span> dim1[dim1 <span class="sc">&gt;=</span> threshold]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>countries.dim1 <span class="ot">&lt;-</span> <span class="fu">names</span>(dim1)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dim1) <span class="ot">&lt;-</span>  <span class="cn">NULL</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>dim2 <span class="ot">&lt;-</span> data.ind.cos2[,<span class="st">"Dim.2"</span>]</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>dim2 <span class="ot">&lt;-</span> dim2[dim2 <span class="sc">&gt;=</span> <span class="fl">0.6</span>]</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>countries.dim2 <span class="ot">&lt;-</span> <span class="fu">names</span>(dim2)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dim2) <span class="ot">&lt;-</span>  <span class="cn">NULL</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">##-- crétion des dataframes </span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>dim1.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Country =</span> countries.dim1,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Cos carré</span><span class="st">`</span> <span class="ot">=</span> dim1</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(dim1))</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>dim2.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">Country =</span> countries.dim2,</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Cos carré</span><span class="st">`</span> <span class="ot">=</span> dim2</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(dim2))</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="do">##-- création des tableaux kableExtra</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>dim1.tbl <span class="ot">&lt;-</span> kableExtra<span class="sc">::</span><span class="fu">kbl</span>(dim1.df, <span class="at">caption =</span> <span class="fu">capTab</span>(<span class="st">"Individus ayant un cosinus carré supérieur ou égal à 0,85 sur l'axe 1"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>)) <span class="sc">%&gt;%</span> <span class="fu">add_footnote</span>(<span class="at">label =</span> <span class="st">"Source des données :  https://marieetienne.github.io/datasets/overshootday_overview.csv"</span>)</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>dim2.tbl <span class="ot">&lt;-</span> kableExtra<span class="sc">::</span><span class="fu">kbl</span>(dim2.df, <span class="at">caption =</span> <span class="fu">capTab</span>(<span class="st">"Individus ayant un cosinus carré supérieur ou égal à 0,6 sur l'axe 2"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))  <span class="sc">%&gt;%</span> <span class="fu">add_footnote</span>(<span class="at">label =</span> <span class="st">"Source des données :  https://marieetienne.github.io/datasets/overshootday_overview.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Dim2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Barbados   Bolivia    Brazil   Namibia  Paraguay 
-0,6458843 0,6609662 0,6672407 0,7502317 0,6807204 </code></pre>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dim1.tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Tableau3 : Individus ayant un cosinus carré supérieur ou égal à 0,85 sur l'axe 1</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Cos.carré</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Rwanda</td>
+<td style="text-align: right;">0,9810454</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nepal</td>
+<td style="text-align: right;">0,9772128</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Haiti</td>
+<td style="text-align: right;">0,9763067</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pakistan</td>
+<td style="text-align: right;">0,9745537</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sao Tome and Principe</td>
+<td style="text-align: right;">0,9617076</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">India</td>
+<td style="text-align: right;">0,9558559</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kenya</td>
+<td style="text-align: right;">0,9448689</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Togo</td>
+<td style="text-align: right;">0,9425662</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Malawi</td>
+<td style="text-align: right;">0,9425394</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tanzania, United Republic of</td>
+<td style="text-align: right;">0,9419010</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ethiopia</td>
+<td style="text-align: right;">0,9390190</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gambia</td>
+<td style="text-align: right;">0,9377395</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Poland</td>
+<td style="text-align: right;">0,9272053</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yemen</td>
+<td style="text-align: right;">0,9228666</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Czech Republic</td>
+<td style="text-align: right;">0,9218239</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Austria</td>
+<td style="text-align: right;">0,9047663</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Guatemala</td>
+<td style="text-align: right;">0,9044971</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Myanmar</td>
+<td style="text-align: right;">0,8964483</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Burundi</td>
+<td style="text-align: right;">0,8916493</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cambodia</td>
+<td style="text-align: right;">0,8911437</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Denmark</td>
+<td style="text-align: right;">0,8896874</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">United States of America</td>
+<td style="text-align: right;">0,8875048</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Slovenia</td>
+<td style="text-align: right;">0,8840522</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Malaysia</td>
+<td style="text-align: right;">0,8840507</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Benin</td>
+<td style="text-align: right;">0,8831711</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudan</td>
+<td style="text-align: right;">0,8713134</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Senegal</td>
+<td style="text-align: right;">0,8705626</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Timor-Leste</td>
+<td style="text-align: right;">0,8640862</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Belgium</td>
+<td style="text-align: right;">0,8604596</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Angola</td>
+<td style="text-align: right;">0,8591836</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ghana</td>
+<td style="text-align: right;">0,8579621</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sierra Leone</td>
+<td style="text-align: right;">0,8542504</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Slovakia</td>
+<td style="text-align: right;">0,8524619</td>
+</tr>
+</tbody><tfoot>
+<tr class="even">
+<td style="text-align: left; padding: 0; border: 0;"><sup>a</sup> Source des données : https://marieetienne.github.io/datasets/overshootday_overview.csv</td>
+<td style="text-align: right;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+
+
+</div>
+</div>
+</div><div class="column" style="width:48%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dim2.tbl </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Tableau4 : Individus ayant un cosinus carré supérieur ou égal à 0,6 sur l'axe 2</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Cos.carré</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Namibia</td>
+<td style="text-align: right;">0,7502317</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Paraguay</td>
+<td style="text-align: right;">0,6807204</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">0,6672407</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bolivia</td>
+<td style="text-align: right;">0,6609662</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Barbados</td>
+<td style="text-align: right;">0,6458843</td>
+</tr>
+</tbody><tfoot>
+<tr class="even">
+<td style="text-align: left; padding: 0; border: 0;"><sup>a</sup> Source des données : https://marieetienne.github.io/datasets/overshootday_overview.csv</td>
+<td style="text-align: right;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+
+
+</div>
+</div>
 </div>
 </div>
 <ul>
 <li><p><strong>AXE 1</strong> : On voit que les pays (individus) comme le Togo, le Yemen, les USA, le Rwanda sont tres bien representés. <strong>RMRQ : Il y en a d’autres</strong></p></li>
-<li><p><strong>AXE 2</strong> : les pays les mieux représentés sur cet axe sont le Barbados, la Bolivie, le Brésil, la Namibie et le Paraguay</p></li>
-<li><p><strong><em>(1-3)</em></strong></p></li>
+<li><p><strong>AXE 2</strong> : Il n’y a que 6 pays qui sont bien représentés sur cet axe. Il s’agit de la Namibie, le Paraguay, le Brésil, la Bolivie et Barbados.</p></li>
 </ul>
-<p><strong>LES VARIABLES</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>graph.cos2.var <span class="ot">&lt;-</span> <span class="fu">fviz_pca_var</span>(pca.model,<span class="at">col.var=</span><span class="st">"cos2"</span>,<span class="at">axes =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">gradient.cols=</span><span class="fu">c</span>(<span class="st">"#F1C40F"</span>,<span class="st">"#2ECC71"</span>,<span class="st">"#8E44AD"</span>), <span class="at">repel=</span><span class="cn">TRUE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_light</span>())</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>graph.cos2.var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong><em>REMARQUE : </em></strong> <em>Pour le plan formé des axes 1 et 3, on peut procéder la même que celle en amont</em></p>
+</section>
+<section id="caractérisation-des-axes" class="level3">
+<h3 class="anchored" data-anchor-id="caractérisation-des-axes">Caractérisation des axes</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>graph.contrib.var <span class="ot">&lt;-</span> <span class="fu">fviz_pca_var</span>(pca.model,<span class="at">col.var=</span><span class="st">"contrib"</span>, <span class="at">gradient.cols=</span><span class="fu">c</span>(<span class="st">"#F1C40F"</span>,<span class="st">"#2ECC71"</span>,<span class="st">"#8E44AD"</span>), <span class="at">repel=</span><span class="cn">TRUE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_light</span>())</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>graph.contrib.var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="TP03_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP03_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="1056"></p>
+<figcaption class="figure-caption">Cercle de corrélation des variables et leur contribution à la formation des axes</figcaption>
+</figure>
 </div>
 </div>
-<ul>
-<li><p><strong>AXE 1</strong> : Sur cet axe les variables <strong><em>overshoot_day</em></strong>, <strong>number_of_earths_required</strong> (toutes les variables en violet) sont bien représentées.</p></li>
-<li><p><strong>AXE 3</strong> : La <strong><em>biocapacité</em></strong> est légèrement bien représentée avec un <span class="math inline">\(cos^2 \sim 0,6\)</span> parcontre la variable <strong><em>number_of_countries_required</em></strong> n’est pas bien représentée.</p></li>
-</ul>
-<p><strong>LES INDIVIDUS</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>data.ind.cos2 <span class="ot">&lt;-</span> pca.model<span class="sc">$</span>ind<span class="sc">$</span>cos2</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Dim1 <span class="ot">&lt;-</span> data.ind.cos2[,<span class="st">"Dim.1"</span>]</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>Dim3 <span class="ot">&lt;-</span> data.ind.cos2[,<span class="st">"Dim.3"</span>]</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>Dim1 <span class="ot">&lt;-</span> Dim1[Dim1 <span class="sc">&gt;=</span> threshold]</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>Dim3 <span class="ot">&lt;-</span> Dim3[Dim3 <span class="sc">&gt;=</span> threshold]</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>Dim1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                      Angola                      Austria 
-                   0,8591836                    0,9047663 
-                     Belgium                        Benin 
-                   0,8604596                    0,8831711 
-                     Burundi                     Cambodia 
-                   0,8916493                    0,8911437 
-              Czech Republic                      Denmark 
-                   0,9218239                    0,8896874 
-                    Ethiopia                       Gambia 
-                   0,9390190                    0,9377395 
-                       Ghana                    Guatemala 
-                   0,8579621                    0,9044971 
-                       Haiti                        India 
-                   0,9763067                    0,9558559 
-                       Kenya                       Malawi 
-                   0,9448689                    0,9425394 
-                    Malaysia                      Myanmar 
-                   0,8840507                    0,8964483 
-                       Nepal                     Pakistan 
-                   0,9772128                    0,9745537 
-                      Poland                       Rwanda 
-                   0,9272053                    0,9810454 
-       Sao Tome and Principe                      Senegal 
-                   0,9617076                    0,8705626 
-                Sierra Leone                     Slovakia 
-                   0,8542504                    0,8524619 
-                    Slovenia                        Sudan 
-                   0,8840522                    0,8713134 
-Tanzania, United Republic of                  Timor-Leste 
-                   0,9419010                    0,8640862 
-                        Togo     United States of America 
-                   0,9425662                    0,8875048 
-                       Yemen 
-                   0,9228666 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Dim3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Albania 
-0,8684971 </code></pre>
-</div>
-</div>
-<ul>
-<li><strong>AXE 3</strong> : On voit que seul l’Albanie est bien représentée.</li>
-</ul>
 </section>
 <section id="comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse" class="level3">
 <h3 class="anchored" data-anchor-id="comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse">Comment l’ACP est-elle modifiée si on retire Singapour de l’analyse ?</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#poids &lt;- df$pop</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#pca.model &lt;- PCA(data.pca, scale.unit = TRUE,</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                 quali.sup = c("region", "income_group"),</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                 graph = FALSE,</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                row.w = data.pca$pop,</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                quanti.sup = 6, ind.sup = 136 )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data.pca.sans.singapore <span class="ot">&lt;-</span> data.pca <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">rownames</span>(data.pca) <span class="sc">!=</span> <span class="st">"Singapore"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>poids <span class="ot">&lt;-</span> df<span class="sc">$</span>pop</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>pca.model.sans.singapore <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca.sans.singapore, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca.sans.singapore<span class="sc">$</span>pop,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="dv">6</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="do">##-- explor(pca.model)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.eig.sans.sing <span class="ot">&lt;-</span> <span class="fu">fviz_eig</span>(pca.model.sans.singapore, <span class="at">title =</span> <span class="st">"Valeurs propres sans Singapore"</span>) </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>comp.eig <span class="ot">&lt;-</span>  cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  plt.eig,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  plt.eig.sans.sing,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>comp.eig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP03_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="1056"></p>
+<figcaption class="figure-caption">Comparaison des valeurs propres issues de l’ACP aevc et sans Singapore</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>&nbsp;&nbsp;On voit que rien ne se passe (pas de changement brusque) au niveau de la qualité des axes. Voyons de plus prêt ce qui se passe :</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plot.indiv.avec.sing <span class="ot">&lt;-</span> <span class="fu">fviz_pca_ind</span>(pca.model)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plot.indiv.avec.sing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP03_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="1056"></p>
+<figcaption class="figure-caption">Comparaison des valeurs propres issues de l’ACP aevc et sans Singapore</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>&nbsp;&nbsp;On voit que <strong>Singapore</strong> est atypique. Cela pourrait signifier que Singapore participe fortement à la formation de l’axe 2 (point plus proche de l’axe 1).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pca.model<span class="sc">$</span>ind<span class="sc">$</span>contrib)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span>  data <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(Dim<span class="fl">.2</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">10</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kbl</span>(data, <span class="at">caption =</span> <span class="fu">capTab</span>(<span class="st">"Contribution des individus à la formation des axes par contribution décroissante suivant l'axe 2"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))  <span class="sc">%&gt;%</span> <span class="fu">add_footnote</span>(<span class="at">label =</span> <span class="st">"Source des données :  https://marieetienne.github.io/datasets/overshootday_overview.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Tableau5 : Contribution des individus à la formation des axes par contribution décroissante suivant l'axe 2</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Dim.1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Dim.2</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Dim.3</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Dim.4</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Dim.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Singapore</td>
+<td style="text-align: right;">0,7259355</td>
+<td style="text-align: right;">15,139608</td>
+<td style="text-align: right;">28,5623680</td>
+<td style="text-align: right;">9,9266768</td>
+<td style="text-align: right;">5,6933884</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">0,2363938</td>
+<td style="text-align: right;">11,748028</td>
+<td style="text-align: right;">0,2780798</td>
+<td style="text-align: right;">16,7474472</td>
+<td style="text-align: right;">0,1489935</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">6,3338962</td>
+<td style="text-align: right;">10,346574</td>
+<td style="text-align: right;">0,9583694</td>
+<td style="text-align: right;">1,3599693</td>
+<td style="text-align: right;">36,9834265</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Russian Federation</td>
+<td style="text-align: right;">3,7284884</td>
+<td style="text-align: right;">10,223438</td>
+<td style="text-align: right;">4,1131775</td>
+<td style="text-align: right;">0,1010599</td>
+<td style="text-align: right;">3,8319553</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Canada</td>
+<td style="text-align: right;">3,7127169</td>
+<td style="text-align: right;">6,392768</td>
+<td style="text-align: right;">0,8335954</td>
+<td style="text-align: right;">3,8719645</td>
+<td style="text-align: right;">0,0267550</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">2,3347045</td>
+<td style="text-align: right;">4,109062</td>
+<td style="text-align: right;">0,8491595</td>
+<td style="text-align: right;">0,6848764</td>
+<td style="text-align: right;">2,2016647</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">United States of America</td>
+<td style="text-align: right;">21,6581050</td>
+<td style="text-align: right;">3,434086</td>
+<td style="text-align: right;">3,0985377</td>
+<td style="text-align: right;">22,3391460</td>
+<td style="text-align: right;">5,4054986</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Korea, Republic of</td>
+<td style="text-align: right;">1,9711036</td>
+<td style="text-align: right;">2,758601</td>
+<td style="text-align: right;">0,8457859</td>
+<td style="text-align: right;">0,0962515</td>
+<td style="text-align: right;">0,0745840</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Australia</td>
+<td style="text-align: right;">1,8672806</td>
+<td style="text-align: right;">2,568678</td>
+<td style="text-align: right;">0,0085414</td>
+<td style="text-align: right;">1,3778438</td>
+<td style="text-align: right;">0,3505079</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Guyana</td>
+<td style="text-align: right;">0,0605633</td>
+<td style="text-align: right;">2,548944</td>
+<td style="text-align: right;">1,0759061</td>
+<td style="text-align: right;">8,5175485</td>
+<td style="text-align: right;">0,9606747</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0; border: 0;"><sup>a</sup> Source des données : https://marieetienne.github.io/datasets/overshootday_overview.csv</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+
+
+</div>
+</div>
+<p>Et pourtant il contribue fortement à la formation de l’axe 2.</p>
 </section>
 <section id="deux-acp-différentes" class="level3">
 <h3 class="anchored" data-anchor-id="deux-acp-différentes">Deux ACP différentes</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>variables.empreinte <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"total_prod"</span>, <span class="st">"total_cons"</span>, <span class="st">"biocapacity"</span>, <span class="st">"number_of_earths_required"</span>, <span class="st">"overshoot_day"</span>, <span class="st">"pop"</span>)]</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.empreinte) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>variables.developpement <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"life_expectancy"</span>, <span class="st">"hdi"</span>, <span class="st">"per_capita_gdp"</span>,<span class="st">"pop"</span>)]</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.developpement) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>variables.empreinte <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"total_prod"</span>, <span class="st">"total_cons"</span>, <span class="st">"biocapacity"</span>, <span class="st">"number_of_earths_required"</span>, <span class="st">"overshoot_day"</span>, <span class="st">"pop"</span>)]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.empreinte) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>variables.developpement <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"life_expectancy"</span>, <span class="st">"hdi"</span>, <span class="st">"per_capita_gdp"</span>,<span class="st">"pop"</span>)]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.developpement) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="acp-sur-les-variables-dempruntes-écologiques" class="level4">
 <h4 class="anchored" data-anchor-id="acp-sur-les-variables-dempruntes-écologiques">ACP sur les variables d’empruntes écologiques</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>acp_empreinte <span class="ot">&lt;-</span> <span class="fu">PCA</span>(variables.empreinte, <span class="at">graph =</span> <span class="cn">FALSE</span>, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>, <span class="at">row.w =</span> variables.empreinte<span class="sc">$</span>pop)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">1</span>] <span class="do">## sélectionner toute les variables sauf la variable pays</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data.pca) <span class="ot">&lt;-</span> df[,<span class="dv">1</span>] <span class="do">## renommer les lignes avec les noms des pays (individus)</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>poids <span class="ot">&lt;-</span> df<span class="sc">$</span>pop</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>acp_empreinte <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4,100602</code></pre>
+<pre><code>[1] 4,115324</code></pre>
 </div>
 </div>
 <p>La première valeur propre est : <strong><em>4,10</em></strong></p>
@@ -759,11 +1035,15 @@ Tanzania, United Republic of                  Timor-Leste
 <section id="acp-sur-les-variables-dempruntes-écologiques-1" class="level4">
 <h4 class="anchored" data-anchor-id="acp-sur-les-variables-dempruntes-écologiques-1">ACP sur les variables d’empruntes écologiques</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>acp.developpement <span class="ot">&lt;-</span> <span class="fu">PCA</span>(variables.developpement, <span class="at">graph =</span> <span class="cn">FALSE</span>, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>, <span class="at">row.w =</span> variables.developpement<span class="sc">$</span>pop)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>acp.developpement <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2,59372</code></pre>
+<pre><code>[1] 2,592046</code></pre>
 </div>
 </div>
 <p>La première valeur propre est : <strong><em>2,59</em></strong></p>
@@ -772,14 +1052,22 @@ Tanzania, United Republic of                  Timor-Leste
 <section id="acp-avec-pondérations-des-variables" class="level3">
 <h3 class="anchored" data-anchor-id="acp-avec-pondérations-des-variables">ACP avec pondérations des variables</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>poids.var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(variables.empreinte)), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="fu">length</span>(variables.developpement)))</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>acp.ponderee <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">col.w =</span> poids.var, <span class="at">graph =</span> <span class="cn">FALSE</span>, <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,<span class="at">quanti.sup =</span> <span class="st">"pop"</span>,</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>poids.var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>], <span class="fu">length</span>(variables.empreinte)), <span class="fu">rep</span>(acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>], <span class="fu">length</span>(variables.developpement)))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> data.pca <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">rownames</span>(data.pca) <span class="sc">!=</span> <span class="st">"Singapore"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>acp.ponderee <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">col.w =</span> poids.var, <span class="at">graph =</span> <span class="cn">FALSE</span>, <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>, <span class="at">quanti.sup =</span> <span class="st">"pop"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">explor</span>(acp.ponderee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
 </div>
-
-
+</div>
 </section>
+</section>
+<section id="realisation-de-lafm" class="level2">
+<h2 class="anchored" data-anchor-id="realisation-de-lafm">REALISATION DE L’AFM</h2>
+
+
 </section>
 </section>
 
