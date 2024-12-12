@@ -1,0 +1,247 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Djamaldbz - DJAMAL TOE",
+    "section": "",
+    "text": "Bienvenue sur mon site personnel.\nJe suis Djamal Y. TOE, statisticien passionné par les analyses avancées, la visualisation de données, et la résolution de problèmes complexes à travers des approches quantitatives. Ce site présente mes projets, mes recherches, et mes contributions dans le domaine des statistiques et de la science des données. Je suis titulaire d’une licence en statistique-informatique et actuellement élève ingénieur en Data Science à l’Ecole Nationale de la statistique et de l’Analyse de l’Information à Bruz Rennes, France."
+  },
+  {
+    "objectID": "about.html#à-propos-de-moi",
+    "href": "about.html#à-propos-de-moi",
+    "title": "Djamaldbz - DJAMAL TOE",
+    "section": "À propos de moi",
+    "text": "À propos de moi\nJe combine mes compétences en statistiques, programmation et analyse de données pour transformer des ensembles de données en informations exploitables. Mon objectif est d’améliorer la prise de décision grâce à des modèles et des méthodes robustes. Ayant effectuer des stages en entreprises, j’ai appris beaucoup de choses notamment en bio-statistiques et sur les modélisations qui y sont utilisées. J’ai également des connaissance en cartographie (avec R)."
+  },
+  {
+    "objectID": "about.html#expérience",
+    "href": "about.html#expérience",
+    "title": "Djamaldbz - DJAMAL TOE",
+    "section": "Expérience",
+    "text": "Expérience\n\nStagiaire au Centre de Méthodologie et de Gestion de données au Centre MURAZ sis Bobo-Dioulasso, Burkina Faso\n\ndurée : 6 mois Août 2023 - Janvier 2024\nTravail effectué :\n\nAnalyse exploratoire de données\nTests statistiques et Modélisations\nSystème d’information géographique\nRedaction automatique de rapports\n\n\nStagiaire au Centre de Méthodologie et de Gestion de données au Centre MURAZ & l’Institut National de recherche en Science de la Santé sis Bobo-Dioulasso, Burkina Faso\n\ndurée : 5 mois Janvier 2024 - Mai 2024"
+  },
+  {
+    "objectID": "about.html#projets-et-contributions",
+    "href": "about.html#projets-et-contributions",
+    "title": "Djamaldbz - DJAMAL TOE",
+    "section": "Projets et Contributions",
+    "text": "Projets et Contributions\n\n1. Analyses Factorielles et Visualisations Avancées\n\nDéveloppement d’analyses factorielles (ACP, AFC, ACM, AFM, AFD) pour comprendre les structures complexes des données.\nVisualisation interactive des résultats pour une meilleure interprétation (Rshiny, Python Jupyter Dash).\n\n\n\n2. Modèles de Régression et Prévision\n\nRégression linéaire, logistique, et mixte\nPrévisions à l’aide de modèles de séries temporelles\n\n\n\n3. Applications Statistiques\n\nDéveloppement d’outils interactifs pour l’analyse de données (Shiny, Quarto)\nRapports automatisés (Rmarkdown, Bookdown)\n\n\n\n4. Applications Bureau et Web\n\nDévéloppement de logiciel bureau pour la gestion des caisses\nDévéloppement de sites web avec python&Django (pas trop avancé)\n\n\n\n5. Computer vision\nDébute dans la vision par ordinateur avec :\n\nLa SVM (Support Vector Machine)\nLe KNN (K- Nearest Neighbour)\nL’ACP (L’Analyse en Composante Principale)\nLes reseaux de neurones convolutionnels (à venir)\n\n\n\n6. Langages de programmtion et outils statistiques\n\nPython, Java, C++ & C\nR, Stata, SPSS\nHtml, Css\nOffice et Suites\nSystème de Gestion de données :\n\nMySql\nOracle SQL"
+  },
+  {
+    "objectID": "about.html#dernières-publications",
+    "href": "about.html#dernières-publications",
+    "title": "Djamaldbz - DJAMAL TOE",
+    "section": "Dernières Publications",
+    "text": "Dernières Publications\n\nExploration des Techniques d’Analyse Factorielle\nGuide Pratique pour les Modèles Mixtes\nVisualisation Dynamique avec R et Quarto\nFormation en python"
+  },
+  {
+    "objectID": "ANALYSES_FACTORIELLES/TP03.html",
+    "href": "ANALYSES_FACTORIELLES/TP03.html",
+    "title": "Djamaldbz - Méthodes d’Analyse factorielle TP02",
+    "section": "",
+    "text": "packages_ &lt;- c(\"ggplot2\", \"dplyr\",\"readxl\",\"cowplot\")\n\nfor (pkg in packages_) {\n  if (!requireNamespace(pkg, quietly = TRUE)) {\n    install.packages(pkg, dependencies = T)\n  }\n  library(pkg, character.only = TRUE)\n}"
+  },
+  {
+    "objectID": "ANALYSES_FACTORIELLES/TP03.html#quelques-définitions",
+    "href": "ANALYSES_FACTORIELLES/TP03.html#quelques-définitions",
+    "title": "Djamaldbz - Méthodes d’Analyse factorielle TP02",
+    "section": "Quelques définitions",
+    "text": "Quelques définitions\n      Le calcul de l’empreinte écologique et de la biocapacité nous aide à répondre à la question de recherche fondamentale : Quelle est la demande des êtres humains envers les surfaces biologiquement productives (empreinte écologique) par rapport à la quantité que la planète (ou la surface productive d’une région) peut régénérer sur ces surfaces (biocapacité) ?\n\nHectare global (gha) : C’est l’unité choisie pour exprimer toutes les quantités d’intérêt concernant la consommation/émission de carbone. Une unité de surface correspondant à la productivité moyenne d’un hectare de terres mondiales. Un hectare de terres agricoles vaudra plus d’hectares globaux qu’un hectare de désert.\nEmpreinte écologique (en gha par personne) : Le nombre de gha requis pour produire les besoins et absorber les déchets d’un pays.\nBiocapacité (en gha) : La capacité d’un pays à produire ce dont il a besoin et à absorber ses déchets (réserve écologique).\nJour de dépassement : Jour de l’année où la demande d’un pays dépasse sa biocapacité annuelle."
+  },
+  {
+    "objectID": "ANALYSES_FACTORIELLES/TP03.html#chargement-des-données",
+    "href": "ANALYSES_FACTORIELLES/TP03.html#chargement-des-données",
+    "title": "Djamaldbz - Méthodes d’Analyse factorielle TP02",
+    "section": "Chargement des données",
+    "text": "Chargement des données\n\n##-- Installer et Charger les packages requis\n###--- vecteurs des packages\npackages &lt;- c(\"factoextra\", \"corrr\", \"FactoMineR\", \"dplyr\",\"kableExtra\",\"corrplot\",\n              \"explor\")\n\n###--- Boucle pour installer et charger les packages\nfor (pkg in packages) {\n  if (!requireNamespace(pkg, quietly = TRUE)) {\n    install.packages(pkg, dependencies = T)\n  }\n  library(pkg, character.only = TRUE)\n}\n\n##-- charger la base de données via le lien web\nlink.to.data &lt;- \"https://marieetienne.github.io/datasets/overshootday_overview.csv\"\ndf &lt;- read.csv(link.to.data)"
+  },
+  {
+    "objectID": "ANALYSES_FACTORIELLES/TP03.html#analyse-exploratoire-des-données",
+    "href": "ANALYSES_FACTORIELLES/TP03.html#analyse-exploratoire-des-données",
+    "title": "Djamaldbz - Méthodes d’Analyse factorielle TP02",
+    "section": "Analyse exploratoire des données",
+    "text": "Analyse exploratoire des données\n\nnrow(df); ncol(df) ;dim(df)\n\n[1] 182\n\n\n[1] 13\n\n\n[1] 182  13\n\n\nLes données sont composées de 182 lignes et de 13 colonnes."
+  },
+  {
+    "objectID": "ANALYSES_FACTORIELLES/TP03.html#résumé-statitique-des-variables",
+    "href": "ANALYSES_FACTORIELLES/TP03.html#résumé-statitique-des-variables",
+    "title": "Djamaldbz - Méthodes d’Analyse factorielle TP02",
+    "section": "Résumé statitique des variables",
+    "text": "Résumé statitique des variables\nOn utilise la commande summary(df) tout simplement, mais pour une question d’exthétique on utilise ce code.\n\n##-- summary pour les variable numériques\nsummary.df.num &lt;- sapply(df[sapply(df, is.numeric)], function(x) {\n  c(\n    min = min(x, na.rm = TRUE),\n    Q1 = quantile(x, 0.25, na.rm = TRUE),\n    Q3 = quantile(x, 0.75, na.rm = TRUE),\n    med = quantile(x, 0.5, na.rm = TRUE),\n    mean = mean(x, na.rm = TRUE),\n    max = max(x, na.rm = TRUE),\n    count = sum(!is.na(x)),\n    sd = sd(x, na.rm = TRUE),\n    `NA's` = round(sum(is.na(x)),0)\n  )\n})\nsummary.df.num &lt;- as.data.frame(summary.df.num)\n\nEnsuite nous affichons ce resumé dans un tableau :\n\n\n\nTableau 1 : Résumé statistique des variables\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nlife_expectancy\nhdi\nper_capita_gdp\npop\ntotal_prod\ntotal_cons\nbiocapacity\nnumber_of_countries_required\nnumber_of_earths_required\novershoot_day\n\n\n\n\nmin\n52,525000\n0,3850000\n732,836\n0,06200\n0,371747\n0,5540298\n0,1041268\n0,0180633\n0,3668548\n41,0000\n\n\nQ1.25%\n65,747000\n0,5945000\n4888,255\n2,64100\n1,156834\n1,2195240\n0,6633750\n0,8273357\n0,8075166\n143,0000\n\n\nQ3.75%\n76,400695\n0,8350000\n31670,000\n32,91550\n3,828778\n3,8418335\n2,6656718\n2,7330613\n2,5438978\n365,0000\n\n\nmed.50%\n71,900000\n0,7310000\n13548,200\n10,01950\n1,924223\n2,3197815\n1,3622344\n1,7280656\n1,5360601\n239,0000\n\n\nmean\n71,180320\n0,7177193\n21139,464\n43,47636\n2,879469\n2,9624675\n3,5569055\n2,9127705\n1,9616192\n239,7802\n\n\nmax\n84,445610\n0,9620000\n120505,000\n1480,63200\n13,394536\n13,1263342\n85,6461100\n55,1061868\n8,6916969\n365,0000\n\n\ncount\n175,000000\n171,0000000\n163,000\n182,00000\n182,000000\n181,0000000\n181,0000000\n181,0000000\n181,0000000\n182,0000\n\n\nsd\n7,615465\n0,1533110\n22330,819\n156,03751\n2,515235\n2,1957327\n10,0256869\n5,1916277\n1,4539202\n109,5507\n\n\nNA’s\n7,000000\n11,0000000\n19,000\n0,00000\n0,000000\n1,0000000\n1,0000000\n1,0000000\n1,0000000\n0,0000\n\n\n\nNote: aby Djamal Y. TOE\n\n\n  Nous constatons que ceraines variables ont des données manquantes, nous pouvons décider de soit les supprimer, soit les prédire avec des méthodes d’imputation en fonction de leurs importances. Mais pour le moment nous allons juste les supprimer.\n\ndf &lt;- na.omit(df)\nnrow(df)\n\n[1] 162\n\n\nAinsi nous passons de 182 à 162 lignes."
+  },
+  {
+    "objectID": "ANALYSES_FACTORIELLES/TP03.html#contruction-de-lanalyse-en-composante-principale",
+    "href": "ANALYSES_FACTORIELLES/TP03.html#contruction-de-lanalyse-en-composante-principale",
+    "title": "Djamaldbz - Méthodes d’Analyse factorielle TP02",
+    "section": "Contruction de l’Analyse en composante principale",
+    "text": "Contruction de l’Analyse en composante principale\n\nLe poids pour les pays : Les tailles respectives des populations de chaques pays car cela garantit que l’analyse est représentative des différences globales, en tenant compte de l’impact démographique des pays.\nMétrique : Normalisation des données car les variables ne sont pas toutes sur la même échelle. Cela permet d’éviter que les variables avec de grosses valeurs (grandes échelles) dominent l’analyse.\nvariables sup :\n\nQuali sup : region, income_group\nQuanti sup : pop\n\n\n\nRéalisation de l’ACP\n\nVérifions la corrélations entre les variables quantitatives\n\n\nnumeric.vars &lt;- as.data.frame(df[sapply(df, is.numeric)])\nM &lt;- round(cor(numeric.vars),2) #- Calculer la matrice de corrélation\n\n##-- créer un objet qui contient une palette de couleur pour le gradiant dans le plot\ncol &lt;- colorRampPalette(c(\"#BB4444\", \"#EE9988\", \"#FFFFFF\", \"#77AADD\", \"#4477AA\"))\n\n##-- dessiner le graphique\ncorrplot(M, method=\"color\", col=col(200),  \n         type=\"upper\", order=\"hclust\", \n         addCoef.col = \"black\", #- ajout des coefficients correlation\n         tl.col=\"black\", tl.srt=45, tl.cex = 1\n         , #- couleur, rotation et police de texte des libellés \n         ##-- ne pas afficher les coefficients de corrélations sur la diagonale (ils valent tous 1)\n         diag=FALSE \n         ) \n\n\n\n\nFigure 1 : Matrice de corrélations\n\n\n\n\n    On voit qu’il y’ a quand même des variables qui sont &lt;&gt; (pour l’affirmer avec plus d’assurance il serait judicieux de faire un test billatéral de corrélation de Pearson avec la commande cor.test(method = “pearson”, alternative = “two.sided”)).\n\nCréation du modèle de l’ACP\n\n\ndata.pca &lt;- df[,-1] #- sélectionner toute les variables sauf la variable pays\nrownames(data.pca) &lt;- df[,1] #- renommer les lignes avec les noms des pays (individus)\npoids &lt;- df$pop\npca.model &lt;- PCA(data.pca, scale.unit = TRUE,\n                 quali.sup = c(\"region\", \"income_group\"),\n                 graph = FALSE,\n                 row.w = data.pca$pop,\n                 quanti.sup = 6)\n\n##- explor(pca.model) pour une interface interactive\n\n\n\nRecupération des valeurs propres et des variances\n\neigen.values &lt;- pca.model$eig\nknitr::kable(eigen.values[1:3,2:3], caption = capTab(\"Inerties expliquées par les 3 premiers axes\"))\n\n\nTableau 2 : Inerties expliquées par les 3 premiers axes\n\n\n\npercentage of variance\ncumulative percentage of variance\n\n\n\n\ncomp 1\n69,758338\n69,75834\n\n\ncomp 2\n16,485374\n86,24371\n\n\ncomp 3\n4,865912\n91,10962\n\n\n\n\n\nOn remarque que les axes 1,2 et 3 représentent respectivement 69,76, 16,49 et 4,09, donc au total 91,11\nOn pourrait aussi visualiser le graphique des valeurs propres :\n\nplt.eig &lt;- fviz_eig(pca.model, title = \"Valeurs propres avec Singapore\")\n\n\n\nQualité de representation des plans / sur les plans\n\nQualité de representation des plans\n\n  Le premier plan a un taux d’inertie supérieur à 86 %, il capte une grande partie de l’information présente dans les données ce qui signifie qu’il à une bonne qualité de representation alors que le second (1-3) en capte environ 74,63 % donc a une faible qualité de représenatation comparé au premier. En depit de ce fait, les deux plans ont quand même qualité de représentation si mous fions au critère du taux d’inertie.\n\nQualité de representation sur les plans\n\n(1-2)\n\n\nLES VARIABLES\n\ngraph.cos2.var &lt;- fviz_pca_var(pca.model,col.var=\"cos2\", gradient.cols=c(\"#F1C40F\",\"#2ECC71\",\"#8E44AD\"), repel=TRUE, ggtheme = theme_light())\n\ngraph.cos2.var\n\n\n\n\nFigure 3 : Qualités de representation des variables\n\n\n\n\nConcernant les variables, on constate qu’elles toutes sont bien representées avec des cosinus carrés qui ont une valeur minimale environ 0,8 à part les variables biocapacity, life_expectancy, number_of_countries_required qui ont un cosinus carrés qui vaut environ 0,7.\nLES INDIVIDUS\n\nthreshold &lt;- 0.85\ndata.ind.cos2 &lt;- pca.model$ind$cos2\n\ndim1 &lt;- data.ind.cos2[,\"Dim.1\"]\ndim1 &lt;- dim1[dim1 &gt;= threshold]\ncountries.dim1 &lt;- names(dim1)\nnames(dim1) &lt;-  NULL\n\ndim2 &lt;- data.ind.cos2[,\"Dim.2\"]\ndim2 &lt;- dim2[dim2 &gt;= 0.6]\ncountries.dim2 &lt;- names(dim2)\nnames(dim2) &lt;-  NULL\n\n##-- crétion des dataframes \ndim1.df &lt;- data.frame(\n  Country = countries.dim1,\n  `Cos carré` = dim1\n) %&gt;% arrange(desc(dim1))\n\n\ndim2.df &lt;- data.frame(\n  Country = countries.dim2,\n  `Cos carré` = dim2\n) %&gt;% arrange(desc(dim2))\n\n\n##-- création des tableaux kableExtra\ndim1.tbl &lt;- kableExtra::kbl(dim1.df, caption = capTab(\"Individus ayant un cosinus carré supérieur ou égal à 0,85 sur l'axe 1\")) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\")) %&gt;% add_footnote(label = \"Source des données :  https://marieetienne.github.io/datasets/overshootday_overview.csv\")\n\ndim2.tbl &lt;- kableExtra::kbl(dim2.df, caption = capTab(\"Individus ayant un cosinus carré supérieur ou égal à 0,6 sur l'axe 2\")) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\"))  %&gt;% add_footnote(label = \"Source des données :  https://marieetienne.github.io/datasets/overshootday_overview.csv\")\n\n\n\n\ndim1.tbl\n\n\n\nTableau 3 : Individus ayant un cosinus carré supérieur ou égal à 0,85 sur l'axe 1\n\n\nCountry\nCos.carré\n\n\n\n\nRwanda\n0,9810454\n\n\nNepal\n0,9772128\n\n\nHaiti\n0,9763067\n\n\nPakistan\n0,9745537\n\n\nSao Tome and Principe\n0,9617076\n\n\nIndia\n0,9558559\n\n\nKenya\n0,9448689\n\n\nTogo\n0,9425662\n\n\nMalawi\n0,9425394\n\n\nTanzania, United Republic of\n0,9419010\n\n\nEthiopia\n0,9390190\n\n\nGambia\n0,9377395\n\n\nPoland\n0,9272053\n\n\nYemen\n0,9228666\n\n\nCzech Republic\n0,9218239\n\n\nAustria\n0,9047663\n\n\nGuatemala\n0,9044971\n\n\nMyanmar\n0,8964483\n\n\nBurundi\n0,8916493\n\n\nCambodia\n0,8911437\n\n\nDenmark\n0,8896874\n\n\nUnited States of America\n0,8875048\n\n\nSlovenia\n0,8840522\n\n\nMalaysia\n0,8840507\n\n\nBenin\n0,8831711\n\n\nSudan\n0,8713134\n\n\nSenegal\n0,8705626\n\n\nTimor-Leste\n0,8640862\n\n\nBelgium\n0,8604596\n\n\nAngola\n0,8591836\n\n\nGhana\n0,8579621\n\n\nSierra Leone\n0,8542504\n\n\nSlovakia\n0,8524619\n\n\n\na Source des données : https://marieetienne.github.io/datasets/overshootday_overview.csv\n\n\n\n\n\n\n\n\n\n\n\n\ndim2.tbl \n\n\n\nTableau 4 : Individus ayant un cosinus carré supérieur ou égal à 0,6 sur l'axe 2\n\n\nCountry\nCos.carré\n\n\n\n\nNamibia\n0,7502317\n\n\nParaguay\n0,6807204\n\n\nBrazil\n0,6672407\n\n\nBolivia\n0,6609662\n\n\nBarbados\n0,6458843\n\n\n\na Source des données : https://marieetienne.github.io/datasets/overshootday_overview.csv\n\n\n\n\n\n\n\n\n\n\n\n\n\nAXE 1 : On voit que les pays (individus) comme le Togo, le Yemen, les USA, le Rwanda sont tres bien representés. RMRQ : Il y en a d’autres\nAXE 2 : Il n’y a que 6 pays qui sont bien représentés sur cet axe. Il s’agit de la Namibie, le Paraguay, le Brésil, la Bolivie et Barbados.\n\nREMARQUE :  Pour le plan formé des axes 1 et 3, on peut procéder la même que celle en amont\n\n\nCaractérisation des axes\n\ngraph.contrib.var &lt;- fviz_pca_var(pca.model,col.var=\"contrib\", gradient.cols=c(\"#F1C40F\",\"#2ECC71\",\"#8E44AD\"), repel=TRUE, ggtheme = theme_light())\n\ngraph.contrib.var\n\n\n\n\nFigure 4 : Cercle de corrélation des variables et leur contribution à la formation des axes\n\n\n\n\n\n\nComment l’ACP est-elle modifiée si on retire Singapour de l’analyse ?\n\ndata.pca.sans.singapore &lt;- data.pca %&gt;% filter(rownames(data.pca) != \"Singapore\")\npoids &lt;- df$pop\npca.model.sans.singapore &lt;- PCA(data.pca.sans.singapore, scale.unit = TRUE,\n                 quali.sup = c(\"region\", \"income_group\"),\n                 graph = FALSE,\n                 row.w = data.pca.sans.singapore$pop,\n                 quanti.sup = 6)\n\n##-- explor(pca.model)\n\n\nplt.eig.sans.sing &lt;- fviz_eig(pca.model.sans.singapore, title = \"Valeurs propres sans Singapore\") \ncomp.eig &lt;-  cowplot::plot_grid(\n  plt.eig,\n  plt.eig.sans.sing,\n  ncol = 2\n)+ theme_light()\ncomp.eig\n\n\n\n\nFigure 5 : Comparaison des valeurs propres issues de l’ACP aevc et sans Singapore\n\n\n\n\n  On voit que rien ne se passe (pas de changement brusque) au niveau de la qualité des axes. Voyons de plus prêt ce qui se passe :\n\nplot.indiv.avec.sing &lt;- fviz_pca_ind(pca.model) + \n                        theme_light()\nplot.indiv.avec.sing\n\n\n\n\nFigure 6 : Comparaison des valeurs propres issues de l’ACP aevc et sans Singapore\n\n\n\n\n  On voit que Singapore est atypique. Cela pourrait signifier que Singapore participe fortement à la formation de l’axe 2 (point plus proche de l’axe 1).\n\ndata &lt;- as.data.frame(pca.model$ind$contrib)\ndata &lt;-  data %&gt;% arrange(desc(Dim.2)) %&gt;% head(10)\nkableExtra::kbl(data, caption = capTab(\"Contribution des individus à la formation des axes par contribution décroissante suivant l'axe 2\")) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\"))  %&gt;% add_footnote(label = \"Source des données :  https://marieetienne.github.io/datasets/overshootday_overview.csv\")\n\n\n\nTableau 5 : Contribution des individus à la formation des axes par contribution décroissante suivant l'axe 2\n\n\n\nDim.1\nDim.2\nDim.3\nDim.4\nDim.5\n\n\n\n\nSingapore\n0,7259355\n15,139608\n28,5623680\n9,9266768\n5,6933884\n\n\nBrazil\n0,2363938\n11,748028\n0,2780798\n16,7474472\n0,1489935\n\n\nChina\n6,3338962\n10,346574\n0,9583694\n1,3599693\n36,9834265\n\n\nRussian Federation\n3,7284884\n10,223438\n4,1131775\n0,1010599\n3,8319553\n\n\nCanada\n3,7127169\n6,392768\n0,8335954\n3,8719645\n0,0267550\n\n\nJapan\n2,3347045\n4,109062\n0,8491595\n0,6848764\n2,2016647\n\n\nUnited States of America\n21,6581050\n3,434086\n3,0985377\n22,3391460\n5,4054986\n\n\nKorea, Republic of\n1,9711036\n2,758601\n0,8457859\n0,0962515\n0,0745840\n\n\nAustralia\n1,8672806\n2,568678\n0,0085414\n1,3778438\n0,3505079\n\n\nGuyana\n0,0605633\n2,548944\n1,0759061\n8,5175485\n0,9606747\n\n\n\na Source des données : https://marieetienne.github.io/datasets/overshootday_overview.csv\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEt pourtant il contribue fortement à la formation de l’axe 2, il est même celui qui contribue les plus à la formation des axes. Le fait que Singapore contribue le plus à la formation des axes et que rien ne change lorsqu’il est retiré de l’analyse s’explique tout simplement par sa taille de population. En effet la taille de la population a été utilisée comme poids des individus qui sont ici les pays."
+  },
+  {
+    "objectID": "ANALYSES_FACTORIELLES/TP03.html#identifications-des-pays-en-fonction-de-leur-groupe-de-revenu",
+    "href": "ANALYSES_FACTORIELLES/TP03.html#identifications-des-pays-en-fonction-de-leur-groupe-de-revenu",
+    "title": "Djamaldbz - Méthodes d’Analyse factorielle TP02",
+    "section": "Identifications des pays en fonction de leur groupe de revenu",
+    "text": "Identifications des pays en fonction de leur groupe de revenu\n\n##-- Définitions des groupes de revenus\nincome_groups_definitions &lt;- c(\n  \"UM\" = \"Upper-Middle\",\n  \"LM\" = \"Lower-Middle\",\n  \"HI\" = \"High Income\",\n  \"LI\" = \"Low Income\"\n)\n\n\n##-- Ajouter une colonne avec les définitions correspondantes\ndata.pca$income_group_def &lt;- as.factor(income_groups_definitions[data.pca$income_group])\n\n\ngraph_indiv &lt;- fviz_pca_ind(\n  pca.model,\n  select.ind = list(\n    contrib = 50\n  ),\n  invisible = c(\"quanti.sup\",\"ind.sup\"),\n  habillage = data.pca$income_group_def,\n  addEllipses = TRUE,\n  repel = TRUE,\n) + theme_light() \n\n\ngraph_indiv\n\n\n\n\nFigure 7 : Affichage des 40 individus qui contribuent le plus à la formation des axes en fonction de leur groupe de revenu\n\n\n\n\n      On voit que les groupes ne sont pas bien séparés, raison pour laquelle les ellipses ont des partie qui coïncident. Cela pourrait signifier que les les groupes de revenus sont trop similaires pour etre clairement séparés sur les axes sélectionnés (dans le plan des composantes principales). Cela pourrait aussi fait cas d’hétérogénéité, c’est-à-dire que les groupes ne sont pas homogènes (grande variabilité intra-groupe).\n\nDeux ACP différentes\n\nvariables.empreinte &lt;- df[, c(\"total_prod\", \"total_cons\", \"biocapacity\", \"number_of_earths_required\", \"overshoot_day\", \"pop\")]\nrownames(variables.empreinte) &lt;- df$country\nvariables.developpement &lt;- df[, c(\"life_expectancy\", \"hdi\", \"per_capita_gdp\",\"pop\")]\nrownames(variables.developpement) &lt;- df$country\n\n\nACP sur les variables d’empruntes écologiques\n      Il s’agit ici de faire l’ACP que sur les variables d’empruntes écologiques et de mettre les autres variables (de dévéloppement) en quantitatives supplémentaires.\n\ndata.pca &lt;- df[,-1] ## sélectionner toute les variables sauf la variable pays\nrownames(data.pca) &lt;- df[,1] ## renommer les lignes avec les noms des pays (individus)\npoids &lt;- df$pop\nacp_empreinte &lt;- PCA(data.pca, scale.unit = TRUE,\n                 quali.sup = c(\"region\", \"income_group\"),\n                 graph = FALSE,\n                 row.w = data.pca$pop,\n                 quanti.sup = c(6,1,2,3))\n\n##-- valeurs propres\nacp_empreinte$eig[1,1]\n\n[1] 4,115324\n\n\nLa première valeur propre est : 4,10\n\n\nACP sur les variables d’empruntes écologiques\n\nacp.developpement &lt;- PCA(data.pca, scale.unit = TRUE,\n                 quali.sup = c(\"region\", \"income_group\"),\n                 graph = FALSE,\n                 row.w = data.pca$pop,\n                 quanti.sup = 6:12)\n\n##-- valeurs propres\nacp.developpement$eig[1,1]\n\n[1] 2,592046\n\n\nLa première valeur propre est : 2,59\n\n\n\nACP avec pondérations des variables\n\n# explor(acp.ponderee)"
+  },
+  {
+    "objectID": "ANALYSES_FACTORIELLES/TP03.html#realisation-de-lafm",
+    "href": "ANALYSES_FACTORIELLES/TP03.html#realisation-de-lafm",
+    "title": "Djamaldbz - Méthodes d’Analyse factorielle TP02",
+    "section": "REALISATION DE L’AFM",
+    "text": "REALISATION DE L’AFM"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#news-stories",
+    "href": "ENGLISH/English-Presentations-with-Milonnet.html#news-stories",
+    "title": "COMPUTERS",
+    "section": "News Stories",
+    "text": "News Stories\n\n\nNews paper : The Guardian\n\n\n\n\nTitle : IBM unveils new quantum computing chip designs to explore news frontiers of science"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#computers",
+    "href": "ENGLISH/English-Presentations-with-Milonnet.html#computers",
+    "title": "COMPUTERS",
+    "section": "Computers ?",
+    "text": "Computers ?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgrammable information processing system\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOld System ===&gt;&gt; New System"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#quantum-computing-chips",
+    "href": "ENGLISH/English-Presentations-with-Milonnet.html#quantum-computing-chips",
+    "title": "COMPUTERS",
+    "section": "Quantum computing chips ?",
+    "text": "Quantum computing chips ?\n\n\nUse qbits to perform computation instead of using bits"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#avantages",
+    "href": "ENGLISH/English-Presentations-with-Milonnet.html#avantages",
+    "title": "COMPUTERS",
+    "section": "Avantages",
+    "text": "Avantages\n\nSolve many domains problems"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#challenges-1",
+    "href": "ENGLISH/English-Presentations-with-Milonnet.html#challenges-1",
+    "title": "COMPUTERS",
+    "section": "Challenges",
+    "text": "Challenges\n\nExpensive, unstable, needs controlled environment"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#summary",
+    "href": "ENGLISH/English-Presentations-with-Milonnet.html#summary",
+    "title": "COMPUTERS",
+    "section": "Summary",
+    "text": "Summary\n\nQuantum computers are promising\nChallenges remain for full adoption\nhttps://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#keywords",
+    "href": "ENGLISH/English-Presentations-with-Milonnet.html#keywords",
+    "title": "COMPUTERS",
+    "section": "Keywords",
+    "text": "Keywords\n\nArtificial Intelligence\nComputational ability\nSupercomputers\nSilicon-based computers\nQuantum computing chip"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#questions",
+    "href": "ENGLISH/English-Presentations-with-Milonnet.html#questions",
+    "title": "COMPUTERS",
+    "section": "Questions ?",
+    "text": "Questions ?\n\n!!! THANK YOU FOR YOUR ATTENTION\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnglish classes with Milonnet"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#news-stories",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#news-stories",
+    "title": "COMPUTERS",
+    "section": "News Stories",
+    "text": "News Stories\n\n\nNews paper : The Guardian\n\n\n\n\nTitle : IBM unveils new quantum computing chip designs to explore news frontiers of science"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#computers",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#computers",
+    "title": "COMPUTERS",
+    "section": "Computers ?",
+    "text": "Computers ?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgrammable information processing system\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOld System ===&gt;&gt; New System"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#quantum-computing-chips",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#quantum-computing-chips",
+    "title": "COMPUTERS",
+    "section": "Quantum computing chips ?",
+    "text": "Quantum computing chips ?\n\n\nUse qbits to perform computation instead of using bits"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#keywords",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#keywords",
+    "title": "COMPUTERS",
+    "section": "Keywords",
+    "text": "Keywords\n\nArtificial Intelligence\nComputational ability\nSupercomputers\nSilicon-based computers\nQuantum computing chip"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#avantages",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#avantages",
+    "title": "COMPUTERS",
+    "section": "Avantages",
+    "text": "Avantages\n\nSolve many domains problems"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#challenges-1",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#challenges-1",
+    "title": "COMPUTERS",
+    "section": "Challenges",
+    "text": "Challenges\n\nExpensive, unstable, needs controlled environment"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#summary",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#summary",
+    "title": "COMPUTERS",
+    "section": "Summary",
+    "text": "Summary\n\nQuantum computers are promising\nChallenges remain for full adoption\nhttps://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron"
+  },
+  {
+    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#questions",
+    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#questions",
+    "title": "COMPUTERS",
+    "section": "Questions ?",
+    "text": "Questions ?\n\n!!! THANK YOU FOR YOUR ATTENTION\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnglish classes with Milonnet"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Djamaldbz - Expertise en Statistiques",
+    "section": "",
+    "text": "Bienvenue sur le site Djamaldbz, dédié à mes travaux en statistiques et informatique. Explorez mes projets, mes recherches, et mes publications."
+  },
+  {
+    "objectID": "index.html#qui-suis-je",
+    "href": "index.html#qui-suis-je",
+    "title": "Djamaldbz - Expertise en Statistiques",
+    "section": "Qui suis-je ?",
+    "text": "Qui suis-je ?\nJe suis Djamal Y. TOE, passionné de statistiques et d’informatique, avec un fort accent sur l’analyse avancée et la résolution de problèmes à travers des méthodes quantitatives.\nMon objectif est d’apporter des solutions innovantes et pratiques dans le domaine des statistiques et de la science des données.\n\nEn savoir plus sur moi ici"
+  },
+  {
+    "objectID": "index.html#mon-expertise",
+    "href": "index.html#mon-expertise",
+    "title": "Djamaldbz - Expertise en Statistiques",
+    "section": "Mon expertise",
+    "text": "Mon expertise\nJe combine mes compétences en statistiques, programmation et analyse de données pour résoudre des problèmes complexes et fournir des solutions pratiques.\nVoici un aperçu de mes domaines d’expertise :\n\nAnalyses Factorielles et Visualisation\nModèles de Régression et Prévisions\nApplications Statistiques Interactives\nDéveloppement d’Applications Bureau et Web\nVision par Ordinateur (Computer Vision en apprentissage)"
+  },
+  {
+    "objectID": "index.html#mes-projets-récents",
+    "href": "index.html#mes-projets-récents",
+    "title": "Djamaldbz - Expertise en Statistiques",
+    "section": "Mes projets récents",
+    "text": "Mes projets récents\nVoici quelques-uns de mes projets récents dans le domaine des statistiques et de l’analyse de données :\n\nAnalyse Factorielle et Visualisation Avancée\nModélisation de Régressions Mixtes pour des données complexes\nDéveloppement d’outils interactifs pour la visualisation de données\n\n\nVoir tous mes projets [Bientôt disponible]"
+  },
+  {
+    "objectID": "index.html#dernières-publications",
+    "href": "index.html#dernières-publications",
+    "title": "Djamaldbz - Expertise en Statistiques",
+    "section": "Dernières publications",
+    "text": "Dernières publications\nVoici les dernières publications sur des sujets de statistiques et d’informatique que j’ai partagées :\n\nExploration des Techniques d’Analyse Factorielle\nGuide pratique pour les modèles mixtes\nVisualisation dynamique avec R et Quarto\n\n\nVoir toutes les publications [Bientôt disponible]"
+  },
+  {
+    "objectID": "index.html#contactez-moi",
+    "href": "index.html#contactez-moi",
+    "title": "Djamaldbz - Expertise en Statistiques",
+    "section": "Contactez-moi",
+    "text": "Contactez-moi\nSi vous avez des questions ou souhaitez collaborer sur un projet, n’hésitez pas à me contacter !\n\nEnvoyer un message\n\n\n\n  \n    \n      \n        A propos de nous\n        Elève en Science de données à l'Ecole Nationale de la Statistique et de l'Analyse de l'Information en France, titulaire d'une licence en Statistiques-informatique\n        \n          \n          \n          \n        \n      \n\n      \n        Rechercher quelque chose ?\n        \n        \n           Rennes,35000, France\n           djamaltoe2905@gmail.com\n           +33 ** ** ** ** **\n        \n      \n\n      \n        Heure de services\n        \n\n\n\nLundi\n8h30pm - 9:30pm\n\n\nMardi - Vendredi\n7pm - 8pm\n\n\nSamedi\n9:30am - 10:30am\n\n\n\n\n      \n    \n  \n  \n    © 2024 Copyright: DJAMAL DEV"
+  }
+]
