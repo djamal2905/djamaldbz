@@ -8,8 +8,7 @@ Bienvenue sur le site **Djamaldbz**, dédié à mes travaux en statistiques et i
 
 ## Qui suis-je ?
 
-Je suis **Djamal Y. TOE**, passionné de statistiques et d'informatique, avec un fort accent sur l'analyse avancée et la résolution de problèmes à travers des méthodes quantitatives.  
-Mon objectif est d'apporter des solutions innovantes et pratiques dans le domaine des statistiques et de la science des données.
+Je m'appelle Djamal Y. TOE, et je suis passionné par les statistiques et l'informatique. Mon parcours m'a amené à me concentrer sur l'analyse avancée et la résolution de problèmes à l'aide de méthodes quantitatives. Mon apprentissage est un voyage continu. Mon objectif est d'explorer de nouvelles approches et d'apporter des solutions pratiques, tout en restant ouvert à l'apprentissage et à l'amélioration constante dans le domaine des statistiques et de la science des données.
 
 > **En savoir plus sur moi** [ici](https://djamal2905.github.io/djamaldbz/about.html)
 
