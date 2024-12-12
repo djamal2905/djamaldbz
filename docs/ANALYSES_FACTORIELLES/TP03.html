@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
   <li class="nav-item">
     <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">Djamaldbz - Probabilités générales TD3</span></a>
+ <span class="menu-text">Djamaldbz - DJAMAL TOE</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -171,6 +171,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#qualité-de-representation-des-plans-sur-les-plans" id="toc-qualité-de-representation-des-plans-sur-les-plans" class="nav-link" data-scroll-target="#qualité-de-representation-des-plans-sur-les-plans">Qualité de representation des plans / sur les plans</a></li>
   <li><a href="#caractérisation-des-axes" id="toc-caractérisation-des-axes" class="nav-link" data-scroll-target="#caractérisation-des-axes">Caractérisation des axes</a></li>
   <li><a href="#comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse" id="toc-comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse" class="nav-link" data-scroll-target="#comment-lacp-est-elle-modifiée-si-on-retire-singapour-de-lanalyse">Comment l’ACP est-elle modifiée si on retire Singapour de l’analyse ?</a></li>
+  </ul></li>
+  <li><a href="#identifications-des-pays-en-fonction-de-leur-groupe-de-revenu" id="toc-identifications-des-pays-en-fonction-de-leur-groupe-de-revenu" class="nav-link" data-scroll-target="#identifications-des-pays-en-fonction-de-leur-groupe-de-revenu">Identifications des pays en fonction de leur groupe de revenu</a>
+  <ul class="collapse">
   <li><a href="#deux-acp-différentes" id="toc-deux-acp-différentes" class="nav-link" data-scroll-target="#deux-acp-différentes">Deux ACP différentes</a></li>
   <li><a href="#acp-avec-pondérations-des-variables" id="toc-acp-avec-pondérations-des-variables" class="nav-link" data-scroll-target="#acp-avec-pondérations-des-variables">ACP avec pondérations des variables</a></li>
   </ul></li>
@@ -287,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
-<caption>Tableau1 : Résumé statistique des variables</caption>
+<caption>Tableau 1 : Résumé statistique des variables</caption>
 <colgroup>
 <col style="width: 4%">
 <col style="width: 9%">
@@ -480,12 +483,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>         , <span class="co">#- couleur, rotation et police de texte des libellés </span></span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>         <span class="do">##-- ne pas afficher les coefficients de corrélations sur la diagonale (ils valent tous 1)</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">diag=</span><span class="cn">FALSE</span> </span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>         ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="TP03_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1152"></p>
-<figcaption class="figure-caption">Matrice de corrélations</figcaption>
+<figcaption class="figure-caption">Figure 1 : Matrice de corrélations</figcaption>
 </figure>
 </div>
 </div>
@@ -514,7 +517,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(eigen.values[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">caption =</span> <span class="fu">capTab</span>(<span class="st">"Inerties expliquées par les 3 premiers axes"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
-<caption>Tableau2 : Inerties expliquées par les 3 premiers axes</caption>
+<caption>Tableau 2 : Inerties expliquées par les 3 premiers axes</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -569,7 +572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="TP03_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="1056"></p>
-<figcaption class="figure-caption">Qualités de representation des variables</figcaption>
+<figcaption class="figure-caption">Figure 3 : Qualités de representation des variables</figcaption>
 </figure>
 </div>
 </div>
@@ -617,7 +620,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
-<caption>Tableau3 : Individus ayant un cosinus carré supérieur ou égal à 0,85 sur l'axe 1</caption>
+<caption>Tableau 3 : Individus ayant un cosinus carré supérieur ou égal à 0,85 sur l'axe 1</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
@@ -776,7 +779,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
-<caption>Tableau4 : Individus ayant un cosinus carré supérieur ou égal à 0,6 sur l'axe 2</caption>
+<caption>Tableau 4 : Individus ayant un cosinus carré supérieur ou égal à 0,6 sur l'axe 2</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
@@ -835,7 +838,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="TP03_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="1056"></p>
-<figcaption class="figure-caption">Cercle de corrélation des variables et leur contribution à la formation des axes</figcaption>
+<figcaption class="figure-caption">Figure 4 : Cercle de corrélation des variables et leur contribution à la formation des axes</figcaption>
 </figure>
 </div>
 </div>
@@ -860,26 +863,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  plt.eig,</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  plt.eig.sans.sing,</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)<span class="sc">+</span> <span class="fu">theme_light</span>()</span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>comp.eig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="TP03_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="1056"></p>
-<figcaption class="figure-caption">Comparaison des valeurs propres issues de l’ACP aevc et sans Singapore</figcaption>
+<figcaption class="figure-caption">Figure 5 : Comparaison des valeurs propres issues de l’ACP aevc et sans Singapore</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>&nbsp;&nbsp;On voit que rien ne se passe (pas de changement brusque) au niveau de la qualité des axes. Voyons de plus prêt ce qui se passe :</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plot.indiv.avec.sing <span class="ot">&lt;-</span> <span class="fu">fviz_pca_ind</span>(pca.model)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plot.indiv.avec.sing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plot.indiv.avec.sing <span class="ot">&lt;-</span> <span class="fu">fviz_pca_ind</span>(pca.model, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">theme_light</span>()</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plot.indiv.avec.sing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="TP03_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="1056"></p>
-<figcaption class="figure-caption">Comparaison des valeurs propres issues de l’ACP aevc et sans Singapore</figcaption>
+<figcaption class="figure-caption">Figure 6 : Comparaison des valeurs propres issues de l’ACP aevc et sans Singapore</figcaption>
 </figure>
 </div>
 </div>
@@ -893,7 +898,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
-<caption>Tableau5 : Contribution des individus à la formation des axes par contribution décroissante suivant l'axe 2</caption>
+<caption>Tableau 5 : Contribution des individus à la formation des axes par contribution décroissante suivant l'axe 2</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -1002,30 +1007,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-<p>Et pourtant il contribue fortement à la formation de l’axe 2.</p>
+<p>Et pourtant il contribue fortement à la formation de l’axe 2, il est même celui qui contribue les plus à la formation des axes. Le fait que <strong>Singapore</strong> contribue le plus à la formation des axes et que rien ne change lorsqu’il est retiré de l’analyse s’explique tout simplement par <strong>sa taille de population</strong>. En effet la taille de la population a été utilisée comme poids des individus qui sont ici les pays.</p>
 </section>
+</section>
+<section id="identifications-des-pays-en-fonction-de-leur-groupe-de-revenu" class="level2">
+<h2 class="anchored" data-anchor-id="identifications-des-pays-en-fonction-de-leur-groupe-de-revenu">Identifications des pays en fonction de leur groupe de revenu</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">##-- Définitions des groupes de revenus</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>income_groups_definitions <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"UM"</span> <span class="ot">=</span> <span class="st">"Upper-Middle"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"LM"</span> <span class="ot">=</span> <span class="st">"Lower-Middle"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HI"</span> <span class="ot">=</span> <span class="st">"High Income"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"LI"</span> <span class="ot">=</span> <span class="st">"Low Income"</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="do">##-- Ajouter une colonne avec les définitions correspondantes</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>data.pca<span class="sc">$</span>income_group_def <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(income_groups_definitions[data.pca<span class="sc">$</span>income_group])</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>graph_indiv <span class="ot">&lt;-</span> <span class="fu">fviz_pca_ind</span>(</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  pca.model,</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">select.ind =</span> <span class="fu">list</span>(</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">contrib =</span> <span class="dv">50</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">invisible =</span> <span class="fu">c</span>(<span class="st">"quanti.sup"</span>,<span class="st">"ind.sup"</span>),</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">habillage =</span> data.pca<span class="sc">$</span>income_group_def,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">addEllipses =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">theme_light</span>() </span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>graph_indiv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP03_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="1056"></p>
+<figcaption class="figure-caption">Figure 7 : Affichage des 40 individus qui cntribue le plus à la formation des axes en fonction de leur groupe de revenu</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On voit que les groupes ne sont pas bien séparés, raison pour laquelle les ellipses ont des partie qui coïncident. Cela pourrait signifier que les les groupes de revenus sont trop similaires pour etre clairement séparés sur les axes sélectionnés (dans le plan des composantes principales). Cela pourrait aussi fait cas d’hétérogénéité, c’est-à-dire que les groupes ne sont pas homogènes (grande variabilité intra-groupe).</p>
 <section id="deux-acp-différentes" class="level3">
 <h3 class="anchored" data-anchor-id="deux-acp-différentes">Deux ACP différentes</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>variables.empreinte <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"total_prod"</span>, <span class="st">"total_cons"</span>, <span class="st">"biocapacity"</span>, <span class="st">"number_of_earths_required"</span>, <span class="st">"overshoot_day"</span>, <span class="st">"pop"</span>)]</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.empreinte) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>variables.developpement <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"life_expectancy"</span>, <span class="st">"hdi"</span>, <span class="st">"per_capita_gdp"</span>,<span class="st">"pop"</span>)]</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.developpement) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>variables.empreinte <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"total_prod"</span>, <span class="st">"total_cons"</span>, <span class="st">"biocapacity"</span>, <span class="st">"number_of_earths_required"</span>, <span class="st">"overshoot_day"</span>, <span class="st">"pop"</span>)]</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.empreinte) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>variables.developpement <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"life_expectancy"</span>, <span class="st">"hdi"</span>, <span class="st">"per_capita_gdp"</span>,<span class="st">"pop"</span>)]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.developpement) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="acp-sur-les-variables-dempruntes-écologiques" class="level4">
 <h4 class="anchored" data-anchor-id="acp-sur-les-variables-dempruntes-écologiques">ACP sur les variables d’empruntes écologiques</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Il s’agit ici de faire l’ACP que sur les variables d’empruntes écologiques et de mettre les autres variables (de dévéloppement) en quantitatives supplémentaires.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">1</span>] <span class="do">## sélectionner toute les variables sauf la variable pays</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data.pca) <span class="ot">&lt;-</span> df[,<span class="dv">1</span>] <span class="do">## renommer les lignes avec les noms des pays (individus)</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>poids <span class="ot">&lt;-</span> df<span class="sc">$</span>pop</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>acp_empreinte <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">1</span>] <span class="do">## sélectionner toute les variables sauf la variable pays</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data.pca) <span class="ot">&lt;-</span> df[,<span class="dv">1</span>] <span class="do">## renommer les lignes avec les noms des pays (individus)</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>poids <span class="ot">&lt;-</span> df<span class="sc">$</span>pop</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>acp_empreinte <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4,115324</code></pre>
 </div>
@@ -1035,13 +1081,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="acp-sur-les-variables-dempruntes-écologiques-1" class="level4">
 <h4 class="anchored" data-anchor-id="acp-sur-les-variables-dempruntes-écologiques-1">ACP sur les variables d’empruntes écologiques</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>acp.developpement <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>acp.developpement <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2,592046</code></pre>
 </div>
@@ -1052,15 +1099,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="acp-avec-pondérations-des-variables" class="level3">
 <h3 class="anchored" data-anchor-id="acp-avec-pondérations-des-variables">ACP avec pondérations des variables</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>poids.var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>], <span class="fu">length</span>(variables.empreinte)), <span class="fu">rep</span>(acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>], <span class="fu">length</span>(variables.developpement)))</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> data.pca <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">rownames</span>(data.pca) <span class="sc">!=</span> <span class="st">"Singapore"</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>acp.ponderee <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">col.w =</span> poids.var, <span class="at">graph =</span> <span class="cn">FALSE</span>, <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>, <span class="at">quanti.sup =</span> <span class="st">"pop"</span>,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">explor</span>(acp.ponderee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
-</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>poids.var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>], <span class="fu">length</span>(variables.empreinte)), <span class="fu">rep</span>(acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>], <span class="fu">length</span>(variables.developpement)))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> data.pca <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">rownames</span>(data.pca) <span class="sc">!=</span> <span class="st">"Singapore"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>acp.ponderee <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">col.w =</span> poids.var, <span class="at">graph =</span> <span class="cn">FALSE</span>, <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>, <span class="at">quanti.sup =</span> <span class="st">"pop"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># explor(acp.ponderee)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>

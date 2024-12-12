@@ -11,14 +11,14 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE
 capTabNo = 1; capFigNo = 1;
 capTab = function(x){
  
-    x = paste0("Tableau",capTabNo," : ",x)
+    x = paste0("Tableau ",capTabNo," : ",x)
     capTabNo <<- capTabNo + 1
  x
 }
 
 capFig = function(x){
  
-    x = paste0("","","",x)
+    x = paste0("Figure ",capFigNo," : ",x)
     capFigNo <<- capFigNo + 1
     x
 }
@@ -155,7 +155,7 @@ corrplot(M, method="color", col=col(200),
          , #- couleur, rotation et police de texte des libellés 
          ##-- ne pas afficher les coefficients de corrélations sur la diagonale (ils valent tous 1)
          diag=FALSE 
-         )
+         ) 
 
 ```
 |     On voit qu'il y' a quand même des variables qui sont <<fortement corrélées>> (pour l'affirmer avec plus d'assurance il serait judicieux de faire un test billatéral de corrélation de **Pearson** avec la commande cor.test(method = "pearson", alternative = "two.sided")).
@@ -304,14 +304,16 @@ comp.eig <-  cowplot::plot_grid(
   plt.eig,
   plt.eig.sans.sing,
   ncol = 2
-)
+)+ theme_light()
 comp.eig
 ```
 
 |   On voit que rien ne se passe (pas de changement brusque) au niveau de la qualité des axes. Voyons de plus prêt ce qui se passe :
 
 ```{r, fig.align='center', fig.cap=capFig("Comparaison des valeurs propres issues de l'ACP aevc et sans Singapore"), fig.width=11, fig.height=6}
-plot.indiv.avec.sing <- fviz_pca_ind(pca.model)
+plot.indiv.avec.sing <- fviz_pca_ind(pca.model, 
+                                     repel = TRUE) + 
+                        theme_light()
 plot.indiv.avec.sing
 ```
 
@@ -323,9 +325,41 @@ data <-  data %>% arrange(desc(Dim.2)) %>% head(10)
 kableExtra::kbl(data, caption = capTab("Contribution des individus à la formation des axes par contribution décroissante suivant l'axe 2")) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))  %>% add_footnote(label = "Source des données :  https://marieetienne.github.io/datasets/overshootday_overview.csv")
 ```
-Et pourtant il contribue fortement à la formation de l'axe 2.
+Et pourtant il contribue fortement à la formation de l'axe 2, il est même celui qui contribue les plus à la formation des axes. Le fait que **Singapore** contribue le plus à la formation des axes et que rien ne change lorsqu'il est retiré de l'analyse s'explique tout simplement par **sa taille de population**. En effet la taille de la population a été utilisée comme poids des individus qui sont ici les pays.
+
+## Identifications des pays en fonction de leur groupe de revenu
+
+```{r, fig.align='center', fig.cap=capFig("Affichage des 40 individus qui cntribue le plus à la formation des axes en fonction de leur groupe de revenu"), fig.width=11, fig.height=6}
+
+##-- Définitions des groupes de revenus
+income_groups_definitions <- c(
+  "UM" = "Upper-Middle",
+  "LM" = "Lower-Middle",
+  "HI" = "High Income",
+  "LI" = "Low Income"
+)
 
 
+##-- Ajouter une colonne avec les définitions correspondantes
+data.pca$income_group_def <- as.factor(income_groups_definitions[data.pca$income_group])
+
+
+graph_indiv <- fviz_pca_ind(
+  pca.model,
+  select.ind = list(
+    contrib = 50
+  ),
+  invisible = c("quanti.sup","ind.sup"),
+  habillage = data.pca$income_group_def,
+  addEllipses = TRUE,
+  repel = TRUE,
+) + theme_light() 
+
+
+graph_indiv
+```
+
+|       On voit que les groupes ne sont pas bien séparés, raison pour laquelle les ellipses ont des partie qui coïncident. Cela pourrait signifier que les les groupes de revenus sont  trop similaires pour etre clairement séparés sur les axes sélectionnés (dans le plan des composantes principales). Cela pourrait aussi fait cas d'hétérogénéité, c'est-à-dire que les groupes ne sont pas homogènes (grande variabilité intra-groupe).
 
 ### Deux ACP différentes
 
@@ -338,6 +372,8 @@ rownames(variables.developpement) <- df$country
 
 
 #### ACP sur les variables d'empruntes écologiques
+
+|       Il s'agit ici de faire l'ACP que sur les variables d'empruntes écologiques et de mettre les autres variables (de dévéloppement) en quantitatives supplémentaires.
 
 ```{r}
 data.pca <- df[,-1] ## sélectionner toute les variables sauf la variable pays
@@ -352,10 +388,12 @@ acp_empreinte <- PCA(data.pca, scale.unit = TRUE,
 ##-- valeurs propres
 acp_empreinte$eig[1,1]
 ```
+
 La première valeur propre est : ***4,10***
 
 
 #### ACP sur les variables d'empruntes écologiques
+
 
 ```{r}
 acp.developpement <- PCA(data.pca, scale.unit = TRUE,
@@ -363,9 +401,11 @@ acp.developpement <- PCA(data.pca, scale.unit = TRUE,
                  graph = FALSE,
                  row.w = data.pca$pop,
                  quanti.sup = 6:12)
+
 ##-- valeurs propres
 acp.developpement$eig[1,1]
 ```
+
 La première valeur propre est : ***2,59***
 
 ### ACP avec pondérations des variables
@@ -376,7 +416,7 @@ data.pca <- data.pca %>% filter(rownames(data.pca) != "Singapore")
 acp.ponderee <- PCA(data.pca, col.w = poids.var, graph = FALSE, row.w = data.pca$pop, scale.unit = TRUE, quanti.sup = "pop",
                  quali.sup = c("region", "income_group"),)
 
-explor(acp.ponderee)
+# explor(acp.ponderee)
 ```
 
 ## REALISATION DE L'AFM
