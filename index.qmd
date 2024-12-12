@@ -2,6 +2,19 @@
 title: "Djamaldbz - Expertise en Statistiques"
 ---
 
+
+<section class="body">
+
+    <div class="container-fluid p-5 bg-primary text-white text-center" id="contenu">
+        <h1 class="display-2" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Bienvenu sur notre page web Statistiques et Informatique</h1>
+        <h2 class="display-6" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">APPRENEZ DE MANIERE SAINE ET ORGANISEE</h2>
+        <p class="h4" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" id="p_">
+            Avec Statistic&Data, trouvez les anciens sujets des tests d'entrées en LSI, les travaux dirigés, les devoirs ainsi que les corrections. <br>
+            Vous ouvez aussi bénéficier des formations dans le domaine des statistiques et de l'informatique en vidéo et faire des quizs
+        </p>
+    </div>
+
+
 Bienvenue sur mon site personnel.
 
 Je suis **Djamal Y. TOE**, statisticien passionné par les analyses avancées, la visualisation de données, et la résolution de problèmes complexes à travers des approches quantitatives. Ce site présente mes projets, mes recherches, et mes contributions dans le domaine des statistiques et de la science des données.
