@@ -1,7 +1,7 @@
 ---
 title: "Djamaldbz - DJAMAL TOE"
 about:
-  template: jolla
+  template: solana
   image: images/logo.png
   links:
     - icon: twitter
