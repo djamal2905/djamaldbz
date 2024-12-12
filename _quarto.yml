@@ -18,12 +18,16 @@ website:
         menu: 
           - href: "ANALYSES_FACTORIELLES/TP03.qmd"
             text: Travaux pratiques N02 sur les méthodes d'analyses factorielles
-      - about.qmd
+      - text: A propos de moi
+        href: about.qmd
+        
           
       
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true

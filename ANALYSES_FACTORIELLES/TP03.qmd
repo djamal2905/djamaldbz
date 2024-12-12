@@ -311,8 +311,7 @@ comp.eig
 |   On voit que rien ne se passe (pas de changement brusque) au niveau de la qualité des axes. Voyons de plus prêt ce qui se passe :
 
 ```{r, fig.align='center', fig.cap=capFig("Comparaison des valeurs propres issues de l'ACP aevc et sans Singapore"), fig.width=11, fig.height=6}
-plot.indiv.avec.sing <- fviz_pca_ind(pca.model, 
-                                     repel = TRUE) + 
+plot.indiv.avec.sing <- fviz_pca_ind(pca.model) + 
                         theme_light()
 plot.indiv.avec.sing
 ```
@@ -329,7 +328,7 @@ Et pourtant il contribue fortement à la formation de l'axe 2, il est même celu
 
 ## Identifications des pays en fonction de leur groupe de revenu
 
-```{r, fig.align='center', fig.cap=capFig("Affichage des 40 individus qui cntribue le plus à la formation des axes en fonction de leur groupe de revenu"), fig.width=11, fig.height=6}
+```{r, fig.align='center', fig.cap=capFig("Affichage des 40 individus qui contribuent le plus à la formation des axes en fonction de leur groupe de revenu"), fig.width=11, fig.height=6}
 
 ##-- Définitions des groupes de revenus
 income_groups_definitions <- c(
@@ -411,10 +410,6 @@ La première valeur propre est : ***2,59***
 ### ACP avec pondérations des variables
 
 ```{r}
-poids.var <- c(rep(acp_empreinte$eig[1,1], length(variables.empreinte)), rep(acp.developpement$eig[1,1], length(variables.developpement)))
-data.pca <- data.pca %>% filter(rownames(data.pca) != "Singapore")
-acp.ponderee <- PCA(data.pca, col.w = poids.var, graph = FALSE, row.w = data.pca$pop, scale.unit = TRUE, quanti.sup = "pop",
-                 quali.sup = c("region", "income_group"),)
 
 # explor(acp.ponderee)
 ```
