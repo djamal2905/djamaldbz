@@ -6,6 +6,30 @@ title: "Djamaldbz - DJAMAL TOE"
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE)
 ```
 
+
+```{r, echo = FALSE}
+capTabNo = 1; capFigNo = 1;
+capTab = function(x){
+ 
+    x = paste0("Tableau ",capTabNo," : ",x)
+    capTabNo <<- capTabNo + 1
+ x
+}
+
+capFig = function(x){
+ 
+    x = paste0("Figure ",capFigNo," : ",x)
+    capFigNo <<- capFigNo + 1
+    x
+}
+
+repeated_capFig = function(x){
+  x = paste0(paste0(paste0("Figure ", capFigNo), ""), x)
+  x
+}
+options(OutDec= ",")
+```
+
 ```{r}
 packages <- c("ggplot2","haven", "gtsummary", "corrr", "MASS",
               "dplyr","haven", "rstatix", "tidyverse", "ggpubr",
@@ -13,7 +37,8 @@ packages <- c("ggplot2","haven", "gtsummary", "corrr", "MASS",
               "readxl", "stringr", "colorspace", "sf", "viridis",
               "tools","ggspatial","readxl","openxlsx","grid",
               "outliers","car","ftExtra","tibble",
-              "gtsummary", "wesanderson", "viridis","RColorBrewer") 
+              "gtsummary", "wesanderson", "viridis",
+              "RColorBrewer", "knitr", "kableExtra") 
             
 for (pkg in packages) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -88,7 +113,7 @@ Supposons que nous menions une étude au Burkina-Faso. Par exemple, nous mésure
 
 
 ```{r}
-###---- Chargement des shapefiles src = GADM ----###
+###---- Chargement des shapefiles src = GADM
 root <- getwd() ##-- la racine du repertoire
 
 ##- La carte du pays sans les polygones des regions, communes et/ou departements
@@ -169,6 +194,21 @@ study_zone_map <- ggplot() +
 study_zone_map
 ```
 
+> Expliquons le code à présent
+
+* Charger les fichier shapefiles :
+  - ***glue*** : pour preparer la structure du format (optionnel)
+  - ***readsf*** : pour lire les fichiers shapefiles
+
+* Definir la zone d'étude : les fichier shapefile devient comme un dataframe, donc est manipulable au même titre que les fichiers excel, csv etc...
+
+```{r, echo=FALSE}
+kbl(head(region_shp,10), caption = capTab("Individus ayant un cosinus carré supérieur ou égal à 0,85 sur l'axe 1")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>% add_footnote(label = "Source des données :  GADM")
+```
+
+
+> A suivre, restez aux aguets
 
 > Cartes choroplèthes
 

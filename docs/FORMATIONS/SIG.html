@@ -95,6 +95,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -186,14 +189,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">"readxl"</span>, <span class="st">"stringr"</span>, <span class="st">"colorspace"</span>, <span class="st">"sf"</span>, <span class="st">"viridis"</span>,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">"tools"</span>,<span class="st">"ggspatial"</span>,<span class="st">"readxl"</span>,<span class="st">"openxlsx"</span>,<span class="st">"grid"</span>,</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">"outliers"</span>,<span class="st">"car"</span>,<span class="st">"ftExtra"</span>,<span class="st">"tibble"</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              <span class="st">"gtsummary"</span>, <span class="st">"wesanderson"</span>, <span class="st">"viridis"</span>,<span class="st">"RColorBrewer"</span>) </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> packages) {</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> T)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              <span class="st">"gtsummary"</span>, <span class="st">"wesanderson"</span>, <span class="st">"viridis"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>              <span class="st">"RColorBrewer"</span>, <span class="st">"knitr"</span>, <span class="st">"kableExtra"</span>) </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> packages) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> T)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="comment-faire-des-cartes-choroplèthes-et-des-cartes-de-proportions-avec-r" class="level2">
 <h2 class="anchored" data-anchor-id="comment-faire-des-cartes-choroplèthes-et-des-cartes-de-proportions-avec-r">Comment faire des cartes Choroplèthes et des cartes de proportions avec R ?</h2>
@@ -254,7 +258,7 @@ Coordonnées géographiques
 <p>Place au code</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">###---- Chargement des shapefiles src = GADM ----</span><span class="al">###</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">###---- Chargement des shapefiles src = GADM</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>root <span class="ot">&lt;-</span> <span class="fu">getwd</span>() <span class="do">##-- la racine du repertoire</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##- La carte du pays sans les polygones des regions, communes et/ou departements</span></span>
@@ -333,12 +337,211 @@ Coordonnées géographiques
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="SIG_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="SIG_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="1152"></p>
 <figcaption class="figure-caption">Cartographie de la zone d’étude</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<blockquote class="blockquote">
+<p>Expliquons le code à présent</p>
+</blockquote>
+<ul>
+<li>Charger les fichier shapefiles :
+<ul>
+<li><strong><em>glue</em></strong> : pour preparer la structure du format (optionnel)</li>
+<li><strong><em>readsf</em></strong> : pour lire les fichiers shapefiles</li>
+</ul></li>
+<li>Definir la zone d’étude : les fichier shapefile devient comme un dataframe, donc est manipulable au même titre que les fichiers excel, csv etc…</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Tableau 1 : Individus ayant un cosinus carré supérieur ou égal à 0,85 sur l'axe 1</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">GID_1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GID_0</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">COUNTRY</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">NAME_1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">VARNAME_1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">NL_NAME_1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">TYPE_1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">ENGTYPE_1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">CC_1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">HASC_1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">ISO_1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BFA.1_1</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">Boucle du Mouhoun</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Région</td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">BF.BO</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">POLYGON ((-2,73901 11,71249...</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BFA.2_1</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">Cascades</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Région</td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">BF.CD</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">POLYGON ((-4,591742 9,70225...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BFA.7_1</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">Centre</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Région</td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">BF.CT</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">POLYGON ((-1,2786 12,13921,...</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BFA.3_1</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">Centre-Est</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Région</td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">BF.CE</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">POLYGON ((0,4371 11,67655, ...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BFA.4_1</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">Centre-Nord</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Région</td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">BF.CN</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">POLYGON ((-0,7773 12,66989,...</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BFA.5_1</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">Centre-Ouest</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Région</td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">BF.CO</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">POLYGON ((-2,360162 11,0081...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BFA.6_1</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">Centre-Sud</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Région</td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">BF.CS</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">POLYGON ((-0,8624911 10,985...</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BFA.8_1</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">Est</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Région</td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">BF.ES</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">POLYGON ((1,384436 11,44223...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BFA.9_1</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">Haut-Bassins</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Région</td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">BF.HB</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">POLYGON ((-4,08994 10,79044...</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BFA.10_1</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">Nord</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Région</td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">BF.NO</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">POLYGON ((-1,96586 12,67774...</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0; border: 0;"><sup>a</sup> Source des données : GADM</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+
+
+</div>
+</div>
+<blockquote class="blockquote">
+<p>A suivre, restez aux aguets</p>
+</blockquote>
 <blockquote class="blockquote">
 <p>Cartes choroplèthes</p>
 </blockquote>
