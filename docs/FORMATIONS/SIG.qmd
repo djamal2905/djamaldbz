@@ -82,6 +82,94 @@ Plusieurs pakages permettent de visualiser les données avec les cartes, ici nou
 
 > Zone d'étude
 
+Supposons que nous menions une étude au Burkina-Faso. Par exemple, nous mésurer des indicateurs tels que le taux de mortalité, la couverture sanitaire etc ... Le Burkina Faso est un pays qui compte 13 regions, mais notre etude s'étend seulement sur 8 regions. Il convient de montrer toutes les regions, puis de mettre en exègue celles qui nous concernent. 
+
+> Place au code
+
+
+```{r}
+###---- Chargement des shapefiles src = GADM ----###
+root <- getwd() ##-- la racine du repertoire
+
+##- La carte du pays sans les polygones des regions, communes et/ou departements
+path0 <- paste0(root,"/DATA_SIG/BFA2/gadm41_BFA_0.shp")
+
+##- La carte du pays avec le polygone des regions, sans ceux des communes et/ou departements
+path1 <- paste0(root,"/DATA_SIG/BFA2/gadm41_BFA_1.shp")
+
+##- La carte du pays avec le polygone des regions, sans ceux des communes et/ou departements
+path2 <- paste0("/DATA_SIG/BFA2/gadm41_BFA_2.shp")
+
+##- La carte du pays avec le polygone des regions, sans ceux des communes et/ou departements
+path3 <- paste0(root,"/DATA_SIG/BFA2/gadm41_BFA_3.shp")
+
+
+##-- selection des regions concernées
+
+study.area <-  c("Boucle du Mouhoun", "Centre-Est", "Centre-Nord",
+             "Centre-Ouest", "Nord", "Sud-Ouest",
+             "Hauts-Bassins", "Cascades")
+
+##-- lecture des shapefiles
+pays_shp <- read_sf(glue(path0), quiet = T)
+region_shp <- read_sf(glue(path1), quiet = T)
+#commune_shp <- read_sf(glue(path2), quiet = T)
+#province_shp <- read_sf(glue(path3), quiet = T)
+
+##-- création d'une sous base avec les polygones des regions sélectionnés
+
+data_region <- region_shp %>% filter(NAME_1 %in% study.area)
+
+
+##-- Study area colors
+study_zone_colors <- c("#1f77b4", "#ff7f0e", "#2ca02c",
+                       "#3FE1B8", "#9467bd", "#8c564b",
+                       "#00008B", "#4B0082")
+
+study_zone_map <- ggplot() +
+  geom_sf(data = pays_shp, aes(linewidth = "Burkina Faso"),fill = "white", color = "black") +
+  geom_sf(data = region_shp, aes(fill = ifelse(
+    NAME_1 %in% study.area,
+    "Regions d'études",
+    "Autres regions"
+  ) )) +
+  geom_sf_text(data = region_shp, aes(label = ifelse(
+    NAME_1 %in% study.area,
+    study.area,
+    ""
+  )), size = 4)+
+  ggspatial::annotation_scale(
+    location = "br",
+    bar_cols = c("black", "white")
+  )  +
+  theme_light()+
+  ggspatial::annotation_north_arrow(
+    location = "tr", which_north = "true",
+    pad_x = unit(0.05, "in"), pad_y = unit(0.05, "in"),
+    style = ggspatial::north_arrow_nautical(
+      fill = c("black", "white"),
+      line_col = "black"
+    )
+  )+
+  xlab("")+
+  ylab("")+
+  scale_linewidth_manual(values = c(1.2), name = "")+
+  scale_fill_manual(values = c("white",study_zone_colors), name="Zone d'étude")+
+  theme_light() + 
+  guides(
+    linewidth = guide_legend(order = 1),
+    fill = guide_legend(order = 2),
+    color = guide_legend(order = 3)
+  )
+```
+
+
+```{r,fig.align='center', fig.width = 12, fig.height = 7}
+#| fig-cap: Cartographie de la zone d'étude
+study_zone_map
+```
+
+
 > Cartes choroplèthes
 
 > Cartes de proportions
