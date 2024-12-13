@@ -6,23 +6,38 @@ title: "Djamaldbz - DJAMAL TOE"
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE)
 ```
 
+```{r}
+packages <- c("ggplot2","haven", "gtsummary", "corrr", "MASS",
+              "dplyr","haven", "rstatix", "tidyverse", "ggpubr",
+              "glue", "dplyr","ggspatial", "ggrepel","marmap", 
+              "readxl", "stringr", "colorspace", "sf", "viridis",
+              "tools","ggspatial","readxl","openxlsx","grid",
+              "outliers","car","ftExtra","tibble",
+              "gtsummary", "wesanderson", "viridis","RColorBrewer") 
+            
+for (pkg in packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg, dependencies = T)
+  }
+  library(pkg, character.only = TRUE)
+}
+```
+
+
 ```{r, echo=FALSE}
 # Créer un tableau avec les régions du Burkina Faso
 regions <- c("Boucle du Mouhoun", "Cascades", "Centre", "Centre-Est", "Centre-Nord", 
              "Centre-Ouest", "Centre-Sud", "Est", "Hauts-Bassins", "Nord", 
              "Plateau-Central", "Sahel", "Sud-Ouest")
 
-# Générer des données fictives pour chaque région
-# data <- tibble(
-#  Region = regions,
-#  Population = sample(300000:2500000, 13, replace = TRUE),  # Population aléatoire entre 300,000 et 2,500,000
- # Taux_Mortalite = round(runif(13, 5, 15), 2),  # Taux de mortalité entre 5 et 15 pour 1000 habitants
- # Couverture_Sanitaire = round(runif(13, 60, 95), 2),  # Couverture sanitaire entre 60% et 95%
- # Acces_Eau_Potable = round(runif(13, 50, 90), 2)  # Accès à l'eau potable entre 50% et 90%
-#)
-
-# Afficher les données générées
-#print(data)
+##- Générer des données fictives pour chaque région
+data <- data.frame(
+  Region = regions,
+  Population = sample(300000:2500000, 13, replace = TRUE), ##-- Population aléatoire entre 300,000 et 2,500,000
+ Taux_Mortalite = round(runif(13, 5, 15), 2),  ##- Taux de mortalité entre 5 et 15 pour 1000 habitants
+ Couverture_Sanitaire = round(runif(13, 60, 95), 2),  ##- Couverture sanitaire entre 60% et 95%
+ Acces_Eau_Potable = round(runif(13, 50, 90), 2)  ##-- Accès à l'eau potable entre 50% et 90%
+)
 ```
 
 
@@ -41,21 +56,21 @@ Les cartes de proportions sont similaires mais mettent davantage l'accent sur le
 Avant de créer ces cartes, il est important de comprendre quelques notions de base, comme les polygones et les shapefiles :
 
 
-::: {#polygon .callout-important}
+::: {#polygon .callout-tip}
 # Polygones
 
 Une zone géographique est souvent représentée par un polygone, une forme géométrique fermée qui peut avoir plusieurs côtés. Par exemple, une commune ou un département sur une carte peut être représentée comme un polygone.
 
 :::
 
-::: {#Shapefiles .callout-important}
+::: {#Shapefiles .callout-tip}
 # Shapefiles
 
 Ce sont un format de fichier standard pour stocker des informations géospatiales, y compris les coordonnées de points, de lignes et de polygones. Ils peuvent contenir les géométries des entités géographiques ainsi que leurs attributs (valeurs associées à chaque région, comme le revenu moyen ou le taux de chômage).
 
 :::
 
-::: {#Shapefiles .callout-important}
+::: {#Shapefiles .callout-tip}
 # Coordonnées géographiques
 
 Les coordonnées (latitude et longitude) permettent de positionner ces polygones sur une carte. En R, on utilise des systèmes de coordonnées géographiques et projetées pour gérer et visualiser ces données.

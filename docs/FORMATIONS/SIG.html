@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -145,6 +179,22 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ggplot2"</span>,<span class="st">"haven"</span>, <span class="st">"gtsummary"</span>, <span class="st">"corrr"</span>, <span class="st">"MASS"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"dplyr"</span>,<span class="st">"haven"</span>, <span class="st">"rstatix"</span>, <span class="st">"tidyverse"</span>, <span class="st">"ggpubr"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"glue"</span>, <span class="st">"dplyr"</span>,<span class="st">"ggspatial"</span>, <span class="st">"ggrepel"</span>,<span class="st">"marmap"</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">"readxl"</span>, <span class="st">"stringr"</span>, <span class="st">"colorspace"</span>, <span class="st">"sf"</span>, <span class="st">"viridis"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">"tools"</span>,<span class="st">"ggspatial"</span>,<span class="st">"readxl"</span>,<span class="st">"openxlsx"</span>,<span class="st">"grid"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">"outliers"</span>,<span class="st">"car"</span>,<span class="st">"ftExtra"</span>,<span class="st">"tibble"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              <span class="st">"gtsummary"</span>, <span class="st">"wesanderson"</span>, <span class="st">"viridis"</span>,<span class="st">"RColorBrewer"</span>) </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> packages) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> T)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <section id="comment-faire-des-cartes-clhoropètres-et-des-cartes-de-proportions-avec-r" class="level2">
 <h2 class="anchored" data-anchor-id="comment-faire-des-cartes-clhoropètres-et-des-cartes-de-proportions-avec-r">Comment faire des cartes clhoropètres et des cartes de proportions avec R ?</h2>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Les cartes choroplèthes et les cartes de proportions sont des outils puissants pour visualiser des données géospatiales dans R. Ces cartes permettent de représenter des valeurs quantitatives (par exemple, des taux de population, des moyennes) sur des zones géographiques, souvent des régions administratives comme des départements, des communes, ou des zones géographiques personnalisées.</p>
@@ -156,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p>Notions de Base : Polygones, Shapefiles et Coordonnées Avant de créer ces cartes, il est important de comprendre quelques notions de base, comme les polygones et les shapefiles :</p>
 </blockquote>
-<div id="polygon" class="callout callout-style-default callout-important callout-titled">
+<div id="polygon" class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -169,7 +219,7 @@ Polygones
 <p>Une zone géographique est souvent représentée par un polygone, une forme géométrique fermée qui peut avoir plusieurs côtés. Par exemple, une commune ou un département sur une carte peut être représentée comme un polygone.</p>
 </div>
 </div>
-<div id="Shapefiles" class="callout callout-style-default callout-important callout-titled">
+<div id="Shapefiles" class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -182,7 +232,7 @@ Shapefiles
 <p>Ce sont un format de fichier standard pour stocker des informations géospatiales, y compris les coordonnées de points, de lignes et de polygones. Ils peuvent contenir les géométries des entités géographiques ainsi que leurs attributs (valeurs associées à chaque région, comme le revenu moyen ou le taux de chômage).</p>
 </div>
 </div>
-<div id="Shapefiles" class="callout callout-style-default callout-important callout-titled">
+<div id="Shapefiles" class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
