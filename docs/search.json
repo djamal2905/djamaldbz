@@ -91,116 +91,18 @@
     "text": "REALISATION DE L’AFM\n\nPourquoi réaliser une AFM au lieu d’une ACP tout court?\n\n      L’Analyse Factorielle Multiple (AFM) permet d’aller au-delà des limites d’une Analyse en Composantes Principales (ACP) classique, particulièrement lorsque les variables d’un jeu de données ne sont pas à la même échelle ou lorsqu’elles sont organisées en groupes. La normalisation dans l’ACP sert à ramener toutes les variables à une même échelle, évitant ainsi que certaines variables dominent artificiellement l’analyse en raison de leur variance plus élevée. Par exemple d’autres ont une contribution élevée que d’autres alors que c’est juste l’unité de mésure qui pèse plus.\n  Cependant, cette normalisation n’est pas suffisante lorsque les variables sont regroupées par thématique ou nature. Par exemple, supposons un jeu de données contenant \\(n\\) variables, parmi lesquelles \\(n - k\\) \\(\\text{avec k telque  } \\forall \\text{ j} \\neq \\text{k, }\\)\n\\(\\text{n - k} &gt; \\text{n - j où n - j est le nombre de variables dans tous les autres groupes ou dans un autre groupe j}\\) appartiennent à un groupe \\(i\\) .Dans ce cas, le groupe \\(i\\) peut influencer de manière disproportionnée les résultats de l’ACP, simplement en raison de la taille du groupe. Cela signifie que, même après normalisation, le poids collectif du groupe \\(i\\) dans la construction des composantes principales pourrait être trop important par rapport aux autres groupes.\n  L’AFM résout ce problème en intégrant un poids équilibré entre les groupes. Elle considère chaque groupe comme une entité, indépendamment du nombre de variables qu’il contient. Cela permet une contribution équitable des groupes aux axes factoriels. Par conséquent, l’AFM est particulièrement adaptée dans des contextes où les variables appartiennent à des thématiques distinctes (par exemple, des groupes liés à des disciplines différentes : santé, économie, environnement).\nIl est crucial de préserver l’équilibre des contributions entre ces thématiques pour éviter les biais d’interprétation. Ainsi, l’AFM fournit une perspective multidimensionnelle plus équilibrée et pertinente pour analyser des jeux de données complexes, tout en respectant la structure inhérente des variables\n\nRéalisons l’AFM à présent\n\n\n#-- création de la table pour l'AFM. Les vriables doivent être rangées \n#-- suivant le groupe (variables du groupe 1 ensuite celles du groupe 2 ...)\ndata.afm &lt;- data.pca %&gt;%\n  select(\n    life_expectancy, hdi, per_capita_gdp,  ##-- Variables de developpement\n    total_prod, total_cons, biocapacity, ##------ Variables\n    number_of_earths_required, overshoot_day ##-- d'empreinte écologique\n)\n\nmodel.afm &lt;- MFA(\n    data.afm, \n    group = c(5, 3), ##-- Spécifie le nombre de variables dans chaque groupe\n    type = rep(\"s\", 2), ##-- Indique que les variables doivent être normalisées pour chaque groupe\n    name.group = c(\"Developpement\", \"Empreinte ecologique\"), ##-- Nommer les groupes\n    graph = F  ##-- Générer un graphique\n)\nvariance.cum.val.prop.afm &lt;- model.afm$eig[, c(1,3)]\ncolnames(variance.cum.val.prop.afm) &lt;- c(\"Valeur propres\", \"Pourcentage de variance cumulée\")\n\n\nkableExtra::kbl(variance.cum.val.prop.afm, caption = capTab(\"Valeurs propres et variances cumulées de chaque axes issues d'une AFM avec R\")) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\")) %&gt;% add_footnote(label = \"Source des données :  https://marieetienne.github.io/datasets/overshootday_overview.csv\")\n\n\n\nTableau 7 : Valeurs propres et variances cumulées de chaque axes issues d'une AFM avec R\n\n\n\nValeur propres\nPourcentage de variance cumulée\n\n\n\n\ncomp 1\n1,9203865\n67,85068\n\n\ncomp 2\n0,5123847\n85,95414\n\n\ncomp 3\n0,2050340\n93,19836\n\n\ncomp 4\n0,0790131\n95,99003\n\n\ncomp 5\n0,0659024\n98,31848\n\n\ncomp 6\n0,0327210\n99,47457\n\n\ncomp 7\n0,0148713\n100,00000\n\n\ncomp 8\n0,0000000\n100,00000\n\n\n\na Source des données : https://marieetienne.github.io/datasets/overshootday_overview.csv\n\n\n\n\n\n\n\n\n\n\n\nOn voit qu’il n’y a pas très grande différence entre les pourcentage de variances cumulées des deux AFM (manuellement @variance.cum.val.prop.2acp et avec R) parcontre les valeurs propres ne sont pas les mêmes.\n\nOn peut visualiser les variables\n\n\nfviz_mfa_var(model.afm, axes = c(1,2), choice= \"quanti.var\", repel = T) + theme_light()\n\n\n\n\nFigure 8 : Visualisation des variables dans le plan (1,2) avec les résultats de l’AFM\n\n\n\n\n\nOn peut visualiser leur qualité de representation\n\n\ngraph.cos.var.afm &lt;- fviz_mfa_var(model.afm, axes = c(1,2), choice= \"quanti.var\", col.var=\"cos2\", gradient.cols=c(\"#F1C40F\",\"#2ECC71\",\"#8E44AD\"), repel = T, ggtheme = theme_light())\n\ngraph.cos.var.afm\n\n\n\n\nFigure 9 : Qualité de représentation des variables dans le plan (1,2) avec les résultats de l’AFM\n\n\n\n\n\nLeur contribution à la formation des axes\n\n\ngraph.contrib.var.afm &lt;- fviz_mfa_var(model.afm,col.var=\"contrib\", gradient.cols=c(\"#F1C40F\",\"#2ECC71\",\"#8E44AD\"), repel=TRUE, ggtheme = theme_light())\n\ngraph.contrib.var.afm\n\n\n\n\nFigure 10 : Cercle de corrélation des variables et leur contribution à la formation des axes"
   },
   {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#news-stories",
-    "href": "ENGLISH/English-Presentations-with-Milonnet.html#news-stories",
-    "title": "COMPUTERS",
-    "section": "News Stories",
-    "text": "News Stories\n\n\nNews paper : The Guardian\n\n\n\n\nTitle : IBM unveils new quantum computing chip designs to explore news frontiers of science"
+    "objectID": "FORMATIONS/SIG.html",
+    "href": "FORMATIONS/SIG.html",
+    "title": "Djamaldbz - DJAMAL TOE",
+    "section": "",
+    "text": "Les cartes choroplèthes et les cartes de proportions sont des outils puissants pour visualiser des données géospatiales dans R. Ces cartes permettent de représenter des valeurs quantitatives (par exemple, des taux de population, des moyennes) sur des zones géographiques, souvent des régions administratives comme des départements, des communes, ou des zones géographiques personnalisées.\n\nIntroduction aux Cartes Choroplèthes et Cartes de Proportions\n\nLes cartes choroplèthes colorient les régions géographiques en fonction de valeurs numériques ou de proportions, facilitant l’analyse spatiale et la compréhension des variations géographiques. Elles sont couramment utilisées pour des données socio-économiques, de santé publique, ou des analyses environnementales.\nLes cartes de proportions sont similaires mais mettent davantage l’accent sur les ratios ou proportions par rapport à une valeur totale, comme des pourcentages ou des fractions de populations.\n\n## Notions de Base : Polygones, Shapefiles et Coordonnées Avant de créer ces cartes, il est important de comprendre quelques notions de base, comme les polygones et les shapefiles :\n\n\n\n\n\n\n\nTip\n\n\n\nPolygones : Une zone géographique est souvent représentée par un polygone, une forme géométrique fermée qui peut avoir plusieurs côtés. Par exemple, une commune ou un département sur une carte peut être représentée comme un polygone.\n\n\n\n\n\n\n\n\nTip\n\n\n\nShapefiles : Ce sont un format de fichier standard pour stocker des informations géospatiales, y compris les coordonnées de points, de lignes et de polygones. Ils peuvent contenir les géométries des entités géographiques ainsi que leurs attributs (valeurs associées à chaque région, comme le revenu moyen ou le taux de chômage).\n\n\n\n\n\n\n\n\nTip\n\n\n\nCoordonnées géographiques : Les coordonnées (latitude et longitude) permettent de positionner ces polygones sur une carte. En R, on utilise des systèmes de coordonnées géographiques et projetées pour gérer et visualiser ces données.\n\n\nPlusieurs pakages permettent de visualiser les données avec les cartes, ici nous interessons aux packages glue et sf.\n\nZone d’étude\n\n\nCartes choroplèthes\n\n\nCartes de proportions\n\n\nCartes de proportions avancées\n\nRetour à la page d’accueuil"
   },
   {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#computers",
-    "href": "ENGLISH/English-Presentations-with-Milonnet.html#computers",
-    "title": "COMPUTERS",
-    "section": "Computers ?",
-    "text": "Computers ?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgrammable information processing system\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOld System ===&gt;&gt; New System"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#quantum-computing-chips",
-    "href": "ENGLISH/English-Presentations-with-Milonnet.html#quantum-computing-chips",
-    "title": "COMPUTERS",
-    "section": "Quantum computing chips ?",
-    "text": "Quantum computing chips ?\n\n\nUse qbits to perform computation instead of using bits"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#avantages",
-    "href": "ENGLISH/English-Presentations-with-Milonnet.html#avantages",
-    "title": "COMPUTERS",
-    "section": "Avantages",
-    "text": "Avantages\n\nSolve many domains problems"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#challenges-1",
-    "href": "ENGLISH/English-Presentations-with-Milonnet.html#challenges-1",
-    "title": "COMPUTERS",
-    "section": "Challenges",
-    "text": "Challenges\n\nExpensive, unstable, needs controlled environment"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#summary",
-    "href": "ENGLISH/English-Presentations-with-Milonnet.html#summary",
-    "title": "COMPUTERS",
-    "section": "Summary",
-    "text": "Summary\n\nQuantum computers are promising\nChallenges remain for full adoption\nhttps://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#keywords",
-    "href": "ENGLISH/English-Presentations-with-Milonnet.html#keywords",
-    "title": "COMPUTERS",
-    "section": "Keywords",
-    "text": "Keywords\n\nArtificial Intelligence\nComputational ability\nSupercomputers\nSilicon-based computers\nQuantum computing chip"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet.html#questions",
-    "href": "ENGLISH/English-Presentations-with-Milonnet.html#questions",
-    "title": "COMPUTERS",
-    "section": "Questions ?",
-    "text": "Questions ?\n\n!!! THANK YOU FOR YOUR ATTENTION\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnglish classes with Milonnet"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#news-stories",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#news-stories",
-    "title": "COMPUTERS",
-    "section": "News Stories",
-    "text": "News Stories\n\n\nNews paper : The Guardian\n\n\n\n\nTitle : IBM unveils new quantum computing chip designs to explore news frontiers of science"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#computers",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#computers",
-    "title": "COMPUTERS",
-    "section": "Computers ?",
-    "text": "Computers ?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgrammable information processing system\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOld System ===&gt;&gt; New System"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#quantum-computing-chips",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#quantum-computing-chips",
-    "title": "COMPUTERS",
-    "section": "Quantum computing chips ?",
-    "text": "Quantum computing chips ?\n\n\nUse qbits to perform computation instead of using bits"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#keywords",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#keywords",
-    "title": "COMPUTERS",
-    "section": "Keywords",
-    "text": "Keywords\n\nArtificial Intelligence\nComputational ability\nSupercomputers\nSilicon-based computers\nQuantum computing chip"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#avantages",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#avantages",
-    "title": "COMPUTERS",
-    "section": "Avantages",
-    "text": "Avantages\n\nSolve many domains problems"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#challenges-1",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#challenges-1",
-    "title": "COMPUTERS",
-    "section": "Challenges",
-    "text": "Challenges\n\nExpensive, unstable, needs controlled environment"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#summary",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#summary",
-    "title": "COMPUTERS",
-    "section": "Summary",
-    "text": "Summary\n\nQuantum computers are promising\nChallenges remain for full adoption\nhttps://www.theguardian.com/technology/2023/dec/04/ibm-quantum-computer-heron"
-  },
-  {
-    "objectID": "ENGLISH/English-Presentations-with-Milonnet2.html#questions",
-    "href": "ENGLISH/English-Presentations-with-Milonnet2.html#questions",
-    "title": "COMPUTERS",
-    "section": "Questions ?",
-    "text": "Questions ?\n\n!!! THANK YOU FOR YOUR ATTENTION\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnglish classes with Milonnet"
+    "objectID": "FORMATIONS/SIG.html#comment-faire-des-cartes-clhoropètres-et-des-cartes-de-proportions-avec-r",
+    "href": "FORMATIONS/SIG.html#comment-faire-des-cartes-clhoropètres-et-des-cartes-de-proportions-avec-r",
+    "title": "Djamaldbz - DJAMAL TOE",
+    "section": "",
+    "text": "Les cartes choroplèthes et les cartes de proportions sont des outils puissants pour visualiser des données géospatiales dans R. Ces cartes permettent de représenter des valeurs quantitatives (par exemple, des taux de population, des moyennes) sur des zones géographiques, souvent des régions administratives comme des départements, des communes, ou des zones géographiques personnalisées.\n\nIntroduction aux Cartes Choroplèthes et Cartes de Proportions\n\nLes cartes choroplèthes colorient les régions géographiques en fonction de valeurs numériques ou de proportions, facilitant l’analyse spatiale et la compréhension des variations géographiques. Elles sont couramment utilisées pour des données socio-économiques, de santé publique, ou des analyses environnementales.\nLes cartes de proportions sont similaires mais mettent davantage l’accent sur les ratios ou proportions par rapport à une valeur totale, comme des pourcentages ou des fractions de populations.\n\n## Notions de Base : Polygones, Shapefiles et Coordonnées Avant de créer ces cartes, il est important de comprendre quelques notions de base, comme les polygones et les shapefiles :\n\n\n\n\n\n\n\nTip\n\n\n\nPolygones : Une zone géographique est souvent représentée par un polygone, une forme géométrique fermée qui peut avoir plusieurs côtés. Par exemple, une commune ou un département sur une carte peut être représentée comme un polygone.\n\n\n\n\n\n\n\n\nTip\n\n\n\nShapefiles : Ce sont un format de fichier standard pour stocker des informations géospatiales, y compris les coordonnées de points, de lignes et de polygones. Ils peuvent contenir les géométries des entités géographiques ainsi que leurs attributs (valeurs associées à chaque région, comme le revenu moyen ou le taux de chômage).\n\n\n\n\n\n\n\n\nTip\n\n\n\nCoordonnées géographiques : Les coordonnées (latitude et longitude) permettent de positionner ces polygones sur une carte. En R, on utilise des systèmes de coordonnées géographiques et projetées pour gérer et visualiser ces données.\n\n\nPlusieurs pakages permettent de visualiser les données avec les cartes, ici nous interessons aux packages glue et sf.\n\nZone d’étude\n\n\nCartes choroplèthes\n\n\nCartes de proportions\n\n\nCartes de proportions avancées\n\nRetour à la page d’accueuil"
   },
   {
     "objectID": "index.html",
@@ -235,7 +137,7 @@
     "href": "index.html#dernières-publications",
     "title": "Djamaldbz - Expertise en Statistiques",
     "section": "Dernières publications",
-    "text": "Dernières publications\nVoici les dernières publications sur des sujets de statistiques et d’informatique que j’ai partagées :\n\nExploration des Techniques d’Analyse Factorielle\nGuide pratique pour les modèles mixtes\nComment faire des cartes de proportions et des cartes clhoropètres avec R ?\n\n\nVoir toutes les publications [Bientôt disponible]"
+    "text": "Dernières publications\nVoici les dernières publications sur des sujets de statistiques et d’informatique que j’ai partagées :\n\nExploration des Techniques d’Analyse Factorielle\nGuide pratique pour les modèles mixtes\nComment faire des cartes de proportions et des cartes choroplèthes avec R ?\n\n\nVoir toutes les publications [Bientôt disponible]"
   },
   {
     "objectID": "index.html#contactez-moi",

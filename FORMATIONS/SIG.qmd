@@ -1,0 +1,51 @@
+---
+title: "Djamaldbz - DJAMAL TOE"
+---
+
+
+## Comment faire des cartes clhoropètres et des cartes de proportions avec R ?
+
+|       Les cartes choroplèthes et les cartes de proportions sont des outils puissants pour visualiser des données géospatiales dans R. Ces cartes permettent de représenter des valeurs quantitatives (par exemple, des taux de population, des moyennes) sur des zones géographiques, souvent des régions administratives comme des départements, des communes, ou des zones géographiques personnalisées.
+
+> Introduction aux Cartes Choroplèthes et Cartes de Proportions
+
+Les cartes choroplèthes colorient les régions géographiques en fonction de valeurs numériques ou de proportions, facilitant l'analyse spatiale et la compréhension des variations géographiques. Elles sont couramment utilisées pour des données socio-économiques, de santé publique, ou des analyses environnementales.
+
+Les cartes de proportions sont similaires mais mettent davantage l'accent sur les ratios ou proportions par rapport à une valeur totale, comme des pourcentages ou des fractions de populations.
+
+>  ## Notions de Base : Polygones, Shapefiles et Coordonnées
+Avant de créer ces cartes, il est important de comprendre quelques notions de base, comme les polygones et les shapefiles :
+
+
+::: {#polygon .callout-tip}
+
+Polygones : Une zone géographique est souvent représentée par un polygone, une forme géométrique fermée qui peut avoir plusieurs côtés. Par exemple, une commune ou un département sur une carte peut être représentée comme un polygone.
+
+:::
+
+::: {#Shapefiles .callout-tip}
+
+Shapefiles : Ce sont un format de fichier standard pour stocker des informations géospatiales, y compris les coordonnées de points, de lignes et de polygones. Ils peuvent contenir les géométries des entités géographiques ainsi que leurs attributs (valeurs associées à chaque région, comme le revenu moyen ou le taux de chômage).
+
+:::
+
+::: {#Shapefiles .callout-tip}
+
+Coordonnées géographiques : Les coordonnées (latitude et longitude) permettent de positionner ces polygones sur une carte. En R, on utilise des systèmes de coordonnées géographiques et projetées pour gérer et visualiser ces données.
+
+:::
+
+Plusieurs pakages permettent de visualiser les données avec les cartes, ici nous interessons aux packages ***glue*** et **sf**.
+
+> Zone d'étude
+
+> Cartes choroplèthes
+
+> Cartes de proportions
+
+> Cartes de proportions avancées
+
+
+[Retour à la page d'accueuil](https://djamal2905.github.io/djamaldbz/)
+
+
