@@ -26,9 +26,10 @@ for (pkg in packages) {
 
 ```{r, echo=FALSE}
 # Créer un tableau avec les régions du Burkina Faso
-regions <- c("Boucle du Mouhoun", "Cascades", "Centre", "Centre-Est", "Centre-Nord", 
-             "Centre-Ouest", "Centre-Sud", "Est", "Hauts-Bassins", "Nord", 
-             "Plateau-Central", "Sahel", "Sud-Ouest")
+regions <- c("Boucle du Mouhoun", "Cascades", "Centre", 
+             "Centre-Est", "Centre-Nord", "Centre-Ouest", "Centre-Sud",
+             "Est", "Hauts-Bassins", "Nord", "Plateau-Central", 
+             "Sahel", "Sud-Ouest")
 
 ##- Générer des données fictives pour chaque région
 data <- data.frame(
@@ -42,7 +43,7 @@ data <- data.frame(
 
 
 
-## Comment faire des cartes clhoropètres et des cartes de proportions avec R ?
+## Comment faire des cartes Choroplèthes et des cartes de proportions avec R ?
 
 |       Les cartes choroplèthes et les cartes de proportions sont des outils puissants pour visualiser des données géospatiales dans R. Ces cartes permettent de représenter des valeurs quantitatives (par exemple, des taux de population, des moyennes) sur des zones géographiques, souvent des régions administratives comme des départements, des communes, ou des zones géographiques personnalisées.
 
