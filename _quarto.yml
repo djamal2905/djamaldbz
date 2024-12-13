@@ -5,7 +5,7 @@ project:
   resources:
     - images/
     - ANALYSES_FACTORIELLES/
-    
+    - FORMATIONS/
 
 website:
   title: "DJAMAL SITE"
