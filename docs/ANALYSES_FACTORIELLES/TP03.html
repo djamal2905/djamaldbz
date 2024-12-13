@@ -98,6 +98,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -178,9 +180,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#identifications-des-pays-en-fonction-de-leur-groupe-de-revenu" id="toc-identifications-des-pays-en-fonction-de-leur-groupe-de-revenu" class="nav-link" data-scroll-target="#identifications-des-pays-en-fonction-de-leur-groupe-de-revenu">Identifications des pays en fonction de leur groupe de revenu</a>
   <ul class="collapse">
   <li><a href="#deux-acp-différentes" id="toc-deux-acp-différentes" class="nav-link" data-scroll-target="#deux-acp-différentes">Deux ACP différentes</a></li>
-  <li><a href="#acp-avec-pondérations-des-variables" id="toc-acp-avec-pondérations-des-variables" class="nav-link" data-scroll-target="#acp-avec-pondérations-des-variables">ACP avec pondérations des variables</a></li>
   </ul></li>
-  <li><a href="#realisation-de-lafm" id="toc-realisation-de-lafm" class="nav-link" data-scroll-target="#realisation-de-lafm">REALISATION DE L’AFM</a></li>
+  <li><a href="#afm" id="toc-afm" class="nav-link" data-scroll-target="#afm">REALISATION DE L’AFM</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1014,6 +1015,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="identifications-des-pays-en-fonction-de-leur-groupe-de-revenu" class="level2">
 <h2 class="anchored" data-anchor-id="identifications-des-pays-en-fonction-de-leur-groupe-de-revenu">Identifications des pays en fonction de leur groupe de revenu</h2>
+<blockquote class="blockquote">
+<p>Il s’agit juste d’une parenthèse qui n’a rien avoir avec l’objectif de l’étude</p>
+</blockquote>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">##-- Définitions des groupes de revenus</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>income_groups_definitions <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
@@ -1049,64 +1053,309 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#hc.pca &lt;- HCPC(pca.model, nb.clust=3)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On voit que les groupes ne sont pas bien séparés, raison pour laquelle les ellipses ont des partie qui coïncident. Cela pourrait signifier que les les groupes de revenus sont trop similaires pour etre clairement séparés sur les axes sélectionnés (dans le plan des composantes principales). Cela pourrait aussi fait cas d’hétérogénéité, c’est-à-dire que les groupes ne sont pas homogènes (grande variabilité intra-groupe).</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On voit que les groupes ne sont pas bien séparés, raison pour laquelle les ellipses ont des partie qui coïncident. Cela pourrait signifier que les les groupes de revenus sont trop similaires pour etre clairement séparés sur les axes sélectionnés (dans le plan des composantes principales). Cela pourrait aussi fait cas d’hétérogénéité, c’est-à-dire que les groupes ne sont pas homogènes (grande variabilité intra-groupe).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bien regarder, nous aurions pu les regrouper en trois groupes de revenu, en combinant les <strong><em>Low income</em></strong> et les <strong><em>Low middle income</em></strong>, les <strong><em>Upper middle income (avec certains pays du High income)</em></strong> et enfin le dernier groupe <strong><em>les high income</em></strong>. Il faut noter que tout ça n’est que purement visuel même si on a quand même une grande partie de l’information contenue dans les données rien qu’avec ces deux plans <strong>(plus de 80%)</strong>.</p>
 <section id="deux-acp-différentes" class="level3">
 <h3 class="anchored" data-anchor-id="deux-acp-différentes">Deux ACP différentes</h3>
+<blockquote class="blockquote">
+<p>Pourquoi réaliser deux ACP différentes ?</p>
+</blockquote>
+<p>&nbsp;&nbsp;Pour simplement calculer la 1-ère valeur propre de chaque groupe de variables (<strong><em>empreinte écologique et de developpement</em></strong>) afin de les utiliser ponderer les variables afin qu’elles contribuent de manière équitable à la formation des axes. Pour plus de détails <a href="#afm">aller à la sous-section</a> et sur le site de mon professeur de <strong>Méthodes d’Analyses Factorielles</strong> en cliquanr sur ce lien <a href="https://marieetienne.github.io/MAF/01_afm.html#/title-slide" class="uri">https://marieetienne.github.io/MAF/01_afm.html#/title-slide</a>.</p>
+<p>On préfère utiliser la première valeur propre (<span class="math inline">\(\lambda_{k1}\)</span>) car elle capturerait l’essentiel de l’inertie d’un groupe et permet une pondération cohérente et équilibrée dans l’AFM. La seconde valeur propre reflète des structures secondaires ou résiduelles qui ne sont pas pertinentes pour normaliser les contributions des groupes dans l’analyse globale.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>variables.empreinte <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"total_prod"</span>, <span class="st">"total_cons"</span>, <span class="st">"biocapacity"</span>, <span class="st">"number_of_earths_required"</span>, <span class="st">"overshoot_day"</span>, <span class="st">"pop"</span>)]</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.empreinte) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>variables.developpement <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"life_expectancy"</span>, <span class="st">"hdi"</span>, <span class="st">"per_capita_gdp"</span>,<span class="st">"pop"</span>)]</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.developpement) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>variables.empreinte <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"total_prod"</span>, <span class="st">"total_cons"</span>, <span class="st">"biocapacity"</span>, <span class="st">"number_of_earths_required"</span>, <span class="st">"overshoot_day"</span>, <span class="st">"pop"</span>)]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.empreinte) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>variables.developpement <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"life_expectancy"</span>, <span class="st">"hdi"</span>, <span class="st">"per_capita_gdp"</span>,<span class="st">"pop"</span>)]</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(variables.developpement) <span class="ot">&lt;-</span> df<span class="sc">$</span>country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="acp-sur-les-variables-dempruntes-écologiques" class="level4">
 <h4 class="anchored" data-anchor-id="acp-sur-les-variables-dempruntes-écologiques">ACP sur les variables d’empruntes écologiques</h4>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Il s’agit ici de faire l’ACP que sur les variables d’empruntes écologiques et de mettre les autres variables (de dévéloppement) en quantitatives supplémentaires.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Il s’agit ici de faire l’ACP que sur les variables d’empruntes écologiques et de mettre les autres variables (de developpement) en quantitatives supplémentaires.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">1</span>] <span class="do">## sélectionner toute les variables sauf la variable pays</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data.pca) <span class="ot">&lt;-</span> df[,<span class="dv">1</span>] <span class="do">## renommer les lignes avec les noms des pays (individus)</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>poids <span class="ot">&lt;-</span> df<span class="sc">$</span>pop</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>acp_empreinte <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>data.pca <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">1</span>] <span class="do">## sélectionner toute les variables sauf la variable pays</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data.pca) <span class="ot">&lt;-</span> df[,<span class="dv">1</span>] <span class="do">## renommer les lignes avec les noms des pays (individus)</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>poids <span class="ot">&lt;-</span> df<span class="sc">$</span>pop</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>acp_empreinte <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="do">##-- 1ere valeur propre</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4,115324</code></pre>
 </div>
 </div>
-<p>La première valeur propre est : <strong><em>4,10</em></strong></p>
+<p>La première valeur propre est : <strong><em>4,12</em></strong></p>
 </section>
 <section id="acp-sur-les-variables-dempruntes-écologiques-1" class="level4">
 <h4 class="anchored" data-anchor-id="acp-sur-les-variables-dempruntes-écologiques-1">ACP sur les variables d’empruntes écologiques</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>acp.developpement <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="do">##-- valeurs propres</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>acp.developpement <span class="ot">&lt;-</span> <span class="fu">PCA</span>(data.pca, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>),</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> data.pca<span class="sc">$</span>pop,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="do">##-- 1ere valeur propre</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2,592046</code></pre>
 </div>
 </div>
 <p>La première valeur propre est : <strong><em>2,59</em></strong></p>
 </section>
-</section>
-<section id="acp-avec-pondérations-des-variables" class="level3">
-<h3 class="anchored" data-anchor-id="acp-avec-pondérations-des-variables">ACP avec pondérations des variables</h3>
+<section id="réalisons-lafm-manuellement" class="level4">
+<h4 class="anchored" data-anchor-id="réalisons-lafm-manuellement">Réalisons l’AFM manuellement</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># explor(acp.ponderee)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>variables.empreinte.pond <span class="ot">&lt;-</span> variables.empreinte[,<span class="sc">-</span><span class="fu">ncol</span>(variables.empreinte)]<span class="sc">/</span><span class="fu">sqrt</span>(acp_empreinte<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>])</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>variables.developpement.pond <span class="ot">&lt;-</span> variables.developpement[,<span class="sc">-</span><span class="fu">ncol</span>(variables.developpement)]<span class="sc">/</span><span class="fu">sqrt</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  acp.developpement<span class="sc">$</span>eig[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>variables.empreinte.pond<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="st">"Empreinte écologique"</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>variables.developpement.pond<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="st">"developpement"</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>df.afm <span class="ot">&lt;-</span> <span class="fu">cbind</span>(variables.empreinte.pond, </span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>                variables.developpement.pond,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">pop =</span> df<span class="sc">$</span>pop,</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">region =</span> df<span class="sc">$</span>region,</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">income_group =</span> df<span class="sc">$</span>income_group)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>acp.afm <span class="ot">&lt;-</span> <span class="fu">PCA</span>(df.afm, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quali.sup =</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>, <span class="st">"group"</span>),</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>                 <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>                 <span class="at">row.w =</span> df.afm<span class="sc">$</span>pop,</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quanti.sup =</span> <span class="dv">9</span>)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>variance.cum.val.prop<span class="fl">.2</span>acp <span class="ot">&lt;-</span> acp.afm<span class="sc">$</span>eig[, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(variance.cum.val.prop<span class="fl">.2</span>acp) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Valeur propres"</span>, <span class="st">"Pourcentage de variance cumulée"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kbl</span>(variance.cum.val.prop<span class="fl">.2</span>acp, <span class="at">caption =</span> <span class="fu">capTab</span>(<span class="st">"Valeurs propres et variances cumulées de chaque axes issues d'une AFM manuelle"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>)) <span class="sc">%&gt;%</span> <span class="fu">add_footnote</span>(<span class="at">label =</span> <span class="st">"Source des données :  https://marieetienne.github.io/datasets/overshootday_overview.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Tableau 6 : Valeurs propres et variances cumulées de chaque axes issues d'une AFM manuelle</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Valeur propres</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pourcentage de variance cumulée</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">comp 1</td>
+<td style="text-align: right;">5,4257689</td>
+<td style="text-align: right;">67,82211</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">comp 2</td>
+<td style="text-align: right;">1,3223267</td>
+<td style="text-align: right;">84,35120</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">comp 3</td>
+<td style="text-align: right;">0,6522681</td>
+<td style="text-align: right;">92,50455</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">comp 4</td>
+<td style="text-align: right;">0,3973880</td>
+<td style="text-align: right;">97,47190</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">comp 5</td>
+<td style="text-align: right;">0,1005256</td>
+<td style="text-align: right;">98,72847</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">comp 6</td>
+<td style="text-align: right;">0,0689548</td>
+<td style="text-align: right;">99,59040</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">comp 7</td>
+<td style="text-align: right;">0,0327679</td>
+<td style="text-align: right;">100,00000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">comp 8</td>
+<td style="text-align: right;">0,0000000</td>
+<td style="text-align: right;">100,00000</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0; border: 0;"><sup>a</sup> Source des données : https://marieetienne.github.io/datasets/overshootday_overview.csv</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+
+
+</div>
 </div>
 </section>
 </section>
-<section id="realisation-de-lafm" class="level2">
-<h2 class="anchored" data-anchor-id="realisation-de-lafm">REALISATION DE L’AFM</h2>
+</section>
+<section id="afm" class="level2">
+<h2 class="anchored" data-anchor-id="afm">REALISATION DE L’AFM</h2>
+<blockquote class="blockquote">
+<p>Pourquoi réaliser une AFM au lieu d’une ACP tout court?</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L’<strong>A</strong>nalyse <strong>F</strong>actorielle <strong>M</strong>ultiple <strong><em>(AFM)</em></strong> permet d’aller au-delà des limites d’une <strong>A</strong>nalyse en <strong>C</strong>omposantes <strong>P</strong>rincipales <strong><em>(ACP)</em></strong> classique, particulièrement lorsque les variables d’un jeu de données ne sont pas à la même échelle ou lorsqu’elles sont organisées en groupes. La normalisation dans l’ACP sert à ramener toutes les variables à une même échelle, évitant ainsi que certaines variables dominent artificiellement l’analyse en raison de leur variance plus élevée. Par exemple d’autres ont une contribution élevée que d’autres alors que c’est juste l’unité de mésure qui pèse plus.</p>
+<p>&nbsp;&nbsp;Cependant, cette normalisation n’est pas suffisante lorsque les variables sont regroupées par thématique ou nature. Par exemple, supposons un jeu de données contenant <span class="math inline">\(n\)</span> variables, parmi lesquelles <span class="math inline">\(n - k\)</span> <span class="math inline">\(\text{avec k telque  } \forall \text{ j} \neq \text{k, }\)</span></p>
+<p><span class="math inline">\(\text{n - k} &gt; \text{n - j où n - j est le nombre de variables dans tous les autres groupes ou dans un autre groupe j}\)</span> appartiennent à un groupe <span class="math inline">\(i\)</span> .Dans ce cas, le groupe <span class="math inline">\(i\)</span> peut influencer de manière disproportionnée les résultats de l’ACP, simplement en raison de la taille du groupe. Cela signifie que, même après normalisation, le poids collectif du groupe <span class="math inline">\(i\)</span> dans la construction des composantes principales pourrait être trop important par rapport aux autres groupes.</p>
+<p>&nbsp;&nbsp;L’<strong>AFM</strong> résout ce problème en intégrant un poids équilibré entre les groupes. Elle considère chaque groupe comme une entité, indépendamment du nombre de variables qu’il contient. Cela permet une contribution équitable des groupes aux axes factoriels. Par conséquent, l’AFM est particulièrement adaptée dans des contextes où les variables appartiennent à des thématiques distinctes (par exemple, des groupes liés à des disciplines différentes : santé, économie, environnement).</p>
+<p>Il est crucial de préserver l’équilibre des contributions entre ces thématiques pour éviter les biais d’interprétation. Ainsi, l’AFM fournit une perspective multidimensionnelle plus équilibrée et pertinente pour analyser des jeux de données complexes, tout en respectant la structure inhérente des variables</p>
+<blockquote class="blockquote">
+<p>Réalisons l’AFM à présent</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#-- création de la table pour l'AFM. Les vriables doivent être rangées </span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#-- suivant le groupe (variables du groupe 1 ensuite celles du groupe 2 ...)</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>data.afm <span class="ot">&lt;-</span> data.pca <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    life_expectancy, hdi, per_capita_gdp,  <span class="do">##-- Variables de developpement</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    total_prod, total_cons, biocapacity, <span class="do">##------ Variables</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    number_of_earths_required, overshoot_day <span class="do">##-- d'empreinte écologique</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>model.afm <span class="ot">&lt;-</span> <span class="fu">MFA</span>(</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    data.afm, </span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>), <span class="do">##-- Spécifie le nombre de variables dans chaque groupe</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">rep</span>(<span class="st">"s"</span>, <span class="dv">2</span>), <span class="do">##-- Indique que les variables doivent être normalisées pour chaque groupe</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">name.group =</span> <span class="fu">c</span>(<span class="st">"Developpement"</span>, <span class="st">"Empreinte ecologique"</span>), <span class="do">##-- Nommer les groupes</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">graph =</span> F  <span class="do">##-- Générer un graphique</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>variance.cum.val.prop.afm <span class="ot">&lt;-</span> model.afm<span class="sc">$</span>eig[, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(variance.cum.val.prop.afm) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Valeur propres"</span>, <span class="st">"Pourcentage de variance cumulée"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kbl</span>(variance.cum.val.prop.afm, <span class="at">caption =</span> <span class="fu">capTab</span>(<span class="st">"Valeurs propres et variances cumulées de chaque axes issues d'une AFM avec R"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>)) <span class="sc">%&gt;%</span> <span class="fu">add_footnote</span>(<span class="at">label =</span> <span class="st">"Source des données :  https://marieetienne.github.io/datasets/overshootday_overview.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Tableau 7 : Valeurs propres et variances cumulées de chaque axes issues d'une AFM avec R</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Valeur propres</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pourcentage de variance cumulée</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">comp 1</td>
+<td style="text-align: right;">1,9203865</td>
+<td style="text-align: right;">67,85068</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">comp 2</td>
+<td style="text-align: right;">0,5123847</td>
+<td style="text-align: right;">85,95414</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">comp 3</td>
+<td style="text-align: right;">0,2050340</td>
+<td style="text-align: right;">93,19836</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">comp 4</td>
+<td style="text-align: right;">0,0790131</td>
+<td style="text-align: right;">95,99003</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">comp 5</td>
+<td style="text-align: right;">0,0659024</td>
+<td style="text-align: right;">98,31848</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">comp 6</td>
+<td style="text-align: right;">0,0327210</td>
+<td style="text-align: right;">99,47457</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">comp 7</td>
+<td style="text-align: right;">0,0148713</td>
+<td style="text-align: right;">100,00000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">comp 8</td>
+<td style="text-align: right;">0,0000000</td>
+<td style="text-align: right;">100,00000</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0; border: 0;"><sup>a</sup> Source des données : https://marieetienne.github.io/datasets/overshootday_overview.csv</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+
+
+</div>
+</div>
+<p>On voit qu’il n’y a pas très grande différence entre les pourcentage de variances cumulées des deux <strong>AFM</strong> (manuellement <span class="citation" data-cites="variance.cum.val.prop.2acp">@variance.cum.val.prop.2acp</span> et avec R) parcontre les valeurs propres ne sont pas les mêmes.</p>
+<blockquote class="blockquote">
+<p>On peut visualiser les variables</p>
+</blockquote>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mfa_var</span>(model.afm, <span class="at">axes =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">choice=</span> <span class="st">"quanti.var"</span>, <span class="at">repel =</span> T) <span class="sc">+</span> <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP03_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="1056"></p>
+<figcaption class="figure-caption">Figure 8 : Visualisation des variables dans le plan (1,2) avec les résultats de l’AFM</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>On peut visualiser leur qualité de representation</p>
+</blockquote>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>graph.cos.var.afm <span class="ot">&lt;-</span> <span class="fu">fviz_mfa_var</span>(model.afm, <span class="at">axes =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">choice=</span> <span class="st">"quanti.var"</span>, <span class="at">col.var=</span><span class="st">"cos2"</span>, <span class="at">gradient.cols=</span><span class="fu">c</span>(<span class="st">"#F1C40F"</span>,<span class="st">"#2ECC71"</span>,<span class="st">"#8E44AD"</span>), <span class="at">repel =</span> T, <span class="at">ggtheme =</span> <span class="fu">theme_light</span>())</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>graph.cos.var.afm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP03_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="1056"></p>
+<figcaption class="figure-caption">Figure 9 : Qualité de représentation des variables dans le plan (1,2) avec les résultats de l’AFM</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Leur contribution à la formation des axes</p>
+</blockquote>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>graph.contrib.var.afm <span class="ot">&lt;-</span> <span class="fu">fviz_mfa_var</span>(model.afm,<span class="at">col.var=</span><span class="st">"contrib"</span>, <span class="at">gradient.cols=</span><span class="fu">c</span>(<span class="st">"#F1C40F"</span>,<span class="st">"#2ECC71"</span>,<span class="st">"#8E44AD"</span>), <span class="at">repel=</span><span class="cn">TRUE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_light</span>())</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>graph.contrib.var.afm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP03_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="1056"></p>
+<figcaption class="figure-caption">Figure 10 : Cercle de corrélation des variables et leur contribution à la formation des axes</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
