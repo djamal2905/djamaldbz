@@ -45,7 +45,7 @@ Voici les dernières publications sur des sujets de statistiques et d'informatiq
 
 - [Exploration des Techniques d'Analyse Factorielle](#)
 - [Guide pratique pour les modèles mixtes](#)
-- [Visualisation dynamique avec R et Quarto](#)
+- [Comment faire des cartes de proportions et des cartes clhoropètres avec R ?](#)
 
 > **Voir toutes les publications** [Bientôt disponible]
 
