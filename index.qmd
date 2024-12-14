@@ -55,7 +55,7 @@ Voici les dernières publications sur des sujets de statistiques et d'informatiq
 
 Si vous avez des questions ou souhaitez collaborer sur un projet, n'hésitez pas à me contacter !
 
-> [Envoyer un message](mailto:djamaltoe@example.com)
+> [Envoyer un message](mailto:djamaltoe2905@gmail.com)
 
 ---
 
@@ -96,6 +96,6 @@ Elève en Science de données à l'Ecole Nationale de la Statistique et de l'Ana
 ### Informations supplémentaires
 
 © 2024 DJAMAL DEV  
-**Contact**: djamaltoe2905@***.com  
+**Contact**: djamaltoe2905@gmail.com  
 **Localisation**: Rennes, France  
 **Téléphone**: +33 ** ** ** ** **

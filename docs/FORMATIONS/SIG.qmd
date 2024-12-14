@@ -111,7 +111,8 @@ Supposons que nous menions une étude au Burkina-Faso. Par exemple, nous mésure
 
 > Place au code
 
-
+<details>
+  <summary>voir/cacher le code</summary>
 ```{r}
 ###---- Chargement des shapefiles src = GADM
 root <- getwd() ##-- la racine du repertoire
@@ -133,7 +134,7 @@ path3 <- paste0(root,"/DATA_SIG/BFA2/gadm41_BFA_3.shp")
 
 study.area <-  c("Boucle du Mouhoun", "Centre-Est", "Centre-Nord",
              "Centre-Ouest", "Nord", "Sud-Ouest",
-             "Hauts-Bassins", "Cascades")
+             "Haut-Bassins", "Cascades")
 
 ##-- lecture des shapefiles
 pays_shp <- read_sf(glue(path0), quiet = T)
@@ -179,7 +180,7 @@ study_zone_map <- ggplot() +
   xlab("")+
   ylab("")+
   scale_linewidth_manual(values = c(1.2), name = "")+
-  scale_fill_manual(values = c("white",study_zone_colors), name="Zone d'étude")+
+  scale_fill_manual(values = c("white","#1f77b4"), name="Zone d'étude")+
   theme_light() + 
   guides(
     linewidth = guide_legend(order = 1),
@@ -187,7 +188,7 @@ study_zone_map <- ggplot() +
     color = guide_legend(order = 3)
   )
 ```
-
+</details>
 
 ```{r,fig.align='center', fig.width = 12, fig.height = 7}
 #| fig-cap: Cartographie de la zone d'étude
@@ -200,21 +201,326 @@ study_zone_map
   - ***glue*** : pour preparer la structure du format (optionnel)
   - ***readsf*** : pour lire les fichiers shapefiles
 
-* Definir la zone d'étude : les fichier shapefile devient comme un dataframe, donc est manipulable au même titre que les fichiers excel, csv etc...
+* Definir la zone d'étude : les fichier shapefile devient comme un dataframe, donc est manipulable au même titre que les fichiers excel, csv etc ...
 
+* On trace d'abord la carte du pays, ensuite on ajoute la couche des regions (c'est-à-dire le shapefile des regions). On pourrait le faire simplement avec le shapefile des regions sans celui du pays.
+
+* Ensuite on ajoute la couleur pour la zone concernée et les noms des regions sélectionnées avec `geom_sf_text`
+
+* `annotation_scale` permet d'ajouter une barre d'échelle (scale bar) à une carte avec la position ***br*** pour dire bottom rigth (en bas à droite)
+
+* `annotation_north_arrow` est utilisée pour ajouter une flèche du nord sur une carte créée avec ggplot2
+
+* Pour le reste il s'agit des fonctions qu'on utilise couramment avec ggplot2
+
+<details>
+  <summary>Afficher/Masquer le tableau</summary>
 ```{r, echo=FALSE}
-kbl(head(region_shp,10), caption = capTab("Individus ayant un cosinus carré supérieur ou égal à 0,85 sur l'axe 1")) %>%
+kbl(head(region_shp,10), caption = capTab("Les 10 premières lignes du shapefile")) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>% add_footnote(label = "Source des données :  GADM")
 ```
+</details>
 
-
-> A suivre, restez aux aguets
 
 > Cartes choroplèthes
 
+|       Les cartes choroplèthes sont des représentations graphiques qui utilisent des nuances de couleurs pour illustrer des données quantitatives ou qualitatives sur des zones géographiques. Chaque zone est remplie d'une couleur qui correspond à une valeur spécifique ou à une plage de valeurs, facilitant ainsi l'analyse des variations spatiales des données.
+
+Les cartes choroplèthes sont idéales pour représenter des indicateurs comme le taux de mortalité, le revenu moyen, l'accès à l'eau potable, ou encore la couverture sanitaire par région.
+
+### Exemple de carte choroplèthe
+
+Dans cet exemple, nous allons créer une carte choroplèthe montrant la **couverture sanitaire** par région au Burkina Faso, en utilisant les données fictives créées plus haut. pour les données, [vous pouvez me contacter par email](mailto:djamaltoe2905@gmail.com).
+
+- **Etape 1 :** ***Charger les shapefiles et les données***
+
+Ici nous nous assurons que les shapefiles des régions et les données sont correctement chargés et liés entre eux. Pour cela on fait une jointure externe.
+
+```{r}
+##-- Joindre les données au shapefile
+region_data <- region_shp %>% 
+  left_join(data, by = c("NAME_1" = "Region"))
+```
+
+Avant de passer à l'étape 2, affichons les données générées avant jointure et ceux aprés jointures.
+
+<details>
+  <summary>Afficher/cacher le code</summary>
+
+```{r}
+tbl.avant.jointure <- kbl(head(data,10)) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
+tbl.apres.jointure <- kbl(head(data,10)) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>% add_footnote(label = "Source des données :  GADM")
+```
+</details>
+
+<details>
+  <summary>Afficher/Masquer le tableau</summary>
+```{r}
+#| label: tables_jointures
+#| tbl-cap : "Les 10 premières lignes des tables"
+#| tbl-subcap: 
+#|   - "Avant jointure"
+#|   - "Après jointure"
+#| layout-ncol: 2
+
+tbl.avant.jointure
+
+tbl.apres.jointure
+```
+  
+</details> 
+
+- **Etape 2 :** ***Créer la carte choroplèthe***
+
+Utilisez `ggplot2` et `geom_sf()` pour afficher les régions et les colorer en fonction de la couverture sanitaire.
+
+```{r}
+#| fig-cap: "Couverture sanitaire par région"
+#| fig-align: "center"
+##-  Carte choroplèthe
+choropleth_map <- ggplot(region_data) +
+  geom_sf(aes(fill = Couverture_Sanitaire), color = "black") +
+  scale_fill_viridis_c(
+    option = "C",
+    name = "Couverture Sanitaire (%)"
+  ) +
+  ggtitle("Carte choroplèthe : Couverture sanitaire par région") +
+  theme_minimal() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 0.5, face = "bold")
+  )
+
+choropleth_map
+```
+
+- **Etape 3 : ** ***Ajouter des éléments décoratifs***
+
+Ajoutons une barre d'échelle et une flèche du nord pour rendre la carte plus informative.
+
+```{r}
+##- Ajout des éléments décoratifs
+choropleth_map <- choropleth_map +
+  ggspatial::annotation_scale(location = "br") +
+  ggspatial::annotation_north_arrow(
+    location = "tl", style = north_arrow_nautical()
+  ) ###-- tl pour top-left (en haut à gauche)
+
+choropleth_map
+```
+
+
+>  Interpréter les résultats
+
+Examinez la carte générée et répondez aux questions suivantes :
+- Quelles régions ont la meilleure couverture sanitaire ?
+- Quelles régions doivent faire l'objet d'une attention particulière pour améliorer les conditions de vie ?
+
+
+
+
+#### Extensions possibles
+
+- Réalisez une carte choroplèthe pour le taux de mortalité.
+- Ajoutez des annotations pour les régions ayant les valeurs extrêmes.
+- Expérimentez avec d'autres palettes de couleurs en utilisant `scale_fill_brewer()` ou `scale_fill_manual()` etc ....
+
+::: {#Shapefiles .callout-important}
+# Données discrètes ?
+
+Il se peut qu'il n'y ait pas une variabilité importante dans les données dans ce cas, au lieu d'avoir une palette, nous aurons juste des cases de couleurs comme s'agissait d'un indicateur discrèt. Dans ce cas, recoder juste cet indicateur en un indicateur qualitatif (regrouper par classe) et ensuite utiliser `scale_fill_manual()` pour definir vos couleurs manuellement ou laisser R le faire tout seul. Le graphique ci-dessous en est un exemple.
+
+:::
+
+![Exemple de carte avec un indicateur recodé](DATA_SIG/example_recode_var.jpg)
+
+
 > Cartes de proportions
 
+>>> **A suivre**
+
 > Cartes de proportions avancées
+
+```{r, echo=F}
+# Création des variables pour chaque région avec des habitudes alimentaires spécifiques
+
+# Assignation des proportions pour chaque aliment
+region_data$Riz <- case_when(
+  region_data$NAME_1 == "Haut-Bassins" ~ 34,
+  region_data$NAME_1 == "Centre" ~ 40,
+  region_data$NAME_1 == "Centre-Est" ~ 25,
+  region_data$NAME_1 == "Centre-Nord" ~ 20,
+  region_data$NAME_1 == "Centre-Ouest" ~ 10,
+  region_data$NAME_1 == "Centre-Sud" ~ 15,
+  region_data$NAME_1 == "Est" ~ 30,
+  region_data$NAME_1 == "Boucle du Mouhoun" ~ 28,
+  region_data$NAME_1 == "Cascades" ~ 22,
+  region_data$NAME_1 == "Nord" ~ 0,
+  region_data$NAME_1 == "Plateau-Central" ~ 5,
+  region_data$NAME_1 == "Sahel" ~ 22,
+  region_data$NAME_1 == "Sud-Ouest" ~ 18,
+  TRUE ~ 0  # Valeur par défaut pour les autres régions
+)
+
+region_data$Soumbala <- case_when(
+  region_data$NAME_1 == "Haut-Bassins" ~ 27,
+  region_data$NAME_1 == "Centre" ~ 15,
+  region_data$NAME_1 == "Centre-Est" ~ 18,
+  region_data$NAME_1 == "Centre-Nord" ~ 22,
+  region_data$NAME_1 == "Centre-Ouest" ~ 30,
+  region_data$NAME_1 == "Centre-Sud" ~ 10,
+  region_data$NAME_1 == "Est" ~ 20,
+  region_data$NAME_1 == "Boucle du Mouhoun" ~ 19,
+  region_data$NAME_1 == "Cascades" ~ 25,
+  region_data$NAME_1 == "Nord" ~ 0,
+  region_data$NAME_1 == "Plateau-Central" ~ 10,
+  region_data$NAME_1 == "Sahel" ~ 0,
+  region_data$NAME_1 == "Sud-Ouest" ~ 15,
+  TRUE ~ 0
+)
+
+region_data$To <- case_when(
+  region_data$NAME_1 == "Haut-Bassins" ~ 13,
+  region_data$NAME_1 == "Centre" ~ 10,
+  region_data$NAME_1 == "Centre-Est" ~ 8,
+  region_data$NAME_1 == "Centre-Nord" ~ 10,
+  region_data$NAME_1 == "Centre-Ouest" ~ 15,
+  region_data$NAME_1 == "Centre-Sud" ~ 5,
+  region_data$NAME_1 == "Est" ~ 7,
+  region_data$NAME_1 == "Boucle du Mouhoun" ~ 12,
+  region_data$NAME_1 == "Cascades" ~ 6,
+  region_data$NAME_1 == "Nord" ~ 0,
+  region_data$NAME_1 == "Plateau-Central" ~ 3,
+  region_data$NAME_1 == "Sahel" ~ 17,
+  region_data$NAME_1 == "Sud-Ouest" ~ 5,
+  TRUE ~ 0
+)
+
+region_data$Mil <- case_when(
+  region_data$NAME_1 == "Haut-Bassins" ~ 5,
+  region_data$NAME_1 == "Centre" ~ 7,
+  region_data$NAME_1 == "Centre-Est" ~ 5,
+  region_data$NAME_1 == "Centre-Nord" ~ 8,
+  region_data$NAME_1 == "Centre-Ouest" ~ 4,
+  region_data$NAME_1 == "Centre-Sud" ~ 3,
+  region_data$NAME_1 == "Est" ~ 6,
+  region_data$NAME_1 == "Boucle du Mouhoun" ~ 4,
+  region_data$NAME_1 == "Cascades" ~ 3,
+  region_data$NAME_1 == "Nord" ~ 0,
+  region_data$NAME_1 == "Plateau-Central" ~ 2,
+  region_data$NAME_1 == "Sahel" ~ 20,
+  region_data$NAME_1 == "Sud-Ouest" ~ 4,
+  TRUE ~ 0
+)
+
+region_data$Bissap <- case_when(
+  region_data$NAME_1 == "Haut-Bassins" ~ 6,
+  region_data$NAME_1 == "Centre" ~ 8,
+  region_data$NAME_1 == "Centre-Est" ~ 10,
+  region_data$NAME_1 == "Centre-Nord" ~ 5,
+  region_data$NAME_1 == "Centre-Ouest" ~ 7,
+  region_data$NAME_1 == "Centre-Sud" ~ 2,
+  region_data$NAME_1 == "Est" ~ 10,
+  region_data$NAME_1 == "Boucle du Mouhoun" ~ 8,
+  region_data$NAME_1 == "Cascades" ~ 6,
+  region_data$NAME_1 == "Nord" ~ 0,
+  region_data$NAME_1 == "Plateau-Central" ~ 1,
+  region_data$NAME_1 == "Sahel" ~ 0,
+  region_data$NAME_1 == "Sud-Ouest" ~ 8,
+  TRUE ~ 0
+)
+
+region_data <- region_data %>%
+  mutate(across(c(Riz, Soumbala, To, Mil, Bissap), as.numeric),
+         total =Riz + Soumbala + To + Mil + Bissap)
+```
+
+
+
+```{r, echo=FALSE}
+##- Region
+library(scatterpie)
+region_centers <- st_centroid(region_data)
+
+map_ <- ggplot() +
+  geom_sf(data = region_data, fill="white") +
+  geom_sf_text(data = region_data, aes(label = NAME_1), color = "black", size = 3) +
+  ggspatial::annotation_scale(
+    location = "br",
+    bar_cols = c("black", "white")
+  ) +
+  theme_light() +
+  ggspatial::annotation_north_arrow(
+    location = "tr", which_north = "true",
+    pad_x = unit(0.05, "in"), pad_y = unit(0.05, "in"),
+    style = ggspatial::north_arrow_nautical(
+      fill = c("black", "white"),
+      line_col = "black"
+    )
+  ) +
+  theme_minimal() +
+  labs(
+    caption = "Auteur : Djamal Y. TOE",
+    fill = "Hab Alim",
+  ) +
+  xlab("")+
+  ylab("")+
+  theme(
+    legend.text = element_text(size = 10) ,
+    legend.position = "bottom",
+    
+  )
+
+coordinates <- st_coordinates(region_centers)
+region_centers$lon <- coordinates[, 1]
+region_centers$lat <- coordinates[, 2]
+```
+
+```{r,echo = FALSE}
+n_data <- as.data.frame(region_centers[c("Population","Riz", "Soumbala", "To", "Mil", "Bissap","total","lon","lat")])
+
+n_data <- n_data[,-ncol(n_data)]
+n_data_sf <- st_as_sf(n_data, coords = c("lon", "lat"), crs = 4326)
+```
+
+
+```{r, echo = FALSE}
+
+#| fig-cap: "Repartions des regions par habitudes alimentaires"
+#| fig-align: "center"
+#| fig-height: 7
+#| fig-width: 12
+
+##- Convertir l'objet sf en dataframe sans la colonne geometry
+n_data_no_geom <- st_drop_geometry(n_data_sf)
+
+##- Calculer le total des habitudes alimentaires
+n_data_no_geom$total <- rowSums(n_data_no_geom[, c("Riz", "Soumbala", "To", "Mil", "Bissap")], na.rm = TRUE)
+
+##- Ajouter les coordonnées géographiques au dataframe (lon, lat)
+n_data_no_geom$lon <- st_coordinates(n_data_sf)[, 1]  # Longitude
+n_data_no_geom$lat <- st_coordinates(n_data_sf)[, 2]  # Latitude
+
+##- Convertir à nouveau en sf (si nécessaire)
+n_data_sf <- st_as_sf(n_data_no_geom, coords = c("lon", "lat"), crs = 4326)
+
+##- Créer la carte avec les diagrammes circulaires
+m <- map_ + 
+  geom_scatterpie(data = n_data_no_geom, 
+                  aes(x = lon, y = lat, r = 0.000000235 * Population), 
+                  alpha = 0.9, 
+                  cols = c("Riz", "Soumbala", "To", "Mil", "Bissap"), color = NA) + 
+  coord_sf()  # Utilisation de coord_sf() pour un objet sf
+
+##- Afficher la carte
+print(m)
+
+```
+
+
 
 
 [Retour à la page d'accueuil](https://djamal2905.github.io/djamaldbz/)

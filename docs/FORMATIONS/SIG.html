@@ -158,7 +158,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#comment-faire-des-cartes-choroplèthes-et-des-cartes-de-proportions-avec-r" id="toc-comment-faire-des-cartes-choroplèthes-et-des-cartes-de-proportions-avec-r" class="nav-link active" data-scroll-target="#comment-faire-des-cartes-choroplèthes-et-des-cartes-de-proportions-avec-r">Comment faire des cartes Choroplèthes et des cartes de proportions avec R ?</a></li>
+  <li><a href="#comment-faire-des-cartes-choroplèthes-et-des-cartes-de-proportions-avec-r" id="toc-comment-faire-des-cartes-choroplèthes-et-des-cartes-de-proportions-avec-r" class="nav-link active" data-scroll-target="#comment-faire-des-cartes-choroplèthes-et-des-cartes-de-proportions-avec-r">Comment faire des cartes Choroplèthes et des cartes de proportions avec R ?</a>
+  <ul class="collapse">
+  <li><a href="#exemple-de-carte-choroplèthe" id="toc-exemple-de-carte-choroplèthe" class="nav-link" data-scroll-target="#exemple-de-carte-choroplèthe">Exemple de carte choroplèthe</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -257,6 +260,10 @@ Coordonnées géographiques
 <blockquote class="blockquote">
 <p>Place au code</p>
 </blockquote>
+<details>
+<summary>
+voir/cacher le code
+</summary>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">###---- Chargement des shapefiles src = GADM</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>root <span class="ot">&lt;-</span> <span class="fu">getwd</span>() <span class="do">##-- la racine du repertoire</span></span>
@@ -278,7 +285,7 @@ Coordonnées géographiques
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>study.area <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">"Boucle du Mouhoun"</span>, <span class="st">"Centre-Est"</span>, <span class="st">"Centre-Nord"</span>,</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Centre-Ouest"</span>, <span class="st">"Nord"</span>, <span class="st">"Sud-Ouest"</span>,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Hauts-Bassins"</span>, <span class="st">"Cascades"</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Haut-Bassins"</span>, <span class="st">"Cascades"</span>)</span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="do">##-- lecture des shapefiles</span></span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>pays_shp <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="fu">glue</span>(path0), <span class="at">quiet =</span> T)</span>
@@ -324,7 +331,7 @@ Coordonnées géographiques
 <span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>)<span class="sc">+</span></span>
 <span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>)<span class="sc">+</span></span>
 <span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linewidth_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="fl">1.2</span>), <span class="at">name =</span> <span class="st">""</span>)<span class="sc">+</span></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"white"</span>,study_zone_colors), <span class="at">name=</span><span class="st">"Zone d'étude"</span>)<span class="sc">+</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"white"</span>,<span class="st">"#1f77b4"</span>), <span class="at">name=</span><span class="st">"Zone d'étude"</span>)<span class="sc">+</span></span>
 <span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span> </span>
 <span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(</span>
 <span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">1</span>),</span>
@@ -332,6 +339,7 @@ Coordonnées géographiques
 <span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">3</span>)</span>
 <span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</details>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>study_zone_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -347,18 +355,27 @@ Coordonnées géographiques
 <p>Expliquons le code à présent</p>
 </blockquote>
 <ul>
-<li>Charger les fichier shapefiles :
+<li><p>Charger les fichier shapefiles :</p>
 <ul>
 <li><strong><em>glue</em></strong> : pour preparer la structure du format (optionnel)</li>
 <li><strong><em>readsf</em></strong> : pour lire les fichiers shapefiles</li>
 </ul></li>
-<li>Definir la zone d’étude : les fichier shapefile devient comme un dataframe, donc est manipulable au même titre que les fichiers excel, csv etc…</li>
+<li><p>Definir la zone d’étude : les fichier shapefile devient comme un dataframe, donc est manipulable au même titre que les fichiers excel, csv etc …</p></li>
+<li><p>On trace d’abord la carte du pays, ensuite on ajoute la couche des regions (c’est-à-dire le shapefile des regions). On pourrait le faire simplement avec le shapefile des regions sans celui du pays.</p></li>
+<li><p>Ensuite on ajoute la couleur pour la zone concernée et les noms des regions sélectionnées avec <code>geom_sf_text</code></p></li>
+<li><p><code>annotation_scale</code> permet d’ajouter une barre d’échelle (scale bar) à une carte avec la position <strong><em>br</em></strong> pour dire bottom rigth (en bas à droite)</p></li>
+<li><p><code>annotation_north_arrow</code> est utilisée pour ajouter une flèche du nord sur une carte créée avec ggplot2</p></li>
+<li><p>Pour le reste il s’agit des fonctions qu’on utilise couramment avec ggplot2</p></li>
 </ul>
+<details>
+<summary>
+Afficher/Masquer le tableau
+</summary>
 <div class="cell">
 <div class="cell-output-display">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
-<caption>Tableau 1 : Individus ayant un cosinus carré supérieur ou égal à 0,85 sur l'axe 1</caption>
+<caption>Tableau 1 : Les 10 premières lignes du shapefile</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">GID_1</th>
@@ -539,21 +556,347 @@ Coordonnées géographiques
 
 </div>
 </div>
-<blockquote class="blockquote">
-<p>A suivre, restez aux aguets</p>
-</blockquote>
+</details>
 <blockquote class="blockquote">
 <p>Cartes choroplèthes</p>
 </blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Les cartes choroplèthes sont des représentations graphiques qui utilisent des nuances de couleurs pour illustrer des données quantitatives ou qualitatives sur des zones géographiques. Chaque zone est remplie d’une couleur qui correspond à une valeur spécifique ou à une plage de valeurs, facilitant ainsi l’analyse des variations spatiales des données.</p>
+<p>Les cartes choroplèthes sont idéales pour représenter des indicateurs comme le taux de mortalité, le revenu moyen, l’accès à l’eau potable, ou encore la couverture sanitaire par région.</p>
+<section id="exemple-de-carte-choroplèthe" class="level3">
+<h3 class="anchored" data-anchor-id="exemple-de-carte-choroplèthe">Exemple de carte choroplèthe</h3>
+<p>Dans cet exemple, nous allons créer une carte choroplèthe montrant la <strong>couverture sanitaire</strong> par région au Burkina Faso, en utilisant les données fictives créées plus haut. pour les données, <a href="mailto:djamaltoe2905@gmail.com">vous pouvez me contacter par email</a>.</p>
+<ul>
+<li><strong>Etape 1 :</strong> <strong><em>Charger les shapefiles et les données</em></strong></li>
+</ul>
+<p>Ici nous nous assurons que les shapefiles des régions et les données sont correctement chargés et liés entre eux. Pour cela on fait une jointure externe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">##-- Joindre les données au shapefile</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>region_data <span class="ot">&lt;-</span> region_shp <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"NAME_1"</span> <span class="ot">=</span> <span class="st">"Region"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Avant de passer à l’étape 2, affichons les données générées avant jointure et ceux aprés jointures.</p>
+<details>
+<summary>
+Afficher/cacher le code
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tbl.avant.jointure <span class="ot">&lt;-</span> <span class="fu">kbl</span>(<span class="fu">head</span>(data,<span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>tbl.apres.jointure <span class="ot">&lt;-</span> <span class="fu">kbl</span>(<span class="fu">head</span>(data,<span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>)) <span class="sc">%&gt;%</span> <span class="fu">add_footnote</span>(<span class="at">label =</span> <span class="st">"Source des données :  GADM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<details>
+<summary>
+Afficher/Masquer le tableau
+</summary>
+<div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tbl.avant.jointure</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tbl.apres.jointure</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-anonymous-5129379" class="cell tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Les 10 premières lignes des tables</p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-anonymous-5129379-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-anonymous-5129379" style="flex-basis: 50.0%;justify-content: center;">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Avant jointure</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Region</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Population</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Taux_Mortalite</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Couverture_Sanitaire</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Acces_Eau_Potable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Boucle du Mouhoun</td>
+<td style="text-align: right;">1847435</td>
+<td style="text-align: right;">10,53</td>
+<td style="text-align: right;">66,23</td>
+<td style="text-align: right;">71,50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cascades</td>
+<td style="text-align: right;">1955719</td>
+<td style="text-align: right;">13,28</td>
+<td style="text-align: right;">80,92</td>
+<td style="text-align: right;">87,96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Centre</td>
+<td style="text-align: right;">2414041</td>
+<td style="text-align: right;">10,19</td>
+<td style="text-align: right;">61,53</td>
+<td style="text-align: right;">85,90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Centre-Est</td>
+<td style="text-align: right;">1544560</td>
+<td style="text-align: right;">11,76</td>
+<td style="text-align: right;">89,56</td>
+<td style="text-align: right;">83,33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Centre-Nord</td>
+<td style="text-align: right;">2325097</td>
+<td style="text-align: right;">13,30</td>
+<td style="text-align: right;">90,91</td>
+<td style="text-align: right;">82,31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Centre-Ouest</td>
+<td style="text-align: right;">1892969</td>
+<td style="text-align: right;">10,70</td>
+<td style="text-align: right;">80,84</td>
+<td style="text-align: right;">64,96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Centre-Sud</td>
+<td style="text-align: right;">698107</td>
+<td style="text-align: right;">9,86</td>
+<td style="text-align: right;">69,71</td>
+<td style="text-align: right;">83,27</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Est</td>
+<td style="text-align: right;">456070</td>
+<td style="text-align: right;">6,26</td>
+<td style="text-align: right;">63,95</td>
+<td style="text-align: right;">70,82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hauts-Bassins</td>
+<td style="text-align: right;">1239169</td>
+<td style="text-align: right;">6,93</td>
+<td style="text-align: right;">80,37</td>
+<td style="text-align: right;">58,94</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nord</td>
+<td style="text-align: right;">1396555</td>
+<td style="text-align: right;">7,80</td>
+<td style="text-align: right;">83,25</td>
+<td style="text-align: right;">71,83</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+
+
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-anonymous-5129379-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-anonymous-5129379" style="flex-basis: 50.0%;justify-content: center;">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Après jointure</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Region</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Population</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Taux_Mortalite</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Couverture_Sanitaire</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Acces_Eau_Potable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Boucle du Mouhoun</td>
+<td style="text-align: right;">1847435</td>
+<td style="text-align: right;">10,53</td>
+<td style="text-align: right;">66,23</td>
+<td style="text-align: right;">71,50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cascades</td>
+<td style="text-align: right;">1955719</td>
+<td style="text-align: right;">13,28</td>
+<td style="text-align: right;">80,92</td>
+<td style="text-align: right;">87,96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Centre</td>
+<td style="text-align: right;">2414041</td>
+<td style="text-align: right;">10,19</td>
+<td style="text-align: right;">61,53</td>
+<td style="text-align: right;">85,90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Centre-Est</td>
+<td style="text-align: right;">1544560</td>
+<td style="text-align: right;">11,76</td>
+<td style="text-align: right;">89,56</td>
+<td style="text-align: right;">83,33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Centre-Nord</td>
+<td style="text-align: right;">2325097</td>
+<td style="text-align: right;">13,30</td>
+<td style="text-align: right;">90,91</td>
+<td style="text-align: right;">82,31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Centre-Ouest</td>
+<td style="text-align: right;">1892969</td>
+<td style="text-align: right;">10,70</td>
+<td style="text-align: right;">80,84</td>
+<td style="text-align: right;">64,96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Centre-Sud</td>
+<td style="text-align: right;">698107</td>
+<td style="text-align: right;">9,86</td>
+<td style="text-align: right;">69,71</td>
+<td style="text-align: right;">83,27</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Est</td>
+<td style="text-align: right;">456070</td>
+<td style="text-align: right;">6,26</td>
+<td style="text-align: right;">63,95</td>
+<td style="text-align: right;">70,82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hauts-Bassins</td>
+<td style="text-align: right;">1239169</td>
+<td style="text-align: right;">6,93</td>
+<td style="text-align: right;">80,37</td>
+<td style="text-align: right;">58,94</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nord</td>
+<td style="text-align: right;">1396555</td>
+<td style="text-align: right;">7,80</td>
+<td style="text-align: right;">83,25</td>
+<td style="text-align: right;">71,83</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0; border: 0;"><sup>a</sup> Source des données : GADM</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+
+
+</div>
+</div>
+</div>
+</div>
+</details>
+<ul>
+<li><strong>Etape 2 :</strong> <strong><em>Créer la carte choroplèthe</em></strong></li>
+</ul>
+<p>Utilisez <code>ggplot2</code> et <code>geom_sf()</code> pour afficher les régions et les colorer en fonction de la couverture sanitaire.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">##-  Carte choroplèthe</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>choropleth_map <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(region_data) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Couverture_Sanitaire), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"C"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Couverture Sanitaire (%)"</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Carte choroplèthe : Couverture sanitaire par région"</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>choropleth_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SIG_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Couverture sanitaire par région</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Etape 3 : </strong> <strong><em>Ajouter des éléments décoratifs</em></strong></li>
+</ul>
+<p>Ajoutons une barre d’échelle et une flèche du nord pour rendre la carte plus informative.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">##- Ajout des éléments décoratifs</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>choropleth_map <span class="ot">&lt;-</span> choropleth_map <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_scale</span>(<span class="at">location =</span> <span class="st">"br"</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_north_arrow</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">location =</span> <span class="st">"tl"</span>, <span class="at">style =</span> <span class="fu">north_arrow_nautical</span>()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="do">###-- tl pour top-left (en haut à gauche)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>choropleth_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="SIG_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Interpréter les résultats</p>
+</blockquote>
+<p>Examinez la carte générée et répondez aux questions suivantes : - Quelles régions ont la meilleure couverture sanitaire ? - Quelles régions doivent faire l’objet d’une attention particulière pour améliorer les conditions de vie ?</p>
+<section id="extensions-possibles" class="level4">
+<h4 class="anchored" data-anchor-id="extensions-possibles">Extensions possibles</h4>
+<ul>
+<li>Réalisez une carte choroplèthe pour le taux de mortalité.</li>
+<li>Ajoutez des annotations pour les régions ayant les valeurs extrêmes.</li>
+<li>Expérimentez avec d’autres palettes de couleurs en utilisant <code>scale_fill_brewer()</code> ou <code>scale_fill_manual()</code> etc ….</li>
+</ul>
+<div id="Shapefiles" class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Données discrètes ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Il se peut qu’il n’y ait pas une variabilité importante dans les données dans ce cas, au lieu d’avoir une palette, nous aurons juste des cases de couleurs comme s’agissait d’un indicateur discrèt. Dans ce cas, recoder juste cet indicateur en un indicateur qualitatif (regrouper par classe) et ensuite utiliser <code>scale_fill_manual()</code> pour definir vos couleurs manuellement ou laisser R le faire tout seul. Le graphique ci-dessous en est un exemple.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="DATA_SIG/example_recode_var.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Exemple de carte avec un indicateur recodé</figcaption>
+</figure>
+</div>
 <blockquote class="blockquote">
 <p>Cartes de proportions</p>
 </blockquote>
 <blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p><strong>A suivre</strong></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote class="blockquote">
 <p>Cartes de proportions avancées</p>
 </blockquote>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="SIG_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 <p><a href="https://djamal2905.github.io/djamaldbz/">Retour à la page d’accueuil</a></p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
