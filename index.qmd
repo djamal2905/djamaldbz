@@ -31,9 +31,9 @@ Voici un aperçu de mes domaines d'expertise :
 
 Voici quelques-uns de mes projets récents dans le domaine des statistiques et de l'analyse de données :
 
-- [Analyse Factorielle et Visualisation Avancée](#)
-- [Modélisation de Régressions Mixtes pour des données complexes](#)
-- [Développement d'outils interactifs pour la visualisation de données](#)
+- [Analyse Factorielle et Visualisation Avancée]() (available soon)
+- [Modélisation de Régressions Mixtes pour des données complexes](#) (available soon)
+- [Développement d'outils interactifs pour la visualisation de données](#) (available soon)
 
 > **Voir tous mes projets** [Bientôt disponible]
 
@@ -43,8 +43,8 @@ Voici quelques-uns de mes projets récents dans le domaine des statistiques et d
 
 Voici les dernières publications sur des sujets de statistiques et d'informatique que j'ai partagées :
 
-- [Exploration des Techniques d'Analyse Factorielle](#)
-- [Guide pratique pour les modèles mixtes](#)
+- [Exploration des Techniques d'Analyse Factorielle](https://djamal2905.github.io/djamaldbz/ANALYSES_FACTORIELLES/TP03.html)
+- [Comment faire des présentations avec R et Rstudio ?](https://djamal2905.github.io/djamaldbz/FORMATIONS/presentations.html)
 - [Comment faire des cartes de proportions et des cartes choroplèthes avec R ?](https://djamal2905.github.io/djamaldbz/FORMATIONS/SIG.html)
 
 > **Voir toutes les publications** [Bientôt disponible]
