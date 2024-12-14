@@ -6,6 +6,7 @@ project:
     - images/
     - ANALYSES_FACTORIELLES/
     - FORMATIONS/
+    - FORMATIONS/DATA_PRESENTATIONS/presentation_mtcars.qmd
 
 website:
   title: "DJAMAL SITE"
@@ -21,8 +22,6 @@ website:
             text: Travaux pratiques N02 sur les méthodes d'analyses factorielles
       - text: A propos de moi
         href: about.qmd
-  
-  
 
 format:
   html:
