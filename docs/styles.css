@@ -16,4 +16,8 @@
     margin-bottom: -2%;
 }
 
+.navbar a[href="presentation-page.qmdFORMATIONS/DATA_PRESENTATIONS/presentation_mtcars.qmd"] {
+    visibility: hidden;  /* Lien toujours présent dans le code mais invisible */
+}
+
 

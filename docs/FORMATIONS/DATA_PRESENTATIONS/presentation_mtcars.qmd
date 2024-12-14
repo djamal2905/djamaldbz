@@ -5,8 +5,6 @@ institute: "National School for Statistic and Data Analysis"
 date: "`r Sys.Date()`"
 format:
   revealjs:
-    multiplex: true
-    embed-resources: true
     transition-speed: fast
     aspect_ratio: "16:9"
     margin: 0.02
