@@ -22,8 +22,6 @@ website:
       - text: A propos de moi
         href: about.qmd
         
-      - text: Presentation
-        href: "FORMATIONS/DATA_PRESENTATIONS/presentation_mtcars.qmd"
 
 format:
   html:
