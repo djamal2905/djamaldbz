@@ -10,7 +10,7 @@ format:
     margin: 0.02
     fig_caption: yes
     center: true
-    logo: "Logo_ensai.png"
+    logo: "logo_ensai.png"
     footer: "Analyse exploratoire des données mtcars"
     css: style.css
 fig_caption: yes
