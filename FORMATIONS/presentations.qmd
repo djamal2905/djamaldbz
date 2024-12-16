@@ -156,10 +156,11 @@ Le fichier style.css doit être dans le même répertoire ou le chemin appropri�
 
 |       Pendant que vous faites la présentations sur Rstudio, vous pouvez la présualiser. Regardez les images ci-après :
 
-::: {layout-ncol=2}
+::: {layout-nrow=2}
 ![Previsualisation : etape 1](DATA_PRESENTATIONS/step5.jpg)
 ![Previsualisation : etape 2](DATA_PRESENTATIONS/step6.jpg)
 ![Compilation et Previsualisation : etape 3](DATA_PRESENTATIONS/step7.jpg)
+
 :::
 
 ::: {#Shapefiles .callout-important}

@@ -291,23 +291,21 @@ ggplot(mtcars, aes(x = factor(am))) +
 
 # Discussions
 
+## Discussions
+
 - **Poids (wt) : Impact significatif sur la consommation en carburant (mpg) avec une p-valeur très faible**
 
 - **Nombre de cylindres (cyl) : Effet marginalement significatif (p = 0,098)**
 
 - **Puissance (hp) : Pas d'impact significatif sur la consommation (p = 0,14)**
 
-# Discussions
+## Discussions
 
 - **R² ajusté : 82,6 %, ce qui indique un bon ajustement du modèle**
 
 - **Test F : Le modèle est globalement significatif (p < 0,05).**
 
-# Discussions
-
 - **Puissance (hp)** : Pas de relation directe significative entre la puissance et la consommation. p-value = 0.140015.
-
-- **Optimisation :** Le modèle suggère que la réduction du poids des voitures pourrait améliorer leur efficacité énergétique.
 
 # Conclusion
 
