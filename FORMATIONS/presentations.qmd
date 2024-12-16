@@ -158,7 +158,9 @@ Le fichier style.css doit être dans le même répertoire ou le chemin appropri�
 
 ::: {layout-nrow=2}
 ![Previsualisation : etape 1](DATA_PRESENTATIONS/step5.jpg)
+
 ![Previsualisation : etape 2](DATA_PRESENTATIONS/step6.jpg)
+
 ![Compilation et Previsualisation : etape 3](DATA_PRESENTATIONS/step7.jpg)
 
 :::
