@@ -19,6 +19,7 @@ website:
         menu: 
           - href: "ANALYSES_FACTORIELLES/TP03.qmd"
             text: Travaux pratiques N02 sur les méthodes d'analyses factorielles
+      - text: Formations
         menu: 
           - href: "FORMATIONS/PAYANTES/R/Formation-en-R.qmd"
             text: Formation en R
