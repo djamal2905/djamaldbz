@@ -335,7 +335,7 @@ Il se peut qu'il n'y ait pas une variabilité importante dans les données dans 
 
 :::
 
-![Exemple de carte avec un indicateur recodé](DATA_SIG/example_recode_var.jpg)
+![Exemple de carte avec un indicateur recodé : Indisponible pour l'instant]
 
 
 > Cartes de proportions
