@@ -8,22 +8,25 @@ Bienvenue sur le site **Djamaldbz**, dédié à mes travaux en statistiques et i
 
 ## Qui suis-je ?
 
-Je m'appelle Djamal Y. TOE, et je suis passionné par les statistiques et l'informatique. Mon parcours m'a amené à me concentrer sur l'analyse avancée et la résolution de problèmes à l'aide de méthodes quantitatives. Mon apprentissage est un voyage continu. Mon objectif est d'explorer de nouvelles approches et d'apporter des solutions pratiques, tout en restant ouvert à l'apprentissage et à l'amélioration constante dans le domaine des statistiques et de la science des données.
+Je m'appelle Djamal Y. TOE, et je suis passionné par les statistiques et l'informatique. Mon parcours m'a permis de me concentrer sur l'analyse des données et la résolution de problèmes avec des méthodes quantitatives. Je suis toujours en apprentissage et cherche à découvrir de nouvelles approches. Mon objectif est d'apporter des solutions pratiques, tout en restant ouvert à l'apprentissage continu et à l'amélioration dans le domaine des statistiques et de la science des données.
 
 > **En savoir plus sur moi** [ici](https://djamal2905.github.io/djamaldbz/about.html)
 
 ---
 
-## Mon expertise
+## Mon approche
 
-Je combine mes compétences en statistiques, programmation et analyse de données pour résoudre des problèmes complexes et fournir des solutions pratiques.  
-Voici un aperçu de mes domaines d'expertise :
+J’aime explorer les statistiques, la programmation et l’analyse de données pour mieux comprendre des problématiques et proposer des solutions adaptées. Je m’intéresse particulièrement aux domaines suivants :
 
-- **Analyses Factorielles et Visualisation**
-- **Modèles de Régression et Prévisions**
-- **Applications Statistiques Interactives**
-- **Développement d'Applications Bureau et Web**
-- **Vision par Ordinateur (Computer Vision en apprentissage)**
+* **Analyses factorielles et visualisation**
+
+* **Modèles de régression et prévisions**
+
+* **Applications statistiques interactives**
+
+* **Développement d’applications**
+
+* **Vision par ordinateur**
 
 ---
 
@@ -87,6 +90,7 @@ Elève en Science de données à l'Ecole Nationale de la Statistique et de l'Ana
 | **Lundi**               | 8h30pm - 9:30pm           |
 | **Mardi - Vendredi**    | 7pm - 8pm                 |
 | **Samedi**              | 9:30am - 10:30am          |
+| **En été**              | **Tous les jours**
 
 :::
 ::::
